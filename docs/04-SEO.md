@@ -1,8 +1,15 @@
 # SEO 規劃｜留白髮所 MARGIN
 
-**依據**：PRD v1.2 §2.2（KPI）、§9（非功能需求 SEO 段）
+**依據**：PRD **v1.4** §2.2（KPI）、§9（非功能需求 SEO 段）
 **網域**：`https://marginhair.com.tw`｜語系 `zh-Hant-TW`｜地區：高雄市苓雅區・三多商圈
-**版本**：v2.0（2026-09-01）
+**版本**：v2.1（2026-09-05；v2.0：2026-09-01）
+
+> **v2.1 修訂**：`/store` 更名為 `/store`、麵包屑與 `BreadcrumbList` 移除（PRD D-09／D-10）。
+>
+> ⚠️ **本文件的內容目前幾乎都還沒實作**：站上只有各頁 `title`，沒有 description、
+> canonical、OG／Twitter、任何一段結構化資料、sitemap.xml 或 robots.txt。
+> 服務單頁 ×5 與髮型誌 12 篇也還不存在，因此 §1 的服務字與長尾字**沒有落點頁**。
+> 這些是 backlog，不是被推翻的決策。
 
 ---
 
@@ -17,8 +24,8 @@
 | 關鍵字 | 意圖 | 對應頁面 |
 |---|---|---|
 | 苓雅 髮廊 | 導航 | `/` |
-| 三多商圈 美髮沙龍 | 導航 | `/`、`/location` |
-| 文橫二路 髮廊 | 導航 | `/location` |
+| 三多商圈 美髮沙龍 | 導航 | `/`、`/store` |
+| 文橫二路 髮廊 | 導航 | `/store` |
 | 三多商圈 剪髮 | 導航 | `/`、`/services` |
 | 高雄 預約制 髮廊 | 比較 | `/about` |
 | 高雄 不推銷 髮廊 | 比較 | `/about` |
@@ -152,7 +159,7 @@ Title:       黃安 An｜設計師・頭皮養護與護髮｜MARGIN
 Description: 年資 5 年，主做頭皮與護髮。用放大鏡看毛孔並把螢幕轉給你一起看，不會因為你坐下就開始加項目。
 ```
 
-### 門市資訊 `/location`
+### 門市資訊 `/store`（原 `/location`，更名見 PRD D-10）
 ```
 Title:       門市資訊｜高雄苓雅文橫二路・三多商圈站 5 分鐘｜MARGIN
 Description: 高雄市苓雅區文橫二路 88 號 2 樓，一樓是咖啡店。捷運三多商圈站 2 號出口步行 5 分鐘，附停車與機車停放說明。週二至週日 11:00–20:00。
@@ -387,7 +394,12 @@ useSeoMeta({
 ```
 （其餘 7 題比照補齊。答案文字須與頁面上顯示的完全一致。）
 
-### 4.6 BreadcrumbList（除首頁外全站，對應 §5 麵包屑）
+### 4.6 ~~BreadcrumbList~~（**不做**，PRD D-09）
+
+麵包屑已於設計階段移除。Google 的結構化資料規範要求 `BreadcrumbList`
+反映頁面上實際存在的導覽軌跡，沒有畫面元素就不該只留 schema，因此一併取消。
+
+若日後 D-09 被推翻、麵包屑補回，這段 schema 也要跟著補回：
 
 ```json
 {
@@ -436,12 +448,15 @@ useSeoMeta({
 □ sitemap.xml 自動產生（@nuxtjs/sitemap），排除 /booking/done
 □ robots.txt 允許爬取，/booking/done 設 noindex
 □ <html lang="zh-Hant-TW">
-□ 麵包屑除首頁外全站顯示，並上 BreadcrumbList schema
-□ 手機可用性：字級 ≥ 16px、點擊區 ≥ 44×44px（含 Sticky 預約列）
+□ ~~麵包屑除首頁外全站顯示，並上 BreadcrumbList schema~~ — **不做，見 PRD D-09**
+□ 手機可用性：字級 ≥ 16px、點擊區 ≥ 44×44px（含 Sticky 預約列，尚未實作）
+□ `/location` 若曾對外露出，需 301 導向 `/store`（PRD D-10）
 □ Core Web Vitals：LCP ≤ 2.5s（PRD §9）、INP < 200ms、CLS < 0.1
 □ 電話用 <a href="tel:+886733800088">，地址用 <address>
 □ 內部連結：每篇文章至少連 1 次 /services 或 /booking
 □ 作品單頁必連設計師頁，設計師頁必連 /booking?stylist={slug}
+□ ⚠️ D-09 取消了 Footer 的「最新 3 篇文章」精簡列（原為 D-04 保留的 SEO 內鏈）。
+   髮型誌上線時需另補內鏈，否則文章頁會變成只能從 /journal 進入的孤島
 □ 404 頁有導引連結
 □ HTTPS + HSTS
 □ Notion CMS 建置時抓資料，非執行時（§13.5）
@@ -478,7 +493,7 @@ Google 在地排名由**關聯性、距離、知名度**三者決定。官網只
 
 | PRD KPI | 目標值 | GA4 設定 |
 |---|---|---|
-| 預約 CTA 點擊率 ≥ 8% | 工作階段 | 事件 `cta_booking_click`，含 `location` 參數（header／sticky／區塊／頁尾） |
+| 預約 CTA 點擊率 ≥ 8% | 工作階段 | 事件 `cta_booking_click`，含 `location` 參數。D-09 之後入口只剩 `cta_band`（頁底收尾帶）與 `sticky`（尚未實作）；若 8% 撐不起來，這份分佈就是加回 Header 按鈕的依據 |
 | 完成預約數 +30%/月 | 後台 | 事件 `booking_complete`，設為轉換 |
 | 平均工作階段時間 ≥ 90 秒 | GA4 | 內建 |
 | 品牌關鍵字流量 +50%／3 個月 | GSC | 篩「留白髮所」「margin hair」 |
