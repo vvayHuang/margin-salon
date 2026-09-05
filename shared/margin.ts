@@ -280,6 +280,7 @@ export const NAV_ITEMS = [
   { id: 'service', label: 'SERVICE', to: '/services' },
   { id: 'works', label: 'WORKS', to: '/works' },
   { id: 'stylists', label: 'STYLISTS', to: '/stylists' },
+  { id: 'journal', label: 'JOURNAL', to: '/journal' },
   { id: 'store', label: 'STORE', to: '/store' },
   { id: 'booking', label: 'BOOKING', to: '/booking' },
 ]

@@ -12,9 +12,12 @@
 > 程式在 `shared/seo.ts` 與 `app/composables/useMgSeo.ts`，sitemap／robots 是
 > `server/routes/` 的兩支 Nitro route。
 >
-> ⚠️ **仍未實作**：髮型誌 12 篇（§1 的長尾字仍沒有落點）、§4.7 `Article`、
-> §4.8 `JobPosting`（`/careers` 尚未建立）。§4.6 `BreadcrumbList` 是**決定不做**，
-> 見 PRD D-09。
+> **§4.7 `Article` 也已實作**（髮型誌文章頁）。髮型誌依本文件 §8 的排程上線 M1 的
+> 4 篇，因此 §1 的長尾字目前只有 #1 #2 #5 #7 有落點頁，M2／M3 的仍然沒有。
+>
+> ⚠️ **仍未實作**：§4.8 `JobPosting`（`/careers` 已建立，schema 列 P2 未做——
+> 需填 `validThrough`，過期未更新會被移除，維護成本較高）。
+> §4.6 `BreadcrumbList` 是**決定不做**，見 PRD D-09。
 >
 > ⚠️ **本文件的 description 有幾則承諾了頁面上沒有的內容**（`/about` 的品牌故事、
 > `/works` 的使用色號、`/services` 的價格），實作時已改寫成頁面實際有的東西，

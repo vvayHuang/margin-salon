@@ -77,6 +77,11 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       '五個步驟約 30 秒完成：選設計師、選服務、選時段、填資料、確認。同時段只服務一位客人，時段確認後就是你的，不會被併客。',
   },
+  '/journal': {
+    title: '髮型誌｜髮色圖鑑與保養知識｜留白髮所 MARGIN',
+    description:
+      '透明感染髮要不要漂、男生剪髮帶哪三張照片、頭皮出油有味道是不是洗髮精的問題。四位設計師寫的實務筆記，分趨勢、保養知識、髮色圖鑑三類。',
+  },
   '/booking/done': {
     title: '預約完成｜留白髮所 MARGIN',
     description: '預約已送出，我們會在營業時間內以簡訊回覆確認。',
@@ -253,5 +258,28 @@ export function faqPageSchema(items: { q: string; a: string }[]) {
       'name': i.q,
       'acceptedAnswer': { '@type': 'Answer', 'text': i.a },
     })),
+  }
+}
+
+/** §4.7 Article — 髮型誌文章頁 */
+export function articleSchema(input: {
+  headline: string
+  description: string
+  datePublished: string
+  author: string
+  image: string
+  section: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': input.headline,
+    'description': input.description,
+    'datePublished': input.datePublished,
+    'dateModified': input.datePublished,
+    'author': { '@type': 'Person', 'name': input.author },
+    'publisher': SALON_REF,
+    'image': `${SITE_URL}/img/${input.image}.webp`,
+    'articleSection': input.section,
   }
 }

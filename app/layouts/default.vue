@@ -6,6 +6,7 @@ const current = computed(() => {
   if (route.path.startsWith('/services')) return 'service'
   if (route.path.startsWith('/about')) return 'about'
   if (route.path.startsWith('/store')) return 'store'
+  if (route.path.startsWith('/journal')) return 'journal'
   if (route.path === '/') return 'home'
   return 'works'
 })

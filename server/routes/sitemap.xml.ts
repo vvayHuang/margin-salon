@@ -1,5 +1,6 @@
 import { STYLISTS, WORKS } from '#shared/margin'
 import { SERVICE_PAGES } from '#shared/services'
+import { PUBLISHED } from '#shared/journal'
 import { SITE_URL } from '#shared/seo'
 
 /**
@@ -20,8 +21,12 @@ export default defineEventHandler((event) => {
     ...WORKS.map(w => `/works/${w.code}`),
     '/stylists',
     ...STYLISTS.map(s => `/stylists/${s.value}`),
+    '/journal',
+    ...PUBLISHED.map(p => `/journal/${p.slug}`),
     '/store',
     '/booking',
+    '/careers',
+    '/privacy',
   ]
 
   const urls = paths

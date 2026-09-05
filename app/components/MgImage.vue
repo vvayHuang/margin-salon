@@ -9,7 +9,8 @@
  */
 const props = withDefaults(
   defineProps<{
-    ratio?: '21/9' | '4/5' | '3/4' | '1/1'
+    /** 16/9 是髮型誌封面用的（PRD §13.4），其餘來自設計系統 */
+    ratio?: '21/9' | '16/9' | '4/5' | '3/4' | '1/1'
     /** 右上角註記，例如「IMAGE 3:4 — 店內全景」。留空則用比例自動生成。 */
     note?: string
     /** public/img 的檔名，例如 `works_001_front`；srcset 由 IMG_ASSETS 自動組。 */
@@ -25,7 +26,9 @@ const props = withDefaults(
 
 const asset = computed(() => (props.src ? imgSize(props.src) : undefined))
 const cornerClass = computed(() =>
-  props.ratio === '21/9' || props.ratio === '3/4' ? 'top-6 right-8 tracking-label' : 'top-4 right-4',
+  props.ratio === '21/9' || props.ratio === '16/9' || props.ratio === '3/4'
+    ? 'top-6 right-8 tracking-label'
+    : 'top-4 right-4',
 )
 </script>
 

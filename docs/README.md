@@ -36,12 +36,22 @@
 - ~~`Service`／`ImageObject`／`Person`／`FAQPage` 結構化資料~~
 - ~~sitemap.xml、robots.txt~~ — `server/routes/` 的兩支 Nitro route
 
-## 目前的 backlog（依投報率排序）
+- ~~`/privacy`、`/careers`、404／500~~
+- ~~髮型誌 `/journal` ＋ 文章單頁 ＋ `Article` schema~~
 
-1. 髮型誌 `/journal` ＋ 文章單頁（`Article` schema、§1 的長尾字目前沒有落點頁）
-2. `/careers`（`JobPosting` schema 列為 P2）、`/privacy`
-   ——`/privacy` 已被作品單頁的 `ImageObject.acquireLicensePage` 指到，優先補
-3. 404／500 錯誤頁（文案 §15 已寫好）
+## 目前的 backlog
+
+原本盤點的七項都做完了。剩下的是需要外部素材或決策才能動的：
+
+1. **實拍素材** — 全站影像仍是 Unsplash 佔位圖，頁尾有聲明。
+   四張設計師頭像色調不統一（`stylist_yuki` 帶藍紫燈光、`stylist_shu` 是黑白），
+   換實拍時一起處理。作品的 Before／After 也要等實拍才能補（D-11）
+2. **Notion CMS**（F-07，P0）— 資料欄位已對齊 §13.1／§13.4，接上時整份陣列換掉即可
+3. **預約後端**（F-06 串 SimplyBook.me、F-10 通知信）與**徵才信件通知**（F-11）
+   ——目前兩個表單都只有前端，頁面上有明講
+4. **髮型誌 M2／M3 共 7 篇**（排程見 04-SEO §8）
+5. `JobPosting` schema（P2，`validThrough` 過期未更新會被移除，維護成本較高）
+6. Logo 與 favicon（`public/img/README.md` 的「尚缺」段）
 
 ## 與 v1.3.1／v2.0 的差異
 
