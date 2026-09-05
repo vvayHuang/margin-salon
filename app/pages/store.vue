@@ -26,20 +26,20 @@ useHead({ title: '店家資訊 — 留白髮所 MARGIN' })
       <h1
         class="mg-hero-name relative -mb-3.5 -ml-1.5 font-display leading-display-tight font-medium tracking-[.01em] text-surface-0"
       >
-        鹽埕<br>
-        <span class="italic">Yancheng</span>
+        苓雅<br>
+        <span class="italic">Lingya</span>
       </h1>
     </section>
 
     <div class="mg-gut mg-intro mg-sect">
       <h2 class="mg-h2 font-display leading-heading font-medium tracking-display-md">
         走進來<br>
-        <span class="pl-14 italic">大概要四分鐘</span>
+        <span class="pl-14 italic">大概要五分鐘</span>
       </h2>
 
       <div class="flex flex-col gap-8 pt-2">
         <p class="max-w-[440px] text-16 leading-body text-fg-2 text-pretty">
-          從捷運鹽埕埔站 2 號出口出來，沿五福四路直走，看到轉角的老藥局左轉，第三間白色鐵門就是。門口沒有招牌，只有門牌號碼。
+          從捷運三多商圈站 2 號出口出來，沿文橫二路走約五分鐘。我們在二樓，一樓是一家咖啡店，樓梯在店面右手邊，門口有一塊小木牌寫 MARGIN。
         </p>
         <dl class="flex max-w-[720px] flex-col">
           <div
@@ -94,7 +94,7 @@ useHead({ title: '店家資訊 — 留白髮所 MARGIN' })
         line2="就約一個時間"
       />
       <p class="mg-gut pt-6 text-14 leading-body-snug text-fg-3 text-pretty">
-        臨時要改時間，在預約確認信裡改就可以，不用打電話。
+        如果早到了，一樓可以先坐一下，我們不會提前開始，因為前一位客人還在。取消或改期請於 24 小時前操作，臨時狀況直接來電 07-338-0088。
       </p>
     </section>
   </div>

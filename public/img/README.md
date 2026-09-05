@@ -45,10 +45,10 @@ Nuxt 用法：
 | `service_treatment.webp` | 1:1 800×800 | 服務卡片 護髮 | 44KB | Katsiaryna Endruszkiewicz | `katsiaryna-endruszkiewicz-yZviQtYoP08.jpg` |
 | `service_scalp.webp` | 1:1 800×800 | 服務卡片 頭皮養護 | 157KB | Ela De Pure | `ela-de-pure-Gp3s0bquEkE.jpg` |
 | `service_scalp_alt.webp` | 1:1 800×800 | 頭皮養護備選 | 13KB | Ela De Pure | `ela-de-pure-06Z_DoagMz4.jpg` |
-| `stylist_shu.webp` | 1:1 600×600 | 設計師 Leo 李思妤 | 15KB | Tron Le | `tron-le-MEsOFGCccHg-unsplash.jpg` |
-| `stylist_yuki.webp` | 1:1 600×600 | 設計師 Yuki 林宜家 | 20KB | Aiony Haust | `aiony-haust-3TLl_97HNJo-unsplash.jpg` |
-| `stylist_ray.webp` | 1:1 600×600 | 設計師 Ken 王柏睿 | 23KB | Imansyah Muhamad Putera | `imansyah-muhamad-putera-n4KewLKFOZw-unsplash.jpg` |
-| `stylist_an.webp` | 1:1 600×600 | 設計師 Amber 陳彥安 | 33KB | Good Faces | `good-faces-yliYi-2s9qg-unsplash.jpg` |
+| `stylist_shu.webp` | 1:1 600×600 | 設計師 Shu 周敘（總監） | 15KB | Tron Le | `tron-le-MEsOFGCccHg-unsplash.jpg` |
+| `stylist_yuki.webp` | 1:1 600×600 | 設計師 Yuki 林宜家（資深設計師） | 20KB | Aiony Haust | `aiony-haust-3TLl_97HNJo-unsplash.jpg` |
+| `stylist_ray.webp` | 1:1 600×600 | 設計師 Ray 陳柏睿（設計師） | 23KB | Imansyah Muhamad Putera | `imansyah-muhamad-putera-n4KewLKFOZw-unsplash.jpg` |
+| `stylist_an.webp` | 1:1 600×600 | 設計師 An 黃安（設計師） | 33KB | Good Faces | `good-faces-yliYi-2s9qg-unsplash.jpg` |
 | `works_001_front.webp` | 4:5 1200×1500 | 染髮 長髮 | 86KB | Guido Fuà | `guido-fua-dpHAcZsu4bg.jpg` |
 | `works_001_back.webp` | 4:5 1200×1500 | 染髮 背面 | 153KB | Vii Nguyenn | `vii-nguyenn-Bjr4JDdl6ts.jpg` |
 | `works_002_front.webp` | 4:5 1200×1500 | 染髮 中長髮 | 142KB | Minh Ngọc | `minh-ng-c-8mrH9UjbgR8.jpg` |
@@ -83,7 +83,7 @@ Nuxt 用法：
 ## 實際上站狀況（2026-09-05 接上）
 
 影像對應寫在程式裡，不在這份表：作品看 `shared/margin.ts` 的 `WORKS[].img`、
-設計師頭像與個人頁 Hero 看 `STYLISTS[].photo` / `.hero`、服務卡片看 `CATEGORY_IMG`，
+設計師頭像與個人頁 Hero 都看 `STYLISTS[].photo`（同一張）、服務卡片看 `CATEGORY_IMG`，
 其餘固定位置直接寫在各頁 `.vue`。檔名 → srcset 的對照表在 `app/utils/img.ts`（由本目錄產生）。
 
 與上表原始規劃不同的幾處替代：
@@ -97,8 +97,8 @@ Nuxt 用法：
 | 設計師個人頁 Hero | 各人的 `stylist_*`（與列表卡片同一張） | 改用本人照片；1:1 裁進 21:9 只剩臉的一條，`object-position: center 45%` 讓五官落在中線。素材只有 600×600／@640，滿版 Hero 會偏軟，換實拍時請出到 ≥1920 寬並補 @640／@1280 變體 |
 
 /store 的周邊圖沒有靜態素材，改成嵌 Google Maps（`STORE_MAP_SRC`，`output=embed` 不用 API key）。
-查詢字串是 `五福四路122巷3號`，Google 找不到這個門牌，會落在 `五福四路122號`；
-之後換成實際地址或自製靜態圖時，把 store.vue 的 iframe 換回 `MgImage` 即可。全站已無灰底佔位。
+查詢字串是 PRD 的地址 `高雄市苓雅區文橫二路88號`；換成自製靜態圖時，把 store.vue 的
+iframe 換回 `MgImage` 即可。全站已無灰底佔位。
 
 未使用：`hero_mobile`（Hero 版位是 21:9，直式素材裁進去只剩一條）、
 `location_env_01`、`service_cut_alt`、`service_scalp_alt`、
@@ -107,6 +107,15 @@ Nuxt 用法：
 設計師頭像已於 2026-09-05 換成四張各自獨立的亞洲面孔（裁切以臉為中心、頭部約佔畫面 45%，
 主檔 600、`@640` 供 retina，全部 ≤40KB）。`stylist_yuki` 帶藍紫色燈光、`stylist_shu` 是黑白，
 四張的色調不統一，換實拍時一起處理。
+
+⚠ `圖片授權表.csv` 原本把這四張記成「候補・尚未處理」，同時在 `stylist_*` 列掛了另外四位
+攝影師（Janko Ferlič／jim hatch／Craig Tidball ×2）——那是換圖前的舊記錄，四張都掛錯人。
+已於 2026-09-05 依本表更正，未採用的四張原始檔仍留在 `_original/`。
+**本表是頭像來源的權威記錄，授權表以本表為準。**
+
+檔名沿用高擬真稿時期的四位設計師代號，已對回 PRD 的姓名：
+`stylist_shu`＝周敘 Shu、`stylist_yuki`＝林宜家 Yuki、`stylist_ray`＝陳柏睿 Ray、
+`stylist_an`＝黃安 An。檔名與 `STYLISTS[].photo` 一致，不需要改檔名。
 
 ## 備註
 

@@ -1,18 +1,41 @@
 /**
  * 留白髮所 MARGIN — 內容與領域邏輯。
- * 資料與文案逐字取自 Claude Design 專案的 `Works Page Hi-Fi.dc.html`，
- * 沒有自己改寫。影像仍是灰底佔位（設計系統 readme：暫代素材）。
+ * 版面與語氣沿用 Claude Design 專案的 `Works Page Hi-Fi.dc.html`，
+ * 但**品牌事實以 PRD v1.3.1 為準**：店址、商圈、電話、營業時間、社群、
+ * 四位設計師的姓名／職級／年資／擅長項目，都對回 PRD §1.1–1.2 與全站文案 §8。
+ * 高擬真稿自己換過一套設定（鹽埕／五福四路／Amber・Ken・Leo），已不再使用。
  */
 
 export type ServiceId = 'color' | 'cut' | 'perm' | 'care'
 export type CategoryId = 'cut' | 'color' | 'perm' | 'care' | 'scalp'
-export type StylistId = 'yuki' | 'amber' | 'ken' | 'leo'
+export type StylistId = 'shu' | 'yuki' | 'ray' | 'an'
 export type SortId = 'new' | 'old'
 
 export interface Option<T extends string> {
   value: T
   label: string
 }
+
+/**
+ * 品牌基本資料 — 唯一來源是 PRD v1.3.1 §1.1（品牌識別）與 §1.2（營運基本資料）。
+ * 這一區的值不要在頁面裡各寫一份，改的時候只能改這裡。
+ */
+export const BRAND = {
+  nameZh: '留白髮所',
+  nameEn: 'MARGIN Hair Studio',
+  /** 主 Slogan，首頁 Hero 的兩行大標 */
+  slogan: ['剪去多餘', '留下你'],
+  /** Hero 副標，PRD §1.1 */
+  tagline: '一次只留給一個人的預約制沙龍',
+  address: '高雄市苓雅區文橫二路 88 號 2 樓',
+  district: '苓雅區',
+  area: '三多商圈',
+  phone: '07-338-0088',
+  /** 07 的區碼在國際格式要去掉開頭的 0 */
+  phoneHref: 'tel:+88673380088',
+  ig: '＠margin.hair',
+  igHref: 'https://www.instagram.com/margin.hair/',
+} as const
 
 export const SERVICES: Option<ServiceId>[] = [
   { value: 'color', label: '染髮' },
@@ -47,19 +70,19 @@ export interface Stylist {
 
 export const STYLISTS: Stylist[] = [
   {
-    value: 'yuki',
-    label: '林宜家 Yuki',
-    role: 'SENIOR STYLIST ・ 12 YEARS',
-    short: 'SENIOR',
+    value: 'shu',
+    label: '周敘 Shu',
+    role: 'DIRECTOR ・ 15 YEARS',
+    short: 'DIRECTOR',
     days: 'TUE–SUN',
-    pick: '韓系燙髮 ・ 霧感染髮',
-    tags: ['韓系燙髮', '霧感染髮', '短髮設計'],
-    t1: '剪短一點',
-    t2: '也要好整理',
-    bio1: '諮詢時我會先問你早上有幾分鐘，再決定要剪掉多少。髮型撐不起來，通常不是你的問題。',
-    bio2: '擅長韓系燙髮與霧感染髮，也接受大幅度改變的討論——但我會先說清楚要分幾次做。',
+    pick: '韓系層次燙 ・ 剪髮結構',
+    tags: ['韓系層次燙', '剪髮結構', '髮質重建'],
+    t1: '先看髮流往哪邊倒',
+    t2: '再決定剪不剪短',
+    bio1: '我做頭髮十五年，前七年在台北，後八年在高雄。早期我很喜歡剪很有設計感的髮型，客人在店裡看起來很好，回家兩週就變形。',
+    bio2: '現在我剪之前一定會問四件事：早上有多少時間、會不會用吹風機、上班能不能綁起來、多久能來一次。答案會直接決定層次要放在哪裡。',
     hours: '週一公休，最後一個時段 18:00。同時段只服務一位客人。',
-    photo: 'stylist_yuki',
+    photo: 'stylist_shu',
     avail: [
       [10, 'THU', ['11:00', '14:00', '18:00']],
       [11, 'FRI', ['13:00', '16:00']],
@@ -68,19 +91,19 @@ export const STYLISTS: Stylist[] = [
     ],
   },
   {
-    value: 'amber',
-    label: '陳彥安 Amber',
-    role: 'SENIOR STYLIST ・ 8 YEARS',
+    value: 'yuki',
+    label: '林宜家 Yuki',
+    role: 'SENIOR STYLIST ・ 9 YEARS',
     short: 'SENIOR',
-    days: 'WED–MON',
-    pick: '漂髮 ・ 特殊色',
-    tags: ['長髮層次', '冷色調染髮', '結構護髮'],
-    t1: '不剪短',
-    t2: '也能換一個人',
-    bio1: '我做染髮比較多。長髮的人最常問的是「不剪短可以嗎」，多數時候可以。',
-    bio2: '補染我只動長出來的那一段，髮尾不重複上藥劑；顏色會慢一點到位，但髮況留得住。',
-    hours: '週二公休，漂髮類最後受理 15:00，因為要留足夠時間。',
-    photo: 'stylist_an',
+    days: 'TUE–SUN',
+    pick: '透明感染髮 ・ 灰霧色系',
+    tags: ['透明感染髮', '灰霧色系', '褪色設計'],
+    t1: '顏色是養出來的',
+    t2: '不是一次染出來的',
+    bio1: '我專門做低彩度的顏色。透明感最難的地方不是染上去，是褪色之後還好不好看。很多人染完第一週很滿意，第三週開始變黃。',
+    bio2: '所以我配色的時候，會把褪色後的樣子一起算進去。你會看到我的作品很多偏灰，那是為了讓它黃掉的速度慢一點。',
+    hours: '週一公休。需要漂兩次以上的顏色，我會建議分成兩個月做。',
+    photo: 'stylist_yuki',
     avail: [
       [10, 'THU', ['12:00', '15:30']],
       [11, 'FRI', []],
@@ -89,18 +112,18 @@ export const STYLISTS: Stylist[] = [
     ],
   },
   {
-    value: 'ken',
-    label: '王柏睿 Ken',
+    value: 'ray',
+    label: '陳柏睿 Ray',
     role: 'STYLIST ・ 6 YEARS',
     short: 'STYLIST',
     days: 'TUE–SAT',
-    pick: '男士剪髮 ・ 頭皮養護',
-    tags: ['男士剪髮', '短髮設計', '頭皮護理'],
-    t1: '短髮差一公分',
-    t2: '就是另一個人',
-    bio1: '短髮差一公分就是另一個人，所以我剪得慢，會停下來給你看。',
-    bio2: '髮量多、髮流亂的頭我接得最多。三週後想修一下，回來免費調整。',
-    hours: '週日、週一公休。剪髮不預約也可以，但要等現場的空檔。',
+    pick: '短髮修剪 ・ 男士造型',
+    tags: ['短髮修剪', '男士造型', '瀏海設計'],
+    t1: '男生剪髮不是剪短',
+    t2: '是剪對比例',
+    bio1: '我大部分的客人是男生，還有想剪短的女生。短髮很難的地方在於沒有地方藏，每一刀的位置都會直接被看到。',
+    bio2: '我剪之前會先看三個東西：髮旋在哪、後腦勺凸不凸、耳朵位置高不高。戴安全帽的人請一定要跟我說，壓塌的位置我會另外處理。',
+    hours: '週日、週一公休。三週後想修一下，回來免費調整。',
     photo: 'stylist_ray',
     avail: [
       [10, 'THU', ['11:00', '13:00', '16:00']],
@@ -110,19 +133,19 @@ export const STYLISTS: Stylist[] = [
     ],
   },
   {
-    value: 'leo',
-    label: '李思妤 Leo',
-    role: 'JUNIOR STYLIST ・ 3 YEARS',
+    value: 'an',
+    label: '黃安 An',
+    role: 'STYLIST ・ 5 YEARS',
     short: 'STYLIST',
-    days: 'THU–MON',
-    pick: '日系剪髮 ・ 髮質重建',
-    tags: ['結構護髮', '頭皮調理', '基礎剪髮'],
-    t1: '先做小片測試',
-    t2: '再決定要不要',
-    bio1: '我還在累積作品，價格也比較低。你想試的顏色我會先做小片測試。',
-    bio2: '依受損程度調配，不做無效療程；判斷不了的時候我會請資深設計師一起看。',
-    hours: '週二、週三公休。護髮類我可以排在晚班，下班後也來得及。',
-    photo: 'stylist_shu',
+    days: 'TUE–SUN',
+    pick: '頭皮養護 ・ 護髮',
+    tags: ['頭皮養護', '敏感頭皮', '護髮'],
+    t1: '頭髮的問題',
+    t2: '有一半不在頭髮上',
+    bio1: '我主要做頭皮跟護髮。很多人是因為掉髮或出油來的，但真正的原因常常是洗頭方式、作息或壓力。',
+    bio2: '我會先用放大鏡看毛孔，螢幕會轉給你一起看，不是我說了算。護髮我不會預設你需要最貴的那個，只是乾的話基礎護髮就夠了。',
+    hours: '週一公休。頭皮養護單次 40–60 分鐘，做完當天不建議染燙。',
+    photo: 'stylist_an',
     avail: [
       [10, 'THU', ['11:00', '12:00', '19:00']],
       [11, 'FRI', ['16:00', '19:00']],
@@ -145,19 +168,19 @@ export interface Work {
 
 export const WORKS: Work[] = [
   { code: 'W-128', title: '霧感灰棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '退到 9 度再上灰棕，透明感為主，不追求一次到位。', img: 'works_002' },
-  { code: 'W-127', title: '霧灰亞麻', service: 'color', stylist: 'amber', length: '長髮', note: '第二次補染，只調整根部三公分，髮尾不再上藥劑。', img: 'works_001' },
+  { code: 'W-127', title: '霧灰亞麻', service: 'color', stylist: 'yuki', length: '長髮', note: '第二次補染，只調整根部三公分，髮尾不再上藥劑。', img: 'works_001' },
   { code: 'W-126', title: '淺棕漸層', service: 'color', stylist: 'yuki', length: '長髮', note: '從中段開始退，根部留原色，長出來時比較好接。', img: 'works_005' },
-  { code: 'W-125', title: '深棕加深', service: 'color', stylist: 'leo', length: '中長髮', note: '客人要能上班的顏色，室內看是深棕，陽光下才看得出紅。', img: 'works_003' },
-  { code: 'W-124', title: '冷茶棕', service: 'color', stylist: 'amber', length: '中長髮', note: '染後兩週回店做結構護髮，顏色掉得比較慢。', img: 'works_004' },
+  { code: 'W-125', title: '深棕加深', service: 'color', stylist: 'yuki', length: '中長髮', note: '客人要能上班的顏色，室內看是深棕，陽光下才看得出紅。', img: 'works_003' },
+  { code: 'W-124', title: '冷茶棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '染後兩週回店做結構護髮，顏色掉得比較慢。', img: 'works_004' },
   { code: 'W-123', title: '灰藍打底', service: 'color', stylist: 'yuki', length: '短髮', note: '打底做兩次，中間隔一週，頭皮沒有不適才繼續。', img: 'works_006' },
-  { code: 'W-122', title: '剪短一點', service: 'cut', stylist: 'yuki', length: '短髮', note: '髮流偏右，左側留長 1.5 公分平衡，吹整只要抓兩下。', img: 'works_011' },
-  { code: 'W-121', title: '耳下三公分', service: 'cut', stylist: 'ken', length: '短髮', note: '髮量多，內層打薄兩層，外層保留重量線。', img: 'works_014' },
-  { code: 'W-120', title: '層次長髮', service: 'cut', stylist: 'amber', length: '長髮', note: '長度一公分都不減，只重整層次與臉側線條。', img: 'works_015' },
-  { code: 'W-119', title: '水波紋燙', service: 'perm', stylist: 'amber', length: '長髮', note: '髮況只撐得住中卷，捲度做小一號，三個月後再加強。', img: 'works_010' },
-  { code: 'W-118', title: '空氣感微捲', service: 'perm', stylist: 'yuki', length: '中長髮', note: '只燙外圈，內層不動，隔天洗完頭也還在。', img: 'works_007' },
-  { code: 'W-117', title: '結構護髮', service: 'care', stylist: 'ken', length: '長髮', note: '依受損程度調配，不做無效療程；這次只做中段到髮尾。', img: 'works_008' },
-  { code: 'W-116', title: '頭皮調理', service: 'care', stylist: 'leo', length: '中長髮', note: '夏天出油，先處理頭皮再談髮尾；一個月一次就夠。', img: 'works_017' },
-  { code: 'W-115', title: '韓系燙髮', service: 'perm', stylist: 'ken', length: '中長髮', note: '捲度只做臉側兩段，其餘留直，長出來不會斷層。', img: 'works_009' },
+  { code: 'W-122', title: '剪短一點', service: 'cut', stylist: 'ray', length: '短髮', note: '髮旋偏右，左側留長 1.5 公分平衡，吹整只要抓兩下。', img: 'works_011' },
+  { code: 'W-121', title: '耳下三公分', service: 'cut', stylist: 'ray', length: '短髮', note: '髮量多，內層打薄兩層，外層保留重量線。', img: 'works_014' },
+  { code: 'W-120', title: '層次長髮', service: 'cut', stylist: 'shu', length: '長髮', note: '長度一公分都不減，只重整層次與臉側線條。', img: 'works_015' },
+  { code: 'W-119', title: '水波紋燙', service: 'perm', stylist: 'shu', length: '長髮', note: '髮況只撐得住中卷，捲度做小一號，三個月後再加強。', img: 'works_010' },
+  { code: 'W-118', title: '空氣感微捲', service: 'perm', stylist: 'shu', length: '中長髮', note: '只燙外圈，內層不動，隔天洗完頭也還在。', img: 'works_007' },
+  { code: 'W-117', title: '結構護髮', service: 'care', stylist: 'an', length: '長髮', note: '依受損程度調配，不做無效療程；這次只做中段到髮尾。', img: 'works_008' },
+  { code: 'W-116', title: '頭皮調理', service: 'care', stylist: 'an', length: '中長髮', note: '夏天出油，先處理頭皮再談髮尾；一個月一次就夠。', img: 'works_017' },
+  { code: 'W-115', title: '韓系燙髮', service: 'perm', stylist: 'shu', length: '中長髮', note: '捲度只做臉側兩段，其餘留直，長出來不會斷層。', img: 'works_009' },
 ]
 
 export const CATEGORIES: { id: CategoryId; label: string }[] = [
@@ -217,8 +240,7 @@ export const NAV_ITEMS = [
 ]
 
 export const FOOTER_LINKS = [
-  { label: 'IG', href: 'https://instagram.com/' },
-  { label: 'FB', href: 'https://facebook.com/' },
+  { label: 'IG', href: BRAND.igHref },
   { label: 'KAOHSIUNG' },
 ]
 
@@ -317,15 +339,15 @@ export const SERVICE_NOTES = [
 /* ---- 店家資訊 ---- */
 
 export const STORE_ROWS = [
-  { k: 'ADDRESS', v: '高雄市鹽埕區五福四路 122 巷 3 號' },
-  { k: 'HOURS', v: '11:00 – 20:00（最後一個時段 18:00）' },
-  { k: 'CLOSED', v: '週一公休，設計師另有個人休假日' },
-  { k: 'BOOKING', v: '線上預約，或私訊 IG；我們不接電話預約' },
-  { k: 'CONTACT', v: 'IG ＠marginhair ・ FB 留白髮所 MARGIN' },
+  { k: 'ADDRESS', v: BRAND.address },
+  { k: 'HOURS', v: '週二–週日 11:00 – 20:00（最後一個時段 18:00）' },
+  { k: 'CLOSED', v: '每週一公休' },
+  { k: 'BOOKING', v: '全預約制，不接受現場排隊。線上預約 30 秒完成' },
+  { k: 'CONTACT', v: `${BRAND.phone} ・ IG ${BRAND.ig}` },
 ]
 
 /** 地圖用的地址，與 STORE_ROWS 的 ADDRESS 同一個地點 */
-export const STORE_MAP_QUERY = '高雄市鹽埕區五福四路122巷3號'
+export const STORE_MAP_QUERY = '高雄市苓雅區文橫二路88號'
 
 /**
  * Google Maps 嵌入網址。`output=embed` 這條不用 API key，
@@ -335,9 +357,9 @@ export const STORE_MAP_SRC
   = `https://maps.google.com/maps?q=${encodeURIComponent(STORE_MAP_QUERY)}&z=17&hl=zh-TW&output=embed`
 
 export const STORE_TIPS = [
-  { k: 'MRT', v: '橘線鹽埕埔站 2 號出口，沿五福四路往西走約 4 分鐘，看到轉角老藥局左轉。' },
-  { k: 'PARKING', v: '巷口有兩個路邊格，通常滿。大勇路平面停車場走過來 3 分鐘，我們可折抵一小時。' },
-  { k: 'ARRIVING', v: '門口沒有招牌，白色鐵門上只有 3 號。提早到可以直接進來坐，水在櫃檯旁邊。' },
+  { k: 'MRT', v: '捷運三多商圈站 2 號出口，沿文橫二路步行 5 分鐘。公車在三多文橫路口站下車，走 1 分鐘。' },
+  { k: 'PARKING', v: '沒有專屬車位。汽車停文橫二路旁的收費停車場，走過來 3 分鐘；機車請停騎樓外白線區，別停在店門正前方，那是鄰居的出入口。' },
+  { k: 'ARRIVING', v: '我們在二樓，一樓是一家咖啡店。樓梯在店面右手邊，門口有一塊小木牌寫 MARGIN，上樓直接推門進來就好。' },
 ]
 
 /* ---- helpers, ported from the hi-fi component logic ---- */
@@ -371,9 +393,12 @@ export function hoursText(minutes: number) {
   return '約 ' + Math.round((minutes / 60) * 10) / 10 + ' 小時'
 }
 
-/** 高擬真稿的日期字串：9／10（四） */
+/**
+ * 高擬真稿的日期字串：9／10（四）
+ * 2026-09-07 是週一（CLOSED_DAYS 就是 7／14／21／28），所以 day % 7 直接對上 WEEKDAY。
+ */
 export function dateText(day: number, sep = '／') {
-  return '9' + sep + day + '（' + WEEKDAY[(day + 1) % 7] + '）'
+  return '9' + sep + day + '（' + WEEKDAY[day % 7] + '）'
 }
 
 export function phoneBad(phone: string) {

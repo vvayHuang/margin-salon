@@ -161,7 +161,7 @@ export function useBooking() {
   /** 送出後的整理格式：2026／09／10（四）14:00 */
   const confirmTime = computed(() =>
     timeText.value
-      ? `2026／09／${String(state.value.day).padStart(2, '0')}（${WEEKDAY[(state.value.day + 1) % 7]}）${state.value.time}`
+      ? `2026／09／${String(state.value.day).padStart(2, '0')}（${WEEKDAY[state.value.day % 7]}）${state.value.time}`
       : '尚未選擇',
   )
 

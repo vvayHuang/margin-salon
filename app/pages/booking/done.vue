@@ -28,7 +28,7 @@ const doneRows = computed(() => [
     </h1>
 
     <p class="mt-8 max-w-[440px] text-16 leading-body text-fg-2 text-pretty">
-      我們會在營業時間內用簡訊與 LINE 回覆確認，通常一小時內。收到確認才算約成。
+      我們會在營業時間內用簡訊回覆確認，通常一小時內。收到確認才算約成。臨時狀況請直接來電 07-338-0088。
     </p>
 
     <div class="mt-10 flex max-w-[640px] flex-col">

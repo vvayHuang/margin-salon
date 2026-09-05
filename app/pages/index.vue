@@ -41,8 +41,8 @@ const prices = computed(() =>
         <h1
           class="mg-h1 relative -mb-3.5 ml-[42px] font-display leading-[1.02] font-medium tracking-display-xl text-surface-0"
         >
-          剪短一點<br>
-          <span class="pl-22 italic">也要好整理</span>
+          剪去多餘<br>
+          <span class="pl-22 italic">留下你</span>
         </h1>
       </div>
     </section>

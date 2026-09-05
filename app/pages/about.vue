@@ -16,7 +16,7 @@ useHead({ title: '關於我們 — 留白髮所 MARGIN' })
         </h1>
         <div class="flex max-w-[420px] flex-col gap-5">
           <p class="text-15 leading-body text-fg-2 text-pretty">
-            我們在鹽埕開了七年，一次只留給一個人。從諮詢到吹整由同一個人做完，中間不會被交接，也不會被晾在旁邊。
+            我們在苓雅區文橫二路的二樓，一次只留給一個人。從諮詢到吹整由同一個人做完，中間不會被交接，也不會被晾在旁邊。
           </p>
           <p class="text-15 leading-body text-fg-2 text-pretty">
             這代表我們一天能接的人不多，也代表你不需要在店裡待到天黑。

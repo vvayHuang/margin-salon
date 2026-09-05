@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {
+  BRAND,
   CATEGORIES,
   CLOSED_DAYS,
   FULL_TIMES,
@@ -264,7 +265,7 @@ function primaryAction() {
       @close="toastOpen = false"
     >
       <template #action>
-        <MgButton variant="link" inverse href="tel:0733800088">打電話給我們 07-338-0088</MgButton>
+        <MgButton variant="link" inverse :href="BRAND.phoneHref">打電話給我們 {{ BRAND.phone }}</MgButton>
       </template>
     </MgToast>
 
