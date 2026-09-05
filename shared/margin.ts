@@ -289,6 +289,16 @@ export const FOOTER_LINKS = [
   { label: 'KAOHSIUNG' },
 ]
 
+/**
+ * 頁尾的兩條站內連結。D-09 把頁尾收成單列，但 /careers 與 /privacy
+ * 不放在這裡就沒有任何入口——孤島頁比頁尾多兩個文字連結糟得多。
+ * 見 D-09 的 2026-09-06 補註。
+ */
+export const FOOTER_NAV = [
+  { label: '加入我們', to: '/careers' },
+  { label: '隱私權政策', to: '/privacy' },
+]
+
 /* ---- 首頁 ---- */
 
 /** 首頁價目導引只挑四個代表項目，點進去是完整價目頁。 */
