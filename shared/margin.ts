@@ -54,6 +54,8 @@ export interface Stylist {
   label: string
   role: string
   short: string
+  /** 中文職級，PRD §13.3 的三選一：總監／資深設計師／設計師 */
+  roleZh: string
   days: string
   pick: string
   tags: string[]
@@ -64,6 +66,13 @@ export interface Stylist {
   hours: string
   /** public/img 檔名（不含副檔名）。列表卡片與個人頁 Hero 共用同一張個人照。 */
   photo: string
+  /**
+   * 指名這位設計師的顧客評價，逐字取自全站文案 §8，一人 3 則。
+   * D-04 把首頁的評價區塊移到設計師頁，理由是「評價綁人比綁店有說服力」。
+   */
+  reviews: string[]
+  /** 個人頁的 meta description，逐字取自 docs/04-SEO.md §2 */
+  seoDesc: string
   /** [日, 星期, 該日開放時段] */
   avail: [number, string, string[]][]
 }
@@ -73,6 +82,7 @@ export const STYLISTS: Stylist[] = [
     value: 'shu',
     label: '周敘 Shu',
     role: 'DIRECTOR ・ 15 YEARS',
+    roleZh: '總監',
     short: 'DIRECTOR',
     days: 'TUE–SUN',
     pick: '韓系層次燙 ・ 剪髮結構',
@@ -82,6 +92,12 @@ export const STYLISTS: Stylist[] = [
     bio1: '我做頭髮十五年，前七年在台北，後八年在高雄。早期我很喜歡剪很有設計感的髮型，客人在店裡看起來很好，回家兩週就變形。',
     bio2: '現在我剪之前一定會問四件事：早上有多少時間、會不會用吹風機、上班能不能綁起來、多久能來一次。答案會直接決定層次要放在哪裡。',
     hours: '週一公休，最後一個時段 18:00。同時段只服務一位客人。',
+    reviews: [
+      '第一次遇到會先問我早上幾點起床的設計師。',
+      '剪完一個月還是好整理，這是我第一次遇到。',
+      '他說我這個髮質做不了那個顏色，直接叫我別做。',
+    ],
+    seoDesc: '年資 15 年，擅長韓系層次燙、剪髮結構與髮質重建。剪之前一定會問你早上有多少時間、會不會吹頭髮。高雄苓雅，可線上指名預約。',
     photo: 'stylist_shu',
     avail: [
       [10, 'THU', ['11:00', '14:00', '18:00']],
@@ -94,6 +110,7 @@ export const STYLISTS: Stylist[] = [
     value: 'yuki',
     label: '林宜家 Yuki',
     role: 'SENIOR STYLIST ・ 9 YEARS',
+    roleZh: '資深設計師',
     short: 'SENIOR',
     days: 'TUE–SUN',
     pick: '透明感染髮 ・ 灰霧色系',
@@ -103,6 +120,12 @@ export const STYLISTS: Stylist[] = [
     bio1: '我專門做低彩度的顏色。透明感最難的地方不是染上去，是褪色之後還好不好看。很多人染完第一週很滿意，第三週開始變黃。',
     bio2: '所以我配色的時候，會把褪色後的樣子一起算進去。你會看到我的作品很多偏灰，那是為了讓它黃掉的速度慢一點。',
     hours: '週一公休。需要漂兩次以上的顏色，我會建議分成兩個月做。',
+    reviews: [
+      '褪色後居然還是好看的，這是我第一次。',
+      '她直接跟我說這個顏色我做不起來，省了我三千。',
+      '灰色調做得很乾淨，沒有那種霧霧的髒感。',
+    ],
+    seoDesc: '年資 9 年，專做低彩度顏色。配色時把褪色後的樣子一起算進去，所以作品偏灰。高雄苓雅三多商圈，可線上指名預約。',
     photo: 'stylist_yuki',
     avail: [
       [10, 'THU', ['12:00', '15:30']],
@@ -115,6 +138,7 @@ export const STYLISTS: Stylist[] = [
     value: 'ray',
     label: '陳柏睿 Ray',
     role: 'STYLIST ・ 6 YEARS',
+    roleZh: '設計師',
     short: 'STYLIST',
     days: 'TUE–SAT',
     pick: '短髮修剪 ・ 男士造型',
@@ -124,6 +148,12 @@ export const STYLISTS: Stylist[] = [
     bio1: '我大部分的客人是男生，還有想剪短的女生。短髮很難的地方在於沒有地方藏，每一刀的位置都會直接被看到。',
     bio2: '我剪之前會先看三個東西：髮旋在哪、後腦勺凸不凸、耳朵位置高不高。戴安全帽的人請一定要跟我說，壓塌的位置我會另外處理。',
     hours: '週日、週一公休。三週後想修一下，回來免費調整。',
+    reviews: [
+      '終於有人問我戴不戴安全帽。',
+      '剪完自己在家抓也抓得起來。',
+      '我後腦勺很扁，他調了側邊比例整個看起來不一樣。',
+    ],
+    seoDesc: '年資 6 年，擅長短髮修剪、男士造型與瀏海設計。會先看髮旋、後腦勺與耳朵位置，戴安全帽的人請務必告知。',
     photo: 'stylist_ray',
     avail: [
       [10, 'THU', ['11:00', '13:00', '16:00']],
@@ -136,6 +166,7 @@ export const STYLISTS: Stylist[] = [
     value: 'an',
     label: '黃安 An',
     role: 'STYLIST ・ 5 YEARS',
+    roleZh: '設計師',
     short: 'STYLIST',
     days: 'TUE–SUN',
     pick: '頭皮養護 ・ 護髮',
@@ -145,6 +176,12 @@ export const STYLISTS: Stylist[] = [
     bio1: '我主要做頭皮跟護髮。很多人是因為掉髮或出油來的，但真正的原因常常是洗頭方式、作息或壓力。',
     bio2: '我會先用放大鏡看毛孔，螢幕會轉給你一起看，不是我說了算。護髮我不會預設你需要最貴的那個，只是乾的話基礎護髮就夠了。',
     hours: '週一公休。頭皮養護單次 40–60 分鐘，做完當天不建議染燙。',
+    reviews: [
+      '他說我只需要最便宜的那個護髮，我還愣住。',
+      '產後掉髮做了三次，明顯有差。',
+      '頭皮很敏感，做完沒有刺痛感。',
+    ],
+    seoDesc: '年資 5 年，主做頭皮與護髮。用放大鏡看毛孔並把螢幕轉給你一起看，不會因為你坐下就開始加項目。',
     photo: 'stylist_an',
     avail: [
       [10, 'THU', ['11:00', '12:00', '19:00']],
@@ -162,25 +199,32 @@ export interface Work {
   stylist: StylistId
   length: string
   note: string
+  /**
+   * 需不需要漂髮。文案 §6 把它列為必填：「這是顧客最在意的成本與傷害資訊」。
+   * 值依各件的 note 判讀——note 講「退到 N 度」「打底」「從中段開始退」的就是要漂。
+   */
+  bleach: boolean
+  /** 使用色號，只有染髮作品有。格式為「色度/色調」，例：10/81 ＋ 護色 */
+  colorCode?: string
   /** public/img 的作品檔名前綴，`_front` / `_back` / `_thumb` 由頁面自己接 */
   img: string
 }
 
 export const WORKS: Work[] = [
-  { code: 'W-128', title: '霧感灰棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '退到 9 度再上灰棕，透明感為主，不追求一次到位。', img: 'works_002' },
-  { code: 'W-127', title: '霧灰亞麻', service: 'color', stylist: 'yuki', length: '長髮', note: '第二次補染，只調整根部三公分，髮尾不再上藥劑。', img: 'works_001' },
-  { code: 'W-126', title: '淺棕漸層', service: 'color', stylist: 'yuki', length: '長髮', note: '從中段開始退，根部留原色，長出來時比較好接。', img: 'works_005' },
-  { code: 'W-125', title: '深棕加深', service: 'color', stylist: 'yuki', length: '中長髮', note: '客人要能上班的顏色，室內看是深棕，陽光下才看得出紅。', img: 'works_003' },
-  { code: 'W-124', title: '冷茶棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '染後兩週回店做結構護髮，顏色掉得比較慢。', img: 'works_004' },
-  { code: 'W-123', title: '灰藍打底', service: 'color', stylist: 'yuki', length: '短髮', note: '打底做兩次，中間隔一週，頭皮沒有不適才繼續。', img: 'works_006' },
-  { code: 'W-122', title: '剪短一點', service: 'cut', stylist: 'ray', length: '短髮', note: '髮旋偏右，左側留長 1.5 公分平衡，吹整只要抓兩下。', img: 'works_011' },
-  { code: 'W-121', title: '耳下三公分', service: 'cut', stylist: 'ray', length: '短髮', note: '髮量多，內層打薄兩層，外層保留重量線。', img: 'works_014' },
-  { code: 'W-120', title: '層次長髮', service: 'cut', stylist: 'shu', length: '長髮', note: '長度一公分都不減，只重整層次與臉側線條。', img: 'works_015' },
-  { code: 'W-119', title: '水波紋燙', service: 'perm', stylist: 'shu', length: '長髮', note: '髮況只撐得住中卷，捲度做小一號，三個月後再加強。', img: 'works_010' },
-  { code: 'W-118', title: '空氣感微捲', service: 'perm', stylist: 'shu', length: '中長髮', note: '只燙外圈，內層不動，隔天洗完頭也還在。', img: 'works_007' },
-  { code: 'W-117', title: '結構護髮', service: 'care', stylist: 'an', length: '長髮', note: '依受損程度調配，不做無效療程；這次只做中段到髮尾。', img: 'works_008' },
-  { code: 'W-116', title: '頭皮調理', service: 'care', stylist: 'an', length: '中長髮', note: '夏天出油，先處理頭皮再談髮尾；一個月一次就夠。', img: 'works_017' },
-  { code: 'W-115', title: '韓系燙髮', service: 'perm', stylist: 'shu', length: '中長髮', note: '捲度只做臉側兩段，其餘留直，長出來不會斷層。', img: 'works_009' },
+  { code: 'W-128', title: '霧感灰棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '退到 9 度再上灰棕，透明感為主，不追求一次到位。', bleach: true, colorCode: '9/81 ＋ 護色', img: 'works_002' },
+  { code: 'W-127', title: '霧灰亞麻', service: 'color', stylist: 'yuki', length: '長髮', note: '第二次補染，只調整根部三公分，髮尾不再上藥劑。', bleach: true, colorCode: '10/11 ＋ 護色', img: 'works_001' },
+  { code: 'W-126', title: '淺棕漸層', service: 'color', stylist: 'yuki', length: '長髮', note: '從中段開始退，根部留原色，長出來時比較好接。', bleach: true, colorCode: '8/73 漸層', img: 'works_005' },
+  { code: 'W-125', title: '深棕加深', service: 'color', stylist: 'yuki', length: '中長髮', note: '客人要能上班的顏色，室內看是深棕，陽光下才看得出紅。', bleach: false, colorCode: '5/56', img: 'works_003' },
+  { code: 'W-124', title: '冷茶棕', service: 'color', stylist: 'yuki', length: '中長髮', note: '染後兩週回店做結構護髮，顏色掉得比較慢。', bleach: false, colorCode: '6/71', img: 'works_004' },
+  { code: 'W-123', title: '灰藍打底', service: 'color', stylist: 'yuki', length: '短髮', note: '打底做兩次，中間隔一週，頭皮沒有不適才繼續。', bleach: true, colorCode: '9/8 ＋ 藍調 /88', img: 'works_006' },
+  { code: 'W-122', title: '剪短一點', service: 'cut', stylist: 'ray', length: '短髮', note: '髮旋偏右，左側留長 1.5 公分平衡，吹整只要抓兩下。', bleach: false, img: 'works_011' },
+  { code: 'W-121', title: '耳下三公分', service: 'cut', stylist: 'ray', length: '短髮', note: '髮量多，內層打薄兩層，外層保留重量線。', bleach: false, img: 'works_014' },
+  { code: 'W-120', title: '層次長髮', service: 'cut', stylist: 'shu', length: '長髮', note: '長度一公分都不減，只重整層次與臉側線條。', bleach: false, img: 'works_015' },
+  { code: 'W-119', title: '水波紋燙', service: 'perm', stylist: 'shu', length: '長髮', note: '髮況只撐得住中卷，捲度做小一號，三個月後再加強。', bleach: false, img: 'works_010' },
+  { code: 'W-118', title: '空氣感微捲', service: 'perm', stylist: 'shu', length: '中長髮', note: '只燙外圈，內層不動，隔天洗完頭也還在。', bleach: false, img: 'works_007' },
+  { code: 'W-117', title: '結構護髮', service: 'care', stylist: 'an', length: '長髮', note: '依受損程度調配，不做無效療程；這次只做中段到髮尾。', bleach: false, img: 'works_008' },
+  { code: 'W-116', title: '頭皮調理', service: 'care', stylist: 'an', length: '中長髮', note: '夏天出油，先處理頭皮再談髮尾；一個月一次就夠。', bleach: false, img: 'works_017' },
+  { code: 'W-115', title: '韓系燙髮', service: 'perm', stylist: 'shu', length: '中長髮', note: '捲度只做臉側兩段，其餘留直，長出來不會斷層。', bleach: false, img: 'works_009' },
 ]
 
 export const CATEGORIES: { id: CategoryId; label: string }[] = [
@@ -405,12 +449,18 @@ export function phoneBad(phone: string) {
   return !/^09\d{8}$/.test(phone.replace(/[\s-]/g, ''))
 }
 
-/** 作品單頁的規格列，時長與價格依服務類別給起價 */
+/**
+ * 作品單頁的規格列，時長與價格依服務類別給起價。
+ * 欄位順序照文案 §6：服務 → 色號 → 需漂髮 → 時長 → 價格。
+ * 色號只有染髮作品有，沒有就不出這一列；需漂髮一律要出，是／否都是資訊。
+ */
 export function workSpecs(w: Work) {
   return [
     { k: 'SERVICE', v: serviceLabel(w.service) },
     { k: 'STYLIST', v: findStylist(w.stylist)?.label ?? '' },
     { k: 'LENGTH', v: w.length },
+    ...(w.colorCode ? [{ k: 'COLOR', v: w.colorCode }] : []),
+    { k: 'BLEACH', v: w.bleach ? '需要漂髮' : '不需漂髮' },
     { k: 'DURATION', v: w.service === 'cut' ? '60 分鐘' : w.service === 'care' ? '90 分鐘' : '150 分鐘' },
     { k: 'PRICE', v: w.service === 'cut' ? '1,200 起' : w.service === 'care' ? '1,800 起' : '3,800 起' },
   ]

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { STORE_MAP_SRC, STORE_ROWS, STORE_TIPS } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
-/** 店家資訊。地址、時間、交通，最後一句提醒改時間不用打電話。 */
-useHead({ title: '店家資訊 — 留白髮所 MARGIN' })
+/** 店家資訊。地址、時間、交通，最後一句提醒臨時狀況怎麼聯絡。 */
+useMgSeo(() => ({ ...PAGE_SEO['/store']!, path: '/store' }))
 </script>
 
 <template>

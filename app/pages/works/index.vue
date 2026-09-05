@@ -11,8 +11,10 @@ import {
   type StylistId,
   type Work,
 } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
-useHead({ title: '作品集 — 留白髮所 MARGIN' })
+// canonical 不帶 ?service=&stylist=，篩選結果指回 /works 主頁（04-SEO §5）
+useMgSeo(() => ({ ...PAGE_SEO['/works']!, path: '/works' }))
 
 const route = useRoute()
 const router = useRouter()

@@ -27,9 +27,14 @@ const related = computed(() =>
   WORKS.filter(w => w.stylist === current.value.stylist && w.code !== current.value.code).slice(0, 4),
 )
 
-useHead(() => ({ title: `${current.value.title} ${current.value.code} — 留白髮所 MARGIN` }))
-
 const booking = useBooking()
+useMgSeo(() => ({
+  title: `${current.value.title}｜${stylist.value.label} 作品｜留白髮所 MARGIN`,
+  description: `${serviceLabel(current.value.service)}・${current.value.length}。${current.value.note}`,
+  path: `/works/${current.value.code}`,
+  ogType: 'article',
+}))
+
 function bookThis() {
   booking.reset({ who: current.value.stylist, step: 1 })
   navigateTo('/booking')
@@ -66,7 +71,12 @@ function bookThis() {
             <span class="w-22 flex-none font-label text-11 font-semibold tracking-label-wide text-fg-3">
               {{ spec.k }}
             </span>
-            <span class="text-15 leading-body-tight">{{ spec.v }}</span>
+            <!-- 需要漂髮是成本與傷害資訊（文案 §6），用全站唯一的強調色標出來；
+                 不需要漂的維持一般字色，否則強調色就沒有訊號價值了 -->
+            <span
+              class="text-15 leading-body-tight"
+              :class="spec.k === 'BLEACH' && current.bleach ? 'text-accent' : ''"
+            >{{ spec.v }}</span>
           </div>
         </div>
 

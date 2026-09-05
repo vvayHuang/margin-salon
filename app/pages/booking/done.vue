@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { money } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
-useHead({ title: '預約完成 — 留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/booking/done']!, path: '/booking/done' }))
 
 const { receipt } = useBooking()
 

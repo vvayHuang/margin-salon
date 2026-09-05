@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { SERVICE_GROUPS, SERVICE_NOTES } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
 /**
  * 服務與價目。同一支 PriceRow，這裡是純列表（不可勾選）；
  * 要勾選的版本在預約流程第二步。
  */
-useHead({ title: '服務與價目 — 留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/services']!, path: '/services' }))
 </script>
 
 <template>

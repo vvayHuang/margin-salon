@@ -15,11 +15,12 @@ import {
   type CategoryId,
   type StylistId,
 } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 import type { DayCell } from '~/components/MgDatePicker.vue'
 import type { SummaryRow } from '~/components/MgBookingSummary.vue'
 
 definePageMeta({ layout: 'booking' })
-useHead({ title: '線上預約 — 留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/booking']!, path: '/booking' }))
 
 const route = useRoute()
 const {

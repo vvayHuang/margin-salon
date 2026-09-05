@@ -6,10 +6,17 @@
 
 > **v2.1 修訂**：`/store` 更名為 `/store`、麵包屑與 `BreadcrumbList` 移除（PRD D-09／D-10）。
 >
-> ⚠️ **本文件的內容目前幾乎都還沒實作**：站上只有各頁 `title`，沒有 description、
-> canonical、OG／Twitter、任何一段結構化資料、sitemap.xml 或 robots.txt。
-> 服務單頁 ×5 與髮型誌 12 篇也還不存在，因此 §1 的服務字與長尾字**沒有落點頁**。
-> 這些是 backlog，不是被推翻的決策。
+> **已實作（2026-09-05）**：§2 各頁 meta（title／description／canonical／robots）、
+> §3 OG 與 Twitter Card、§4.1 `HairSalon`。程式在 `shared/seo.ts` 與
+> `app/composables/useMgSeo.ts`。
+>
+> ⚠️ **仍未實作**：§4.2 `ImageObject`、§4.4 `Person`、§4.5 `FAQPage`（`/services`
+> 還沒有 FAQ 區塊）、sitemap.xml、robots.txt。服務單頁 ×5 與髮型誌 12 篇也還不存在，
+> 因此 §1 的服務字與長尾字**沒有落點頁**。這些是 backlog，不是被推翻的決策。
+>
+> ⚠️ **本文件的 description 有幾則承諾了頁面上沒有的內容**（`/about` 的品牌故事、
+> `/works` 的使用色號、`/services` 的價格），實作時已改寫成頁面實際有的東西，
+> 差異寫在 `shared/seo.ts` 的註解裡。**description 承諾頁面沒有的東西，比沒有 description 更傷。**
 
 ---
 
@@ -83,7 +90,7 @@ M3+　　在地字（苓雅／三多商圈）進前 10
 Title:       苓雅美髮沙龍｜留白髮所 MARGIN・三多商圈預約制
 Description: 高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開、不推銷、不辦卡。捷運三多商圈站步行 5 分鐘，線上預約 30 秒完成。
 Canonical:   https://marginhair.com.tw/
-OG Image:    /og/og_default.jpg
+OG Image:    /img/og_default.jpg   ←（v2.1 更正：檔案實際在 /img/ 底下，不是 /og/）
 ```
 
 ### 關於我們 `/about`

@@ -13,7 +13,12 @@ const who = computed(() => stylist.value!)
 const allWorks = computed(() => WORKS.filter(w => w.stylist === slug.value))
 const shownWorks = computed(() => allWorks.value.slice(0, 4))
 
-useHead(() => ({ title: `${who.value.label} — 留白髮所 MARGIN` }))
+// Title 公式見 04-SEO §2：{姓名}｜{職級}・{主要擅長}｜MARGIN
+useMgSeo(() => ({
+  title: `${who.value.label}｜${who.value.roleZh}・${who.value.tags[0]}｜MARGIN`,
+  description: who.value.seoDesc,
+  path: `/stylists/${slug.value}`,
+}))
 
 const booking = useBooking()
 
@@ -90,6 +95,24 @@ function pickSlot(day: number, time: string) {
       </div>
       <div class="mg-grid4 pt-10">
         <MgWorkCard v-for="w in shownWorks" :key="w.code" :work="w" />
+      </div>
+    </div>
+
+    <!-- 顧客評價：D-04 把首頁的評價區塊移到這裡，評價綁人比綁店有說服力 -->
+    <div class="mg-gut mg-sect">
+      <div class="flex items-baseline justify-between gap-6">
+        <h2 class="mg-h2 font-display leading-heading font-medium tracking-display-md">
+          指名 {{ stylistLatin(slug) }} 的<br>
+          <span class="pl-14 italic">客人這樣說</span>
+        </h2>
+        <span class="font-label text-12 font-semibold tracking-label-mid text-fg-3">REVIEWS</span>
+      </div>
+      <div class="mg-nums pt-12">
+        <figure v-for="(review, i) in who.reviews" :key="i" class="border-t-2 border-t-line-1 pt-5">
+          <blockquote class="font-display text-20 leading-heading-loose text-fg-1 text-pretty">
+            「{{ review }}」
+          </blockquote>
+        </figure>
       </div>
     </div>
 

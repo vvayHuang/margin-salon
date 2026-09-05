@@ -7,9 +7,12 @@ import {
   STYLISTS,
   WORKS,
 } from '#shared/margin'
+import { PAGE_SEO, hairSalonSchema } from '#shared/seo'
 
 /** 首頁。順序照高擬真稿：滿版標題 → 開場白 → 作品 → 設計師 → 價目導引 → 收尾。 */
-useHead({ title: '留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/']!, path: '/' }))
+// HairSalon 只掛在首頁，其餘頁面用 @id 指回來（04-SEO §4.1）
+useJsonLd(hairSalonSchema)
 
 const works = computed(() => WORKS.slice(0, HOME_WORK_COUNT))
 

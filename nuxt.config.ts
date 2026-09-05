@@ -13,14 +13,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: { lang: 'zh-Hant-TW' },
+      // title 與 description 由各頁的 useMgSeo 設定（docs/04-SEO.md §2）；
+      // 這裡只留 fallback title，全站共用的 description 會蓋掉每頁自己的。
       title: '留白髮所 MARGIN',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content: '每一張都是實際施作的紀錄，沒有修過髮色。你看到的就是離店那天的樣子。',
-        },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

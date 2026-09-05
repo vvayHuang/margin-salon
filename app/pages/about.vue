@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ABOUT_PRINCIPLES, ABOUT_SPACE } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
 /** 關於我們。標題靠右、影像在右欄，是全站唯一右對齊 H1 的版面。 */
-useHead({ title: '關於我們 — 留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/about']!, path: '/about' }))
 </script>
 
 <template>

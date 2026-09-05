@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { STYLISTS } from '#shared/margin'
+import { PAGE_SEO } from '#shared/seo'
 
 /**
  * 設計師索引。高擬真稿的 STYLISTS 導覽是直接跳到某一位的個人頁，
  * 沒有畫索引頁；這裡用設計系統既有的 StylistCard 補一頁，讓導覽不會是死連結。
  */
-useHead({ title: '設計師 — 留白髮所 MARGIN' })
+useMgSeo(() => ({ ...PAGE_SEO['/stylists']!, path: '/stylists' }))
 </script>
 
 <template>
