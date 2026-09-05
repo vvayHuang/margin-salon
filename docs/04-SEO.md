@@ -6,13 +6,15 @@
 
 > **v2.1 修訂**：`/store` 更名為 `/store`、麵包屑與 `BreadcrumbList` 移除（PRD D-09／D-10）。
 >
-> **已實作（2026-09-05）**：§2 各頁 meta（title／description／canonical／robots）、
-> §3 OG 與 Twitter Card、§4.1 `HairSalon`。程式在 `shared/seo.ts` 與
-> `app/composables/useMgSeo.ts`。
+> **已實作**：§2 各頁 meta、§3 OG 與 Twitter Card、§4.1 `HairSalon`、
+> §4.2 `ImageObject`、§4.3 `Service`、§4.4 `Person`、§4.5 `FAQPage`、
+> sitemap.xml、robots.txt。服務單頁 ×5 也已建立，§1 的服務字有落點頁了。
+> 程式在 `shared/seo.ts` 與 `app/composables/useMgSeo.ts`，sitemap／robots 是
+> `server/routes/` 的兩支 Nitro route。
 >
-> ⚠️ **仍未實作**：§4.2 `ImageObject`、§4.4 `Person`、§4.5 `FAQPage`（`/services`
-> 還沒有 FAQ 區塊）、sitemap.xml、robots.txt。服務單頁 ×5 與髮型誌 12 篇也還不存在，
-> 因此 §1 的服務字與長尾字**沒有落點頁**。這些是 backlog，不是被推翻的決策。
+> ⚠️ **仍未實作**：髮型誌 12 篇（§1 的長尾字仍沒有落點）、§4.7 `Article`、
+> §4.8 `JobPosting`（`/careers` 尚未建立）。§4.6 `BreadcrumbList` 是**決定不做**，
+> 見 PRD D-09。
 >
 > ⚠️ **本文件的 description 有幾則承諾了頁面上沒有的內容**（`/about` 的品牌故事、
 > `/works` 的使用色號、`/services` 的價格），實作時已改寫成頁面實際有的東西，
@@ -455,8 +457,10 @@ useSeoMeta({
 □ 網址全小寫、用連字號、不含中文
 □ 每頁 canonical 正確；作品篩選 URL（?service=color）指向 /works 主頁
 □ 篩選 URL 可分享、可回上一頁（§13.2），但加 noindex 避免重複內容
-□ sitemap.xml 自動產生（@nuxtjs/sitemap），排除 /booking/done
-□ robots.txt 允許爬取，/booking/done 設 noindex
+□ sitemap.xml **已做**——不是 @nuxtjs/sitemap，是 `server/routes/sitemap.xml.ts`。
+   路由是靜態的、資料都在 shared/ 裡，多一個相依只是為了做同一件事。已排除 /booking/done
+□ robots.txt **已做**（`server/routes/robots.txt.ts`），Disallow /booking/done，
+   該頁另有 noindex meta
 □ <html lang="zh-Hant-TW">
 □ ~~麵包屑除首頁外全站顯示，並上 BreadcrumbList schema~~ — **不做，見 PRD D-09**
 □ 手機可用性：字級 ≥ 16px、點擊區 ≥ 44×44px（含 Sticky 預約列，尚未實作）

@@ -163,3 +163,95 @@ export function hairSalonSchema() {
     },
   }
 }
+
+/* ---- 其餘結構化資料（04-SEO §4.2–§4.5） ---- */
+
+/** 所有 schema 都用 @id 指回首頁的 HairSalon，不重複描述同一間店 */
+const SALON_REF = { '@id': `${SITE_URL}/#salon` }
+
+/** §4.3 Service — 服務單頁 ×5 */
+export function serviceSchema(input: {
+  name: string
+  serviceType: string
+  lowPrice: number
+  highPrice: number
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    'name': input.name,
+    'serviceType': input.serviceType,
+    'provider': SALON_REF,
+    'areaServed': { '@type': 'City', 'name': '高雄市' },
+    'offers': {
+      '@type': 'AggregateOffer',
+      'lowPrice': input.lowPrice,
+      'highPrice': input.highPrice,
+      'priceCurrency': 'TWD',
+    },
+  }
+}
+
+/**
+ * §4.2 ImageObject — 作品單頁。
+ * caption 直接用 §13.1 的衍生欄位 alt，與頁面上的 img alt 是同一份資料。
+ * `acquireLicensePage` 指向 /privacy。
+ */
+export function imageObjectSchema(input: {
+  img: string
+  title: string
+  description: string
+  caption: string
+  creator: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ImageObject',
+    'contentUrl': `${SITE_URL}/img/${input.img}_front.webp`,
+    'thumbnailUrl': `${SITE_URL}/img/${input.img}_thumb.webp`,
+    'name': input.title,
+    'description': input.description,
+    'caption': input.caption,
+    'width': 1200,
+    'height': 1500,
+    'creator': { '@type': 'Person', 'name': input.creator },
+    'copyrightHolder': SALON_REF,
+    'acquireLicensePage': `${SITE_URL}/privacy`,
+    'representativeOfPage': true,
+  }
+}
+
+/** §4.4 Person — 設計師個人頁 ×4 */
+export function personSchema(input: {
+  name: string
+  jobTitle: string
+  knowsAbout: string[]
+  photo: string
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    'name': input.name,
+    'jobTitle': input.jobTitle,
+    'worksFor': SALON_REF,
+    'knowsAbout': input.knowsAbout,
+    'image': `${SITE_URL}/img/${input.photo}.webp`,
+    'sameAs': [BRAND.igHref],
+  }
+}
+
+/**
+ * §4.5 FAQPage — /services 的常見問題。
+ * 答案與頁面上顯示的必須逐字相同，所以兩邊吃同一個 SERVICE_FAQ。
+ */
+export function faqPageSchema(items: { q: string; a: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    'mainEntity': items.map(i => ({
+      '@type': 'Question',
+      'name': i.q,
+      'acceptedAnswer': { '@type': 'Answer', 'text': i.a },
+    })),
+  }
+}

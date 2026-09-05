@@ -9,6 +9,7 @@ import {
   stylistZh,
   type StylistId,
 } from '#shared/margin'
+import { personSchema } from '#shared/seo'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug) as StylistId)
@@ -28,6 +29,14 @@ useMgSeo(() => ({
   description: who.value.seoDesc,
   path: `/stylists/${slug.value}`,
 }))
+useJsonLd(() =>
+  personSchema({
+    name: who.value.label,
+    jobTitle: who.value.roleZh,
+    knowsAbout: who.value.tags,
+    photo: who.value.photo,
+  }),
+)
 
 /** 只有剪髮有職級價差，染燙護四位同價（文案 §3） */
 const cutPrice = computed(() => money(stylistCutPrice(who.value)))

@@ -33,12 +33,15 @@
 - ~~`/about` 品牌故事「店名的由來」~~ — 文案 §2，286 字
 - ~~設計師個人頁的個人價目與 IG~~ — 順帶補上價目表缺的「總監剪髮 1,800」
 
+- ~~`Service`／`ImageObject`／`Person`／`FAQPage` 結構化資料~~
+- ~~sitemap.xml、robots.txt~~ — `server/routes/` 的兩支 Nitro route
+
 ## 目前的 backlog（依投報率排序）
 
-1. `Service`（服務單頁）、`ImageObject`（作品單頁）、`Person`（設計師頁）、
-   `FAQPage`（`/services`）結構化資料 — 內容都上站了，各約十行
-2. sitemap.xml、robots.txt
-3. 髮型誌 `/journal`、`/careers`、`/privacy`、404／500
+1. 髮型誌 `/journal` ＋ 文章單頁（`Article` schema、§1 的長尾字目前沒有落點頁）
+2. `/careers`（`JobPosting` schema 列為 P2）、`/privacy`
+   ——`/privacy` 已被作品單頁的 `ImageObject.acquireLicensePage` 指到，優先補
+3. 404／500 錯誤頁（文案 §15 已寫好）
 
 ## 與 v1.3.1／v2.0 的差異
 

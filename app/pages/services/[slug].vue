@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { MENU, STYLISTS, WORKS, money, type CategoryId } from '#shared/margin'
 import { SERVICE_PAGES } from '#shared/services'
+import { serviceSchema } from '#shared/seo'
 
 /**
  * 服務單頁 — 五頁共用這一個模板（PRD §6.3）。
@@ -18,12 +19,16 @@ const page = computed(() => found.value!)
 const stylist = computed(() => STYLISTS.find(s => s.value === page.value.stylist)!)
 
 /** 價格區間取自價目表，不另外寫死 */
-const priceRange = computed(() => {
-  const prices = MENU.filter(m => m.cat === page.value.cat && m.price > 0).map(m => m.price)
-  const lo = Math.min(...prices)
-  const hi = Math.max(...prices)
-  return lo === hi ? `${money(lo)} 起` : `${money(lo)} – ${money(hi)}`
-})
+const prices = computed(() =>
+  MENU.filter(m => m.cat === page.value.cat && m.price > 0).map(m => m.price),
+)
+const priceLo = computed(() => Math.min(...prices.value))
+const priceHi = computed(() => Math.max(...prices.value))
+const priceRange = computed(() =>
+  priceLo.value === priceHi.value
+    ? `${money(priceLo.value)} 起`
+    : `${money(priceLo.value)} – ${money(priceHi.value)}`,
+)
 
 /**
  * 該項目的作品。作品的 service 沒有 scalp（頭皮養護歸在護髮底下做），
@@ -45,6 +50,14 @@ useMgSeo(() => ({
   description: page.value.seoDesc,
   path: `/services/${slug.value}`,
 }))
+useJsonLd(() =>
+  serviceSchema({
+    name: page.value.title,
+    serviceType: page.value.serviceType,
+    lowPrice: priceLo.value,
+    highPrice: priceHi.value,
+  }),
+)
 </script>
 
 <template>

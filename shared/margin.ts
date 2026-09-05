@@ -485,6 +485,15 @@ export function serviceLabel(value: string | undefined) {
   return SERVICES.find(o => o.value === value)?.label ?? ''
 }
 
+/**
+ * 作品的 alt 文字。規則來自 PRD §7.1 與 §13.1 的衍生欄位：
+ * `{服務項目}｜{髮長}｜{設計師}`，例：`透明感染髮｜中長髮｜Yuki`。
+ * 圖片 alt 與 ImageObject 的 caption 共用同一份，兩邊不會各寫各的。
+ */
+export function workAlt(w: Work) {
+  return `${serviceLabel(w.service)}｜${w.length}｜${stylistLatin(w.stylist)}`
+}
+
 export function workMeta(w: Work) {
   return `${serviceLabel(w.service)} ・ ${findStylist(w.stylist)?.label} ・ ${w.length}`
 }

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { SERVICE_FAQ, SERVICE_GROUPS, SERVICE_NOTES } from '#shared/margin'
-import { PAGE_SEO } from '#shared/seo'
+import { PAGE_SEO, faqPageSchema } from '#shared/seo'
 import { SERVICE_PAGES } from '#shared/services'
 
 /** 類別 → 服務單頁網址。五個類別都有單頁，這裡不會拿到 undefined，但還是留一手。 */
@@ -14,6 +14,8 @@ const detailHref = (cat: string) => {
  * 要勾選的版本在預約流程第二步。
  */
 useMgSeo(() => ({ ...PAGE_SEO['/services']!, path: '/services' }))
+// 答案與頁面上的 MgFaq 吃同一份 SERVICE_FAQ，不會各寫各的（04-SEO §4.5）
+useJsonLd(() => faqPageSchema(SERVICE_FAQ))
 </script>
 
 <template>

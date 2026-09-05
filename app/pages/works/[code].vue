@@ -4,8 +4,10 @@ import {
   findStylist,
   serviceLabel,
   stylistLatin,
+  workAlt,
   workSpecs,
 } from '#shared/margin'
+import { imageObjectSchema } from '#shared/seo'
 
 const route = useRoute()
 const code = computed(() => String(route.params.code))
@@ -34,6 +36,15 @@ useMgSeo(() => ({
   path: `/works/${current.value.code}`,
   ogType: 'article',
 }))
+useJsonLd(() =>
+  imageObjectSchema({
+    img: current.value.img,
+    title: current.value.title,
+    description: `${serviceLabel(current.value.service)}，${current.value.bleach ? '需要漂髮' : '不需漂髮'}${current.value.colorCode ? `，色號 ${current.value.colorCode}` : ''}。${current.value.length}。`,
+    caption: workAlt(current.value),
+    creator: stylist.value.label,
+  }),
+)
 
 function bookThis() {
   booking.reset({ who: current.value.stylist, step: 1 })
@@ -47,7 +58,7 @@ function bookThis() {
       <MgImage
         ratio="4/5"
         :src="`${current.img}_front`"
-        :alt="`${current.title}｜${current.length}`"
+        :alt="workAlt(current)"
         sizes="(max-width: 900px) 100vw, 60vw"
         priority
       />

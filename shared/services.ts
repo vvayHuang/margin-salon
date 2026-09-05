@@ -26,6 +26,8 @@ export interface ServicePage {
   title: string
   /** Archivo 小標 */
   latin: string
+  /** schema.org Service 的 serviceType，要是類別描述不是標語（04-SEO §4.3） */
+  serviceType: string
   /** 一句話定位 */
   lead: string
   /** meta title，依 04-SEO §2 的公式手寫；價格已對齊站上的價目表 */
@@ -60,6 +62,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     cat: 'cut',
     title: '剪髮',
     latin: 'CUT',
+    serviceType: '剪髮與髮型結構設計',
     lead: '從髮質與生活習慣決定長度。',
     seoTitle: '剪髮｜高雄苓雅剪髮 1200 起・三週免費修剪｜MARGIN',
     seoDesc: '從髮質與生活習慣決定長度，剪之前先問你早上有多少時間、會不會吹。設計師剪髮 1,200 起，三週內想修一下回來免費調整。高雄苓雅三多商圈預約制沙龍。',
@@ -111,6 +114,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     cat: 'color',
     title: '染髮',
     latin: 'COLOR',
+    serviceType: '透明感染髮與褪色設計',
     lead: '顏色是養出來的，不是一次染出來的。',
     seoTitle: '透明感染髮｜高雄染髮 3800 起・褪色也好看｜MARGIN',
     seoDesc: '低彩度染髮，配色時把褪色後的樣子一起算進去，所以作品偏灰。需要漂髮者諮詢報價後才開始施作。3,800 起，高雄苓雅三多商圈預約制沙龍。',
@@ -163,6 +167,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     cat: 'perm',
     title: '燙髮',
     latin: 'PERM',
+    serviceType: '韓系層次燙與捲度設計',
     lead: '讓髮尾有方向，而不是有形狀。',
     seoTitle: '韓系層次燙｜高雄苓雅燙髮 3200 起｜MARGIN',
     seoDesc: '讓髮尾有方向，而不是有形狀。依髮質調整軟化時間，撐不住的捲度會做小一號，含吹整教學。3,200 起，約需 3 小時。高雄三多商圈。',
@@ -214,6 +219,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     cat: 'care',
     title: '護髮',
     latin: 'TREATMENT',
+    serviceType: '結構式護髮與髮質判讀',
     lead: '先判斷你需不需要，再決定做哪一種。',
     seoTitle: '護髮｜高雄結構式護髮・先判斷你需不需要｜MARGIN',
     seoDesc: '只是乾的話基礎護髮就夠了。我們摸過再決定，不會預設你需要最貴的那個，也不做套裝療程。結構護髮 1,800，單次 90 分鐘。高雄苓雅。',
@@ -266,6 +272,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     cat: 'scalp',
     title: '頭皮養護',
     latin: 'SCALP',
+    serviceType: '頭皮深層清潔與舒緩養護',
     lead: '頭髮的問題，有一半不在頭髮上。',
     seoTitle: '頭皮養護｜高雄頭皮深層清潔 1600 起｜MARGIN',
     seoDesc: '出油、癢、異味與掉髮，先用放大鏡看毛孔再決定做什麼，螢幕會轉給你一起看。無矽靈無 SLS，敏感頭皮與孕期可做。1,600 起，高雄三多商圈。',
