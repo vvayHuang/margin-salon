@@ -1,0 +1,50 @@
+﻿檔名,用途,攝影師,Unsplash ID,來源網址,授權,原始尺寸,取得日期,備註
+hero_desktop.webp,首頁 Hero 桌機 21:9,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,選圖基準 A；佔位圖，上線前替換為實拍
+hero_mobile.webp,首頁 Hero 手機 4:5,Giorgio Trovato (@giorgiotrovato),NF_Q9RQ6qRk,https://unsplash.com/photos/NF_Q9RQ6qRk,Unsplash License,2880x1920,2026-09-05,佔位圖，上線前替換為實拍
+hero_desktop_alt.webp,Hero 備選 21:9,Greg Trowman (@gregtrow),jsuWg7IXx1k,https://unsplash.com/photos/jsuWg7IXx1k,Unsplash License,5761x4000,2026-09-05,備選，未採用時可刪
+about_intro.webp,首頁 品牌介紹 3:2,Greg Trowman (@gregtrow),k7AvgINPgdg,https://unsplash.com/photos/k7AvgINPgdg,Unsplash License,6000x4000,2026-09-05,佔位圖
+about_hero.webp,/about 頁首 16:9,Guilherme Petri (@guipetri),PtOfbGkU3uI,https://unsplash.com/photos/PtOfbGkU3uI,Unsplash License,4038x2692,2026-09-05,佔位圖
+space_lounge.webp,/about 等候區 16:9,Greg Trowman (@gregtrow),kJx_9iCByBs,https://unsplash.com/photos/kJx_9iCByBs,Unsplash License,6000x4000,2026-09-05,佔位圖
+space_cutting.webp,/about 剪髮區 16:9,Giorgio Trovato (@giorgiotrovato),gI9rvJK61L8,https://unsplash.com/photos/gI9rvJK61L8,Unsplash License,5760x3840,2026-09-05,選圖基準 B；佔位圖
+space_detail.webp,/about 空間細節 16:9,Giorgio Trovato (@giorgiotrovato),XBcURNhKeog,https://unsplash.com/photos/XBcURNhKeog,Unsplash License,5760x3840,2026-09-05,佔位圖
+space_alt_01.webp,空間備選 16:9,Guilherme Petri (@guipetri),ZkNxY2zErck,https://unsplash.com/photos/ZkNxY2zErck,Unsplash License,4104x2736,2026-09-05,備選
+space_alt_02.webp,空間備選 16:9,Tile Merchant Ireland (@tilemerchant),pb1Ajy_QUeE,https://unsplash.com/photos/pb1Ajy_QUeE,Unsplash License,6144x4098,2026-09-05,備選
+location_stairs.webp,/location 二樓樓梯 16:9,Cuvii (@cuvii),KvZ1Z2Q-7uc,https://unsplash.com/photos/KvZ1Z2Q-7uc,Unsplash License,7728x5152,2026-09-05,佔位圖；日本拍攝，氛圍貼近文案「樓梯在店面右手邊」
+location_exterior.webp,/location 外觀 16:9,Hector Falcon (@hectorfalcon),4FhMrcTl4Kc,https://unsplash.com/photos/4FhMrcTl4Kc,Unsplash License,5184x3456,2026-09-05,佔位圖；壓縮後 193KB 為細節較多的例外
+location_env_01.webp,/location 環境 16:9,Nico Knaack (@xoxnk),C6SUsdkBGjE,https://unsplash.com/photos/C6SUsdkBGjE,Unsplash License,3475x2328,2026-09-05,佔位圖
+service_cut.webp,服務卡片 剪髮 1:1,Victor Sirbu (@victorsirbu04),Cr3CxWtuc5U,https://unsplash.com/photos/Cr3CxWtuc5U,Unsplash License,3688x3688,2026-09-05,佔位圖
+service_cut_alt.webp,剪髮備選 剪刀平拍 1:1,Giorgio Trovato (@giorgiotrovato),U-DinasrjvU,https://unsplash.com/photos/U-DinasrjvU,Unsplash License,10000x10000,2026-09-05,備選
+service_color.webp,服務卡片 染髮 1:1,Yovanka Loria Salon (@yovankaloriasalon),RpFQdgJ9gQw,https://unsplash.com/photos/RpFQdgJ9gQw,Unsplash License,2400x2400,2026-09-05,佔位圖；對應主力品項「透明感染髮」
+service_perm.webp,服務卡片 燙髮 1:1,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67CzXs,https://unsplash.com/photos/nDSCY67CzXs,Unsplash License,3345x3571,2026-09-05,佔位圖；與 works_007_front 同一原始檔
+service_treatment.webp,服務卡片 護髮 1:1,Katsiaryna Endruszkiewicz (@endka_1),yZviQtYoP08,https://unsplash.com/photos/yZviQtYoP08,Unsplash License,4000x4000,2026-09-05,佔位圖
+service_scalp.webp,服務卡片 頭皮養護 1:1,Ela De Pure (@eladepure),Gp3s0bquEkE,https://unsplash.com/photos/Gp3s0bquEkE,Unsplash License,2400x2400,2026-09-05,佔位圖；產品照，非施作照
+service_scalp_alt.webp,頭皮養護備選 1:1,Ela De Pure (@eladepure),06Z_DoagMz4,https://unsplash.com/photos/06Z_DoagMz4,Unsplash License,2400x2400,2026-09-05,備選
+stylist_shu.webp,設計師 周敘 Shu 1:1,Janko Ferlič (@itfeelslikefilm),XbxQbS1NMKE,https://unsplash.com/photos/XbxQbS1NMKE,Unsplash License,3946x4344,2026-09-05,⚠ 兒童照，不適合作為設計師頭像，待替換
+stylist_yuki.webp,設計師 林宜家 Yuki 1:1,jim hatch (@jimo6633),s2qtRSATaP8,https://unsplash.com/photos/s2qtRSATaP8,Unsplash License,4378x4831,2026-09-05,待替換為亞洲面孔
+stylist_ray.webp,設計師 陳柏睿 Ray 1:1,Craig Tidball (@devonshiremedia),Ufd5WoJf_7k,https://unsplash.com/photos/Ufd5WoJf_7k,Unsplash License,3360x3360,2026-09-05,待替換為亞洲面孔
+stylist_an.webp,設計師 黃安 An 1:1,Craig Tidball (@devonshiremedia),X8xRBoeJ8xM,https://unsplash.com/photos/X8xRBoeJ8xM,Unsplash License,3079x3079,2026-09-05,待替換為亞洲面孔
+works_001_front.webp,作品 染髮 長髮 4:5,Guido Fuà (@eikona),dpHAcZsu4bg,https://unsplash.com/photos/dpHAcZsu4bg,Unsplash License,4096x6144,2026-09-05,佔位圖；有人物，上線前須換為有拍攝同意的實拍
+works_001_back.webp,作品 染髮 背面 4:5,Vii Nguyenn (@viinguyenn),Bjr4JDdl6ts,https://unsplash.com/photos/Bjr4JDdl6ts,Unsplash License,2220x2775,2026-09-05,⚠ 藍髮插紅辣椒，與品牌極簡調性不符，建議降為備選
+works_002_front.webp,作品 染髮 中長髮 4:5,Minh Ngọc (@ngocntmn),8mrH9UjbgR8,https://unsplash.com/photos/8mrH9UjbgR8,Unsplash License,3456x5184,2026-09-05,佔位圖；有人物
+works_002_back.webp,作品 染髮 背面 4:5,Rejaul Karim (@rejaul_creativedesign),q8nZvIpE55Y,https://unsplash.com/photos/q8nZvIpE55Y,Unsplash License,4640x6960,2026-09-05,佔位圖；建議升為染髮背面主圖
+works_003_front.webp,作品 染髮 黑長髮 4:5,Jarin Dominguez (@jarind),sxUdO8Xud2k,https://unsplash.com/photos/sxUdO8Xud2k,Unsplash License,4016x6016,2026-09-05,佔位圖；有人物
+works_004_front.webp,作品 染髮 中長髮 4:5,Chalaphan Mathong (@jmj_jimmy),2Ceido7Uldo,https://unsplash.com/photos/2Ceido7Uldo,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
+works_005_front.webp,作品 染髮 自然光 4:5,Rameez Remy (@rameez_remy),mncdBRKF56k,https://unsplash.com/photos/mncdBRKF56k,Unsplash License,2160x2700,2026-09-05,佔位圖；有人物
+works_006_front.webp,作品 染髮 特殊色 4:5,Scott Goodwill (@scottagoodwill),r7KPlaryeqs,https://unsplash.com/photos/r7KPlaryeqs,Unsplash License,4096x4096,2026-09-05,藍綠漸層，與「低彩度」定位不符，建議降為備選
+works_007_front.webp,作品 燙髮 4:5,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67CzXs,https://unsplash.com/photos/nDSCY67CzXs,Unsplash License,3345x3571,2026-09-05,與 service_perm 同一原始檔，同頁勿並列
+works_008_front.webp,作品 燙髮 黑白 4:5,Alexander Krivitskiy (@krivitskiy),e7-0U1EAqz4,https://unsplash.com/photos/e7-0U1EAqz4,Unsplash License,6629x6074,2026-09-05,佔位圖；有人物
+works_009_front.webp,作品 燙髮 4:5,Janko Ferlič (@itfeelslikefilm),LGlBwZGjiwM,https://unsplash.com/photos/LGlBwZGjiwM,Unsplash License,4819x5304,2026-09-05,佔位圖；有人物
+works_010_front.webp,作品 燙髮 逆光 4:5,Alef Morais (@alef_visuals),HWdTfhFX-OY,https://unsplash.com/photos/HWdTfhFX-OY,Unsplash License,3790x4737,2026-09-05,佔位圖；有人物
+works_011_front.webp,作品 剪髮 短髮 4:5,Alex Perez (@a2eorigins),vXQza9AUe40,https://unsplash.com/photos/vXQza9AUe40,Unsplash License,3648x5472,2026-09-05,佔位圖；有人物
+works_012_front.webp,作品 剪髮 短髮黑白 4:5,Lawrence Chismorie (@lawrnsky),-3CCUXDrS8A,https://unsplash.com/photos/-3CCUXDrS8A,Unsplash License,3082x4535,2026-09-05,佔位圖；有人物
+works_013_front.webp,作品 剪髮 短髮 4:5,Alex Perez (@a2eorigins),VLPLo-GtrIE,https://unsplash.com/photos/VLPLo-GtrIE,Unsplash License,3265x4898,2026-09-05,佔位圖；有人物
+works_014_front.webp,作品 剪髮 短髮 4:5,Sergey Sokolov (@svsokolov),6q2PwZsM-UY,https://unsplash.com/photos/6q2PwZsM-UY,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
+works_015_front.webp,作品 剪髮 施作中 4:5,Nate Johnston (@natejohnston),tgPrIYnW3g4,https://unsplash.com/photos/tgPrIYnW3g4,Unsplash License,4141x5176,2026-09-05,佔位圖；對應 Ray 的男士剪髮
+works_015_back.webp,作品 男士短髮 背面 4:5,Matthew Jackson (@levijackson),fmbnp_Oy1-I,https://unsplash.com/photos/fmbnp_Oy1-I,Unsplash License,4000x6000,2026-09-05,佔位圖
+works_016_front.webp,作品 男士短髮 4:5,Ahmad Ebadi (@ebadi__ahmad),zAsMbiVW5-M,https://unsplash.com/photos/zAsMbiVW5-M,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
+works_017_front.webp,作品 男士 沙龍情境 4:5,Mr Shave (@mrshave),4k60yfGy7fU,https://unsplash.com/photos/4k60yfGy7fU,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
+og_default.jpg,OG 預設分享圖 1200x630,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,由 hero_desktop 同一原始檔裁切；JPG 格式（社群相容性）
+（待指派）,設計師頭像候補・亞洲女性 短髮,Aiony Haust (@aiony),3TLl_97HNJo,https://unsplash.com/photos/3TLl_97HNJo,Unsplash License,3276x4096,2026-09-05,新增，尚未處理。建議 stylist_yuki（文案中 Yuki 為女性）
+（待指派）,設計師頭像候補・男性,Good Faces Agency (@goodfaces),yliYi-2s9qg,https://unsplash.com/photos/yliYi-2s9qg,Unsplash License,1856x2784,2026-09-05,新增，尚未處理。非亞洲面孔，與其餘三張不一致
+（待指派）,設計師頭像候補・亞洲男性,Imansyah Muhamad Putera (@imansyahmp),n4KewLKFOZw,https://unsplash.com/photos/n4KewLKFOZw,Unsplash License,3456x3456,2026-09-05,新增，尚未處理。建議 stylist_ray（年資 6 年、男士造型）
+（待指派）,設計師頭像候補・亞洲女性 黑白,Tron Le (@tronle_sg),MEsOFGCccHg,https://unsplash.com/photos/MEsOFGCccHg,Unsplash License,3781x5672,2026-09-05,新增，尚未處理。黑白照，與其餘三張色調不一致

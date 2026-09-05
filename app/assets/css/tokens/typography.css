@@ -1,0 +1,67 @@
+:root{
+/* Families */
+--font-display:'Noto Serif TC',serif;
+--font-body:'Noto Sans TC','PingFang TC','Microsoft JhengHei',sans-serif;
+--font-label:'Archivo',sans-serif;
+--font-mono:ui-monospace,Menlo,monospace;
+/* Mixed CJK+Latin runs: Latin picks up Archivo, CJK falls through to Noto Sans TC */
+--font-mixed:'Archivo','Noto Sans TC','PingFang TC',sans-serif;
+
+/* Weights */
+--weight-display:500;
+--weight-display-strong:600; /* wordmark only */
+--weight-body:400;
+--weight-body-medium:500;
+--weight-label:600;
+--weight-label-strong:700; /* the error "!" glyph only */
+--weight-wordmark:600;
+
+/* Size scale (px, verbatim from the hi-fi source — 19 steps, no in-between values) */
+--size-132:132px; /* stylist-page hero name */
+--size-104:104px; /* home hero */
+--size-96:96px;
+--size-88:88px;  /* page H1 (作品集 / 線上預約) */
+--size-64:64px;
+--size-56:56px;  /* section H2 */
+--size-40:40px;  /* booking step heading, modal title */
+--size-32:32px;
+--size-28:28px;  /* stylist-card name */
+--size-24:24px;  /* work title, price row, confirm value */
+--size-22:22px;  /* calendar month, sub-panel heading */
+--size-20:20px;  /* summary-card emphasis value */
+--size-18:18px;
+--size-16:16px;  /* body, buttons, inputs, time slots */
+--size-15:15px;  /* summary-card value, dropdown row */
+--size-14:14px;
+--size-13:13px;  /* field label, breadcrumb */
+--size-12:12px;  /* Archivo caps label */
+--size-11:11px;  /* Archivo caps label, small / crop annotation */
+
+/* Line heights */
+--leading-display-tight:.94;
+--leading-display:1.05;
+--leading-heading:1.2;
+--leading-heading-loose:1.25;
+--leading-body-tight:1.7;
+--leading-body-snug:1.8;
+--leading-body:1.9;
+
+/* Tracking — display tightens as it grows, labels always wide */
+--tracking-display-xl:.02em;  /* 96px and up */
+--tracking-display-md:.03em;  /* 40–88px */
+--tracking-display-sm:.04em;  /* 22–32px */
+--tracking-label:.10em;
+--tracking-label-mid:.12em;
+--tracking-label-wide:.14em;
+--tracking-wordmark:.12em;
+--tracking-button:.04em;
+
+/* Semantic roles */
+--text-hero:var(--weight-display) var(--size-132)/var(--leading-display-tight) var(--font-display);
+--text-title:var(--weight-display) var(--size-64)/var(--leading-display) var(--font-display);
+--text-step:var(--weight-display) var(--size-40)/var(--leading-heading) var(--font-display);
+--text-subhead:var(--weight-display) var(--size-24)/var(--leading-heading) var(--font-display);
+--text-paragraph:var(--weight-body) var(--size-16)/var(--leading-body) var(--font-body);
+--text-caption:var(--weight-body) var(--size-14)/var(--leading-body-tight) var(--font-body);
+--text-label:var(--weight-label) var(--size-12)/1.2 var(--font-label);
+}

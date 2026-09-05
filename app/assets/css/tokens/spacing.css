@@ -1,0 +1,25 @@
+:root{
+--space-4:4px;
+--space-8:8px;
+--space-12:12px;
+--space-16:16px;
+--space-20:20px;
+--space-24:24px;
+--space-32:32px;
+--space-40:40px;
+--space-48:48px;
+--space-56:56px;
+--space-64:64px;
+--space-96:96px;
+--space-120:120px;
+
+/* Page gutters */
+--gutter-desktop:48px;
+--gutter-mobile:16px;
+/* Vertical rhythm between major page sections */
+--section-gap:var(--space-120);
+--section-gap-mobile:72px;
+
+/* Radius — the brand has exactly one radius value */
+--radius:0;
+}

@@ -1,0 +1,10 @@
+node_modules
+.nuxt
+.output
+.data
+dist
+.env
+.DS_Store
+
+# 佔位圖原始檔（150MB，不進版控）
+public/img/_original

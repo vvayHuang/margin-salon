@@ -1,0 +1,54 @@
+:root{
+/* Foreground ramp — pure neutral, no hue */
+--fg-1:#111111;
+--fg-2:#3C3C3C;
+--fg-3:#6E6E6E;
+--fg-4:#B5B5B5;
+--fg-5:#C5C5C5;
+/* Archivo caps label sitting inside a solid #111 fill (active dropdown trigger) */
+--fg-on-dark:#9A9A9A;
+/* The single accent. Never add a second chromatic colour. */
+--accent:#C8351C;
+/* Surfaces */
+--surface-0:#FFFFFF;
+--surface-1:#F4F3F1;
+--surface-2:#F2F2F2;
+/* Lines */
+--line-1:#111111;
+--line-2:#E4E4E4;
+--line-3:#D0D0D0;
+/* Image placeholder */
+--placeholder:#5E5E5E;
+--placeholder-label:#CFCFCF;
+/* Dialog scrim. Opacity only — never a blur, never a glass layer. */
+--scrim:rgba(17,17,17,.72);
+
+/* ---- Semantic aliases ---- */
+--text-heading:var(--fg-1);
+--text-body:var(--fg-2);
+--text-muted:var(--fg-3);
+--text-disabled:var(--fg-4);
+--text-past:var(--fg-5);
+--text-inverse:var(--surface-0);
+--text-accent:var(--accent);
+--text-link:var(--fg-1);
+
+--surface-page:var(--surface-0);
+--surface-toolbar:var(--surface-1);
+--surface-hover-row:var(--surface-1);
+--surface-skeleton:var(--surface-2);
+--surface-disabled:var(--surface-2);
+--surface-selected:var(--accent);
+--surface-solid:var(--fg-1);
+
+--border-strong:var(--line-1);
+--border-hairline:var(--line-2);
+--border-disabled:var(--line-3);
+--border-error:var(--accent);
+--border-active-underline:var(--accent);
+
+--state-error:var(--accent);
+--state-current:var(--accent);
+--surface-scrim:var(--scrim);
+--text-on-solid-muted:var(--fg-on-dark);
+}

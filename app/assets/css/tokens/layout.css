@@ -1,0 +1,75 @@
+:root{
+/* Component heights / paddings, measured from the hi-fi source */
+--h-button:56px;
+--pad-button:0 40px;
+--h-button-sm:40px;
+--pad-button-sm:0 16px;
+--h-dropdown:40px;
+--pad-dropdown:0 16px;
+--h-chip:32px;
+--pad-chip:0 12px;
+--h-input:56px;
+--pad-input:0 16px;
+--h-textarea:112px;
+--pad-textarea:16px;
+--h-timeslot:56px;
+--h-choice:56px;      /* radio-style choice button (是／否, 短／中長／長) */
+--w-choice:160px;
+--w-choice-sm:120px;
+--sq-checkbox:20px;
+--sq-radio-dot:12px;
+--sq-step:20px;       /* booking step indicator square */
+--w-step-rule:40px;   /* 1px connector between steps */
+--w-dropdown-menu:236px;
+--h-dropdown-row:38px;
+--pad-dropdown-menu:6px 0;
+--h-toolbar:64px;
+--pad-toolbar:0 20px;
+--sq-avatar:96px;
+--w-modal:600px;
+--pad-modal:48px;
+--pad-banner:24px 48px;
+--sq-upload:120px;
+--h-nav:72px;
+--h-nav-mobile:56px;
+--w-burger:24px;    /* three 1px rules, 4px apart */
+--h-footer:96px;
+--w-summary-card:360px;
+--pad-summary-card:32px;
+--w-summary-label:56px;   /* 設計師／服務／時間／金額 label column */
+--w-confirm-label:96px;   /* STYLIST／SERVICE／TIME／DETAILS label column */
+--w-price-duration:80px;
+--w-price-amount:120px;
+
+/* Border widths */
+--border-1:1px;
+--border-2:2px;
+--border-4:4px;
+/* Text links: 1px rule, sat 3px below the baseline box */
+--underline-offset:3px;
+
+/* Grids */
+--grid-works:repeat(3,1fr);
+--grid-works-gap:56px 8px;
+--grid-stylist-works:repeat(4,1fr);
+--grid-stylist-works-gap:8px;
+--grid-calendar:repeat(7,1fr);
+--grid-calendar-gap:4px;
+--grid-timeslots:repeat(3,1fr);
+--grid-timeslots-gap:8px;
+
+/* Image crops */
+--ratio-hero:21/9;
+--ratio-work:4/5;
+--ratio-square:1/1;
+
+/* Staggered heading indent (second line) */
+--indent-heading-sm:56px;
+--indent-heading-lg:88px;
+
+/* Motion — fades only, no bounce, no scale. Skeleton pulse is the one exception. */
+--ease:cubic-bezier(.2,0,.2,1);
+--dur-fast:120ms;
+--dur:200ms;
+--dur-slow:320ms;
+}

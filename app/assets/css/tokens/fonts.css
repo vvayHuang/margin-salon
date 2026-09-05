@@ -1,0 +1,5 @@
+/* 留白髮所 MARGIN — webfonts. All three families ship from the Google Fonts CDN;
+   no binaries are vendored. Weights are exactly those the hi-fi source loads.
+   Swapping to a licensed Chinese display face (e.g. 金萱) later means
+   replacing --font-display only. */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Noto+Sans+TC:wght@400;500;700&family=Archivo:wght@400;600;700&display=swap");
