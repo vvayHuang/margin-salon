@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { SERVICE_GROUPS, SERVICE_NOTES } from '#shared/margin'
 import { PAGE_SEO } from '#shared/seo'
+import { SERVICE_PAGES } from '#shared/services'
+
+/** 類別 → 服務單頁網址。五個類別都有單頁，這裡不會拿到 undefined，但還是留一手。 */
+const detailHref = (cat: string) => {
+  const page = SERVICE_PAGES.find(p => p.cat === cat)
+  return page ? `/services/${page.slug}` : undefined
+}
 
 /**
  * 服務與價目。同一支 PriceRow，這裡是純列表（不可勾選）；
@@ -34,6 +41,9 @@ useMgSeo(() => ({ ...PAGE_SEO['/services']!, path: '/services' }))
         <span class="font-label text-12 font-semibold tracking-label-mid text-fg-3">{{ g.latin }}</span>
       </div>
       <p class="mt-4 max-w-[560px] text-15 leading-body text-fg-2 text-pretty">{{ g.note }}</p>
+      <div v-if="detailHref(g.id)" class="mt-5">
+        <MgButton variant="link" :to="detailHref(g.id)">看{{ g.label }}的完整說明</MgButton>
+      </div>
       <div class="mt-8 flex flex-col">
         <MgPriceRow
           v-for="row in g.rows"
