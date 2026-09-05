@@ -12,11 +12,14 @@ const current = computed(() => {
 </script>
 
 <template>
-  <div class="flex min-h-screen flex-col bg-surface-0 font-body text-fg-1">
+  <!-- 手機底部給 sticky 預約列留位，否則它會蓋住頁尾。
+       88px＝12（上內距）＋56（按鈕）＋12（下內距）＋1（上框線）＋7 的餘裕 -->
+  <div class="flex min-h-screen flex-col bg-surface-0 pb-[88px] font-body text-fg-1 md:pb-0">
     <MgNav :current="current" />
     <main class="flex-1">
       <slot />
     </main>
     <MgFooter />
+    <MgStickyBook />
   </div>
 </template>

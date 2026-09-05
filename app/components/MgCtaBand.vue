@@ -15,7 +15,12 @@ defineProps<{
 </script>
 
 <template>
-  <section class="relative flex w-full items-end bg-placeholder" style="aspect-ratio: 21 / 9">
+  <!-- data-mg-cta：MgStickyBook 靠這個標記判斷收尾帶是否在畫面內，在的話就收起來 -->
+  <section
+    data-mg-cta
+    class="relative flex w-full items-end bg-placeholder"
+    style="aspect-ratio: 21 / 9"
+  >
     <img
       v-if="src"
       :src="imgSrc(src)"

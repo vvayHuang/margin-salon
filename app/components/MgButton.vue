@@ -10,6 +10,9 @@ import { NuxtLink } from '#components'
  * 給了 `to` 就渲染成 NuxtLink。NuxtLink 要用 import 拿，不能在 template 的 :is
  * 運算式裡 resolveComponent('NuxtLink') —— 那會解析失敗、退回字串，於是 DOM 裡
  * 長出一顆沒有 href 的 <nuxtlink>，看起來像按鈕但點不動。
+ *
+ * `href` 給站外連結與 tel:／mailto:，渲染成 <a>。沒有這個 prop 之前，
+ * 傳 href 會落到 fallthrough attrs 上變成 <button href="tel:…">，那是點不動的。
  */
 withDefaults(
   defineProps<{
@@ -19,7 +22,10 @@ withDefaults(
     fullWidth?: boolean
     muted?: boolean
     inverse?: boolean
+    /** 站內路由，渲染成 NuxtLink */
     to?: string
+    /** 站外連結或 tel:／mailto:，渲染成 <a> */
+    href?: string
   }>(),
   { variant: 'primary', size: 'md', disabled: false, fullWidth: false, muted: false, inverse: false },
 )
@@ -27,10 +33,11 @@ withDefaults(
 
 <template>
   <component
-    :is="to && !disabled ? NuxtLink : 'button'"
+    :is="disabled ? 'button' : to ? NuxtLink : href ? 'a' : 'button'"
     :to="to && !disabled ? to : undefined"
-    :type="to && !disabled ? undefined : 'button'"
-    :disabled="to ? undefined : disabled"
+    :href="href && !to && !disabled ? href : undefined"
+    :type="!disabled && (to || href) ? undefined : 'button'"
+    :disabled="to || href ? undefined : disabled"
     :aria-disabled="disabled || undefined"
     class="mg-btn"
     :class="[`mg-btn--${variant}`, `mg-btn--${size}`, { 'mg-btn--muted': muted, 'mg-btn--inverse': inverse, 'mg-btn--full': fullWidth, 'mg-btn--disabled': disabled }]"

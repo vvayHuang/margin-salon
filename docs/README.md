@@ -26,19 +26,19 @@
 - ~~各頁 meta 與 `HairSalon` 結構化資料~~ — `shared/seo.ts`、`app/composables/useMgSeo.ts`
 - ~~設計師個人頁的顧客評價~~ — D-04 的對策到此兌現
 - ~~作品單頁的「需要漂髮」與「使用色號」~~ — `WORKS[].bleach` / `.colorCode`
+- ~~手機 Sticky 預約列~~（F-02，P0）— `MgStickyBook`，D-09 的風險對策到此兌現
 
 ## 目前的 backlog（依投報率排序）
 
-1. **手機 Sticky 預約列**（F-02，P0）— D-09 取消 Header 按鈕後，這是手機唯一的常駐預約入口
-2. **服務單頁 ×5**（`/services/{slug}`）— SEO 主力，且是 D-08／D-10 之後主力服務訊息唯一的落點。
+1. **服務單頁 ×5**（`/services/{slug}`）— SEO 主力，且是 D-08／D-10 之後主力服務訊息唯一的落點。
    開工前要先決定：PRD 寫的是 燙／染／護／頭皮／**接髮**，但站上沒有接髮這個服務（五類是
    剪／染／燙／護／頭皮）。且文案 §4 只完整寫了「頭皮養護」一頁，其餘四頁要新寫
-3. `ImageObject`（作品單頁）、`Person`（設計師頁）結構化資料 — 資料都在，各約十行
-4. `FAQPage` — 要先在 `/services` 補 FAQ 區塊（文案 §3 已寫好 8 題）
-5. sitemap.xml、robots.txt
-6. 設計師個人頁的個人價目與 IG 連結
-7. 髮型誌 `/journal`、`/careers`、`/privacy`、404／500
-8. `/about` 的品牌故事「店名的由來」（文案 §2，286 字已寫好）— SEO description 目前繞開了它
+2. `ImageObject`（作品單頁）、`Person`（設計師頁）結構化資料 — 資料都在，各約十行
+3. `FAQPage` — 要先在 `/services` 補 FAQ 區塊（文案 §3 已寫好 8 題）
+4. sitemap.xml、robots.txt
+5. 設計師個人頁的個人價目與 IG 連結
+6. 髮型誌 `/journal`、`/careers`、`/privacy`、404／500
+7. `/about` 的品牌故事「店名的由來」（文案 §2，286 字已寫好）— SEO description 目前繞開了它
 
 ## 與 v1.3.1／v2.0 的差異
 
