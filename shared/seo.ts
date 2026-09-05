@@ -39,12 +39,11 @@ export const PAGE_SEO: Record<string, PageSeo> = {
     description:
       '高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開、不推銷、不辦卡。捷運三多商圈站步行 5 分鐘，線上預約 30 秒完成。',
   },
-  // 04-SEO 原本的 description 講「排版裡的 margin 是留白」，但那段品牌故事還沒上站
-  // （文案 §2 區塊 2，backlog）。改寫成頁面上真的有的三條原則。
+  // 品牌故事「店名的由來」2026-09-06 已上站，description 改回 04-SEO 原本的版本。
   '/about': {
     title: '關於留白髮所｜高雄苓雅預約制沙龍・不推銷不辦卡',
     description:
-      '留白不是留少。我們在苓雅區文橫二路的二樓，同時段只服務一位客人：從諮詢到吹整由同一個人做完，先講做不到的部分，剪完你要整理得動。',
+      '排版裡的 margin 是留白，看起來什麼都沒有，卻決定主體好不好看。我們同時段只服務一位客人，沒有會員卡、沒有儲值、設計師無銷售抽成。',
   },
   // 04-SEO 的價格（染 3000／燙 3500／護 1200／頭皮 1500）是文件版價目表的數字，
   // 與站上的 MENU 對不上。改成從 MENU 算，之後改價目不會再漏改這裡。
@@ -108,7 +107,8 @@ export function hairSalonSchema() {
     'telephone': '+886-7-338-0088',
     'priceRange': `NT$${PRICE_MIN.toLocaleString('en-US')}-${PRICE_MAX.toLocaleString('en-US')}`,
     'currenciesAccepted': 'TWD',
-    'paymentAccepted': 'Cash, Credit Card, Mobile Payment',
+    // 與 /services 的付款規則和 FAQ 一致：沒有信用卡
+    'paymentAccepted': 'Cash, Bank Transfer, Mobile Payment',
     'publicAccess': false,
     'address': {
       '@type': 'PostalAddress',

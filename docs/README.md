@@ -29,15 +29,16 @@
 - ~~手機 Sticky 預約列~~（F-02，P0）— `MgStickyBook`，D-09 的風險對策到此兌現
 - ~~服務單頁 ×5~~ — `shared/services.ts` ＋ `pages/services/[slug].vue`，組合見 **D-11**
 - ~~FAQ 折疊~~（F-09）— `MgFaq`，原生 details／summary
+- ~~`/services` 常見問題~~ — 7 題（文案 §3 的 8 題拿掉「為什麼沒有 LINE」）
+- ~~`/about` 品牌故事「店名的由來」~~ — 文案 §2，286 字
+- ~~設計師個人頁的個人價目與 IG~~ — 順帶補上價目表缺的「總監剪髮 1,800」
 
 ## 目前的 backlog（依投報率排序）
 
-1. `Service`（服務單頁）、`ImageObject`（作品單頁）、`Person`（設計師頁）結構化資料 — 資料都在，各約十行
-2. `FAQPage` — 要先在 `/services` 補 FAQ 區塊（文案 §3 已寫好 8 題），`MgFaq` 可以直接用
-3. sitemap.xml、robots.txt
-4. 設計師個人頁的個人價目與 IG 連結
-5. 髮型誌 `/journal`、`/careers`、`/privacy`、404／500
-6. `/about` 的品牌故事「店名的由來」（文案 §2，286 字已寫好）— SEO description 目前繞開了它
+1. `Service`（服務單頁）、`ImageObject`（作品單頁）、`Person`（設計師頁）、
+   `FAQPage`（`/services`）結構化資料 — 內容都上站了，各約十行
+2. sitemap.xml、robots.txt
+3. 髮型誌 `/journal`、`/careers`、`/privacy`、404／500
 
 ## 與 v1.3.1／v2.0 的差異
 

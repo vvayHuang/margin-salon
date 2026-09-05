@@ -256,6 +256,7 @@ export interface MenuItem {
 export const MENU: MenuItem[] = [
   { id: 'cut1', cat: 'cut', name: '設計師剪髮', note: '含諮詢、洗髮、剪、吹整', minutes: 60, price: 1200 },
   { id: 'cut2', cat: 'cut', name: '資深設計師剪髮', note: '含諮詢、洗髮、剪、吹整', minutes: 60, price: 1500 },
+  { id: 'cut4', cat: 'cut', name: '總監剪髮', note: '同上，含髮流與骨架分析', minutes: 70, price: 1800 },
   { id: 'cut3', cat: 'cut', name: '瀏海修剪', note: '本店客人免費', minutes: 10, price: 0 },
   { id: 'color1', cat: 'color', name: '透明感染髮', note: '單色補染，長髮加價到店確認', minutes: 150, price: 3800 },
   { id: 'color2', cat: 'color', name: '漂髮＋特殊色', note: '需先評估受損程度，可能分兩次進行', minutes: 240, price: 4200 },
@@ -296,6 +297,18 @@ export const HOME_PRICE_IDS = ['cut1', 'color1', 'perm1', 'care1']
 export const HOME_WORK_COUNT = 3
 
 /* ---- 關於我們 ---- */
+
+/**
+ * 品牌故事「店名的由來」，逐字取自全站文案 §2 區塊 2（286 字，上限 300）。
+ * 這是整個品牌的核心敘事，站上一直沒有落點，SEO description 也因此繞開了它。
+ */
+export const ABOUT_STORY = [
+  '排版裡的 margin 是留白。它看起來什麼都沒有，卻決定了主體好不好看。',
+  '頭髮也是一樣的事。很多人剪完頭髮的隔天早上會發現，昨天在店裡的樣子回不來了。那通常不是技術問題，是加了太多東西——太多層次、太多造型品、太多需要每天維持的東西。',
+  '所以我們把流程反過來。先問你早上有多少時間、會不會吹頭髮、幾週會來一次、有沒有戴安全帽。然後剪掉不需要的部分。',
+  '剩下的，才是你。',
+  '我們在苓雅區文橫二路的二樓，同時段只服務一位客人。沒有會員卡、沒有儲值、沒有業績抽成。需要的產品我們會告訴你哪裡買，在我們這裡買不會比較便宜。',
+]
 
 export const ABOUT_PRINCIPLES = [
   {
@@ -380,6 +393,37 @@ export const SERVICE_NOTES = [
   { k: '付款', v: '現金、轉帳、行動支付。不推銷課程與套卡。' },
 ]
 
+export const SERVICE_FAQ = [
+  {
+    q: '一次要多久？',
+    a: '剪髮約 1 小時，染燙 2–3 小時，漂髮視髮況可能到 4 小時。預約時會顯示預估時長，我們不會讓你等到超過。',
+  },
+  {
+    q: '可以帶照片嗎？',
+    a: '可以，建議帶三張。不用是同一種風格，我們比較在意你不想要什麼，那個判斷通常更準。',
+  },
+  {
+    q: '可以指定設計師嗎？',
+    a: '可以。預約第一步就是選設計師，也可以選「不指定」，我們會依你想做的項目安排。',
+  },
+  {
+    q: '有停車位嗎？',
+    a: '沒有專屬車位。汽車可停文橫二路旁的收費停車場，走過來約 3 分鐘。機車請停騎樓外白線區，別停在店門正前方。',
+  },
+  {
+    q: '可以刷卡嗎？',
+    a: '接受現金、轉帳與行動支付。不推銷課程，也沒有套卡與儲值。',
+  },
+  {
+    q: '染髮會過敏，可以先測試嗎？',
+    a: '可以。預約備註欄註明，我們會安排你提前 48 小時到店做貼膚測試，不收費用。',
+  },
+  {
+    q: '男生可以來嗎？',
+    a: '可以。剪髮不分性別計價，設計師剪髮 1,200 起。Ray 專門做短髮與男士造型，作品集可以篩他的作品看。',
+  },
+]
+
 /* ---- 店家資訊 ---- */
 
 export const STORE_ROWS = [
@@ -410,6 +454,19 @@ export const STORE_TIPS = [
 
 export function money(n: number) {
   return 'NT$' + n.toLocaleString('en-US')
+}
+
+/** 職級對應的剪髮品項。染燙護四位同價，只有剪髮有職級價差（文案 §3）。 */
+export const ROLE_CUT_ITEM: Record<string, string> = {
+  總監: 'cut4',
+  資深設計師: 'cut2',
+  設計師: 'cut1',
+}
+
+/** 這位設計師的剪髮價 */
+export function stylistCutPrice(s: Stylist) {
+  const id = ROLE_CUT_ITEM[s.roleZh] ?? 'cut1'
+  return MENU.find(m => m.id === id)?.price ?? 1200
 }
 
 export function findStylist(value: string | undefined) {

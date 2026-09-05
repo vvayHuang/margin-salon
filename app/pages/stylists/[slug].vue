@@ -1,5 +1,14 @@
 <script setup lang="ts">
-import { STYLISTS, WORKS, stylistLatin, stylistZh, type StylistId } from '#shared/margin'
+import {
+  BRAND,
+  STYLISTS,
+  WORKS,
+  money,
+  stylistCutPrice,
+  stylistLatin,
+  stylistZh,
+  type StylistId,
+} from '#shared/margin'
 
 const route = useRoute()
 const slug = computed(() => String(route.params.slug) as StylistId)
@@ -19,6 +28,9 @@ useMgSeo(() => ({
   description: who.value.seoDesc,
   path: `/stylists/${slug.value}`,
 }))
+
+/** 只有剪髮有職級價差，染燙護四位同價（文案 §3） */
+const cutPrice = computed(() => money(stylistCutPrice(who.value)))
 
 const booking = useBooking()
 
@@ -116,7 +128,7 @@ function pickSlot(day: number, time: string) {
       </div>
     </div>
 
-    <div class="mg-gut mg-intro mg-sect pb-30">
+    <div class="mg-gut mg-intro mg-sect">
       <h2 class="mg-h2 font-display leading-heading font-medium tracking-display-md">
         最近的<br>
         <span class="pl-14 italic">空檔</span>
@@ -154,6 +166,45 @@ function pickSlot(day: number, time: string) {
         </div>
 
         <p class="text-14 leading-body-snug text-fg-3 text-pretty">{{ who.hours }}</p>
+      </div>
+    </div>
+
+    <!-- 我的價目與社群（PRD §6.5 區塊 6、7） -->
+    <div class="mg-gut mg-sect pb-30">
+      <dl class="flex max-w-[720px] flex-col">
+        <div class="flex items-baseline gap-6 border-t border-line-2 py-5">
+          <dt class="w-24 flex-none font-label text-12 font-semibold tracking-label-mid text-fg-3">
+            CUT
+          </dt>
+          <dd class="text-16 leading-body-tight">
+            {{ cutPrice }}
+            <span class="text-fg-3">（{{ who.roleZh }}）</span>
+          </dd>
+        </div>
+        <div class="flex items-baseline gap-6 border-t border-line-2 py-5">
+          <dt class="w-24 flex-none font-label text-12 font-semibold tracking-label-mid text-fg-3">
+            OTHERS
+          </dt>
+          <dd class="text-16 leading-body-tight">染、燙、護與頭皮養護四位同價</dd>
+        </div>
+        <div class="flex items-baseline gap-6 border-t border-b border-line-2 py-5">
+          <dt class="w-24 flex-none font-label text-12 font-semibold tracking-label-mid text-fg-3">
+            INSTAGRAM
+          </dt>
+          <dd class="text-16 leading-body-tight">
+            <!-- 全店共用一個帳號（PRD §1.2），不是每位設計師各一個 -->
+            <a
+              :href="BRAND.igHref"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="border-b border-current hover:opacity-60"
+            >{{ BRAND.ig }}</a>
+            <span class="text-fg-3">・作品發布用，不接受 DM 預約</span>
+          </dd>
+        </div>
+      </dl>
+      <div class="pt-6">
+        <MgButton variant="link" muted to="/services">看完整價目表</MgButton>
       </div>
     </div>
   </div>

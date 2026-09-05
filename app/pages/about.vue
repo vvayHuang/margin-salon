@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ABOUT_PRINCIPLES, ABOUT_SPACE } from '#shared/margin'
+import { ABOUT_PRINCIPLES, ABOUT_SPACE, ABOUT_STORY } from '#shared/margin'
 import { PAGE_SEO } from '#shared/seo'
 
 /** 關於我們。標題靠右、影像在右欄，是全站唯一右對齊 H1 的版面。 */
@@ -31,6 +31,24 @@ useMgSeo(() => ({ ...PAGE_SEO['/about']!, path: '/about' }))
         sizes="(max-width: 900px) 100vw, 50vw"
         priority
       />
+    </section>
+
+    <!-- 品牌故事：店名的由來。全站唯一一段長文，所以用 mg-intro 的窄欄排 -->
+    <section class="mg-gut mg-sect">
+      <div class="mg-intro">
+        <h2 class="mg-h2 font-display leading-heading font-medium tracking-display-md">
+          店名的<br>
+          <span class="pl-14 italic">由來</span>
+        </h2>
+        <div class="flex max-w-[560px] flex-col gap-6 pt-4">
+          <p
+            v-for="(para, i) in ABOUT_STORY"
+            :key="i"
+            class="text-16 leading-body text-fg-2 text-pretty"
+            :class="para.length < 12 ? 'mg-indent font-display text-24 leading-heading text-fg-1' : ''"
+          >{{ para }}</p>
+        </div>
+      </div>
     </section>
 
     <!-- 三條原則：Archivo 大數字與內文並排 -->

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { SERVICE_GROUPS, SERVICE_NOTES } from '#shared/margin'
+import { SERVICE_FAQ, SERVICE_GROUPS, SERVICE_NOTES } from '#shared/margin'
 import { PAGE_SEO } from '#shared/seo'
 import { SERVICE_PAGES } from '#shared/services'
 
@@ -73,6 +73,19 @@ useMgSeo(() => ({ ...PAGE_SEO['/services']!, path: '/services' }))
           <dd class="text-15 leading-body-snug text-pretty">{{ n.v }}</dd>
         </div>
       </dl>
+    </section>
+
+    <!-- 常見問題（文案 §3 區塊 5）。FAQPage schema 的答案必須與這裡逐字相同 -->
+    <section class="mg-gut mg-sect">
+      <div class="flex items-baseline justify-between gap-6">
+        <h2 class="font-display text-40 leading-heading font-medium tracking-display-md">
+          常見問題
+        </h2>
+        <span class="font-label text-12 font-semibold tracking-label-mid text-fg-3">FAQ</span>
+      </div>
+      <div class="mt-8 max-w-[720px]">
+        <MgFaq :items="SERVICE_FAQ" />
+      </div>
     </section>
 
     <div class="mg-sect">
