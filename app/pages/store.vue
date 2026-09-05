@@ -7,10 +7,6 @@ useHead({ title: '店家資訊 — 留白髮所 MARGIN' })
 
 <template>
   <div>
-    <div class="mg-gut pt-8 pb-6">
-      <MgBreadcrumb :items="[{ label: '首頁', to: '/' }, { label: '店家資訊' }]" />
-    </div>
-
     <!-- Hero：地名貼齊影像左下邊界，與設計師個人頁同一個做法 -->
     <section
       class="relative flex w-full items-end overflow-hidden bg-placeholder"

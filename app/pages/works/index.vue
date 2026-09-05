@@ -79,15 +79,6 @@ function loadMore() {
 
 <template>
   <div>
-    <div class="mg-gut pt-8">
-      <MgBreadcrumb
-        :items="[
-          { label: '首頁', to: '/' },
-          ...(hasFilters ? [{ label: '作品集', to: '/works' }, { label: '篩選結果' }] : [{ label: '作品集' }]),
-        ]"
-      />
-    </div>
-
     <div class="mg-gut mg-head pt-12">
       <h1 class="mg-h1 flex-none font-display leading-[1.08] font-medium tracking-display-md">
         作品<br>

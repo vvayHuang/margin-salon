@@ -94,7 +94,7 @@ Nuxt 用法：
 | /services 收尾帶（原「藥劑檯」） | `space_alt_01` | 沒有藥劑檯素材，這張的檯面與瓶罐最接近 |
 | /store Hero（原「店門口」） | `location_stairs` | 三張 location 裡只有這張有門口感 |
 | /about 空間三連拍「洗髮區」 | `space_detail` | 沒有洗髮區素材 |
-| 設計師個人頁 Hero | `space_cutting` / `space_detail` / `space_alt_01` / `space_lounge` | 沒有「工作中的側身」，先用空間照，四人各一張不重複 |
+| 設計師個人頁 Hero | 各人的 `stylist_*`（與列表卡片同一張） | 改用本人照片；1:1 裁進 21:9 只剩臉的一條，`object-position: center 45%` 讓五官落在中線。素材只有 600×600／@640，滿版 Hero 會偏軟，換實拍時請出到 ≥1920 寬並補 @640／@1280 變體 |
 
 /store 的周邊圖沒有靜態素材，改成嵌 Google Maps（`STORE_MAP_SRC`，`output=embed` 不用 API key）。
 查詢字串是 `五福四路122巷3號`，Google 找不到這個門牌，會落在 `五福四路122號`；

@@ -33,16 +33,6 @@ function pickSlot(day: number, time: string) {
 
 <template>
   <div>
-    <div class="mg-gut pt-8 pb-6">
-      <MgBreadcrumb
-        :items="[
-          { label: '首頁', to: '/' },
-          { label: '設計師', to: '/stylists' },
-          { label: who.label },
-        ]"
-      />
-    </div>
-
     <!-- Hero：大名字貼齊影像左下邊界 -->
     <section
       class="relative flex w-full items-end overflow-hidden bg-placeholder"

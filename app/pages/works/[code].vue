@@ -38,16 +38,6 @@ function bookThis() {
 
 <template>
   <div>
-    <div class="mg-gut pt-8">
-      <MgBreadcrumb
-        :items="[
-          { label: '首頁', to: '/' },
-          { label: '作品集', to: '/works' },
-          { label: current.title },
-        ]"
-      />
-    </div>
-
     <div class="mg-gut mg-detail pt-12">
       <MgImage
         ratio="4/5"

@@ -10,10 +10,6 @@ useHead({ title: '服務與價目 — 留白髮所 MARGIN' })
 
 <template>
   <div>
-    <div class="mg-gut pt-8">
-      <MgBreadcrumb :items="[{ label: '首頁', to: '/' }, { label: '服務與價目' }]" />
-    </div>
-
     <div class="mg-gut mg-intro pt-14">
       <h1 class="mg-h1 font-display leading-[1.08] font-medium tracking-display-md">
         服務<br>

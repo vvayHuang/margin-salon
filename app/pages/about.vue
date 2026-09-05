@@ -7,10 +7,6 @@ useHead({ title: '關於我們 — 留白髮所 MARGIN' })
 
 <template>
   <div>
-    <div class="mg-gut pt-8">
-      <MgBreadcrumb :items="[{ label: '首頁', to: '/' }, { label: '關於我們' }]" />
-    </div>
-
     <!-- 標題欄自己有一組左邊距（.mg-about-hero），不吃 .mg-gut -->
     <section class="mg-about-hero pt-20">
       <div class="flex flex-col gap-10">

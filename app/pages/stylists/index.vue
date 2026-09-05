@@ -10,10 +10,6 @@ useHead({ title: '設計師 — 留白髮所 MARGIN' })
 
 <template>
   <div>
-    <div class="mg-gut pt-8">
-      <MgBreadcrumb :items="[{ label: '首頁', to: '/' }, { label: '設計師' }]" />
-    </div>
-
     <div class="mg-gut mg-head pt-12">
       <h1 class="mg-h1 flex-none font-display leading-[1.08] font-medium tracking-display-md">
         設計<br>
