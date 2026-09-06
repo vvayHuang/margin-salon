@@ -2,11 +2,7 @@
 import {
   BRAND,
   CATEGORIES,
-  CLOSED_DAYS,
-  FULL_TIMES,
   MENU,
-  NO_ROOM_DAY,
-  SLOT_TIMES,
   STEPS,
   STYLISTS,
   dateText,
@@ -15,6 +11,7 @@ import {
   type CategoryId,
   type StylistId,
 } from '#shared/margin'
+import { bookingDay, emailBad } from '#shared/booking'
 import { PAGE_SEO } from '#shared/seo'
 import type { DayCell } from '~/components/MgDatePicker.vue'
 import type { SummaryRow } from '~/components/MgBookingSummary.vue'
@@ -25,6 +22,9 @@ useMgSeo(() => ({ ...PAGE_SEO['/booking']!, path: '/booking' }))
 const route = useRoute()
 const {
   state,
+  month,
+  daySlots,
+  live,
   totals,
   stylistText,
   serviceText,
@@ -33,23 +33,33 @@ const {
   lastStart,
   ready,
   blockReason,
+  loadMonth,
   pickDay,
   toggleService,
   next,
   goStep,
   prevStep,
-  complete,
+  submit: sendBooking,
   hoursText,
 } = useBooking()
+
+// 重新整理時 step 可能已經停在 3（狀態存在 useState 裡），月曆要自己補抓一次。
+onMounted(() => {
+  if (state.value.step === 3 && !month.value) loadMonth()
+})
 
 /**
  * 高擬真稿把邊界狀態做成一個 prop（無／時段被搶走／送出失敗），預設是「時段被搶走」。
  * 這裡原樣保留成網址參數，方便把兩種狀態叫出來看：/booking?edge=fail
+ *
+ * 接上 SimplyBook 之後這兩種狀態是真的會發生的（送出前後之間時段被搶走、
+ * 預約系統回錯），所以真實錯誤走同一組 UI；`edge` 只在示範模式下用來把它們演出來。
  */
 const edge = computed(() => (route.query.edge as string) ?? 'taken')
 
 const modalOpen = ref(false)
 const toastOpen = ref(false)
+const failMessage = ref('送出的時候連線斷了，預約沒有成立。再按一次送出就可以，資料都還在。')
 
 /* ---- 步驟 1 ---- */
 interface StylistCard {
@@ -89,41 +99,49 @@ const durationNote = computed(() =>
 )
 
 /* ---- 步驟 3 ---- */
+/** 日期狀態來自 /api/booking/availability；選中與「選了但那天排不下」是前端疊上去的 */
 const days = computed<(DayCell | null)[]>(() => {
   const cells: (DayCell | null)[] = [null]
-  for (let d = 1; d <= 30; d++) {
-    let st: DayCell['state'] = 'available'
-    if (d <= 4) st = 'past'
-    else if (CLOSED_DAYS.includes(d)) st = 'full'
-    else if (d === state.value.day) st = d === NO_ROOM_DAY ? 'selected-unavailable' : 'selected'
-    cells.push({ day: d, state: st })
+  for (const cell of month.value?.days ?? []) {
+    const picked = cell.day === state.value.day
+    const st: DayCell['state'] = picked && cell.state === 'available'
+      ? (dayFull.value ? 'selected-unavailable' : 'selected')
+      : cell.state
+    cells.push({ day: cell.day, state: st })
   }
   return cells
 })
 
-const slots = computed(() =>
-  SLOT_TIMES.map(time => ({
-    time,
-    state: state.value.loading
-      ? ('loading' as const)
-      : FULL_TIMES.includes(time)
+const slots = computed(() => {
+  if (state.value.loading) {
+    // 還在等後端回答的時候先擺八格骨架，格數與平常的時段數一致，版面不會跳。
+    return Array.from({ length: 8 }, (_, i) => ({ time: String(i), state: 'loading' as const }))
+  }
+  return (daySlots.value?.times ?? []).map(slot => ({
+    time: slot.time,
+    state:
+      slot.state === 'full'
         ? ('full' as const)
-        : state.value.time === time
+        : state.value.time === slot.time
           ? ('selected' as const)
           : ('available' as const),
-  })),
-)
+  }))
+})
 
 const altSlots = computed(() =>
-  ([[13, '15:00'], [14, '11:30'], [16, '16:00']] as [number, string][]).map(([day, time]) => ({
-    day,
-    time,
-    label: `9／${day} ${time}`,
-    state:
-      state.value.day === day && state.value.time === time
-        ? ('selected' as const)
-        : ('available' as const),
-  })),
+  (daySlots.value?.alternatives ?? []).map(alt => {
+    const day = bookingDay(alt.date)
+    return {
+      day,
+      time: alt.time,
+      // 替代時段的格子只有 56px 高，塞得下「9／15 11:30」，塞不下星期幾
+      label: `9／${day} ${alt.time}`,
+      state:
+        state.value.day === day && state.value.time === alt.time
+          ? ('selected' as const)
+          : ('available' as const),
+    }
+  }),
 )
 
 const slotHeading = computed(() =>
@@ -139,19 +157,23 @@ const slotNote = computed(() => {
 const slotNoteAccent = computed(() =>
   !state.value.day || dayFull.value ? '' : `最後可開始時間 ${lastStart.value}。`,
 )
-const dayFullNote = computed(
-  () =>
-    `${dateText(NO_ROOM_DAY)} 剩下的空檔只有 60 分鐘，你選的服務需要 ${totals.value.minutes || 150} 分鐘，接不下來。這三個時間可以。`,
+const dayFullNote = computed(() =>
+  altSlots.value.length
+    ? `${dateText(state.value.day)} 接不下 ${totals.value.minutes || 150} 分鐘的服務。這幾個時間可以。`
+    : `${dateText(state.value.day)} 沒有排得下的空檔，也找不到附近的替代時間。換一週看看，或直接來電 ${BRAND.phone}。`,
 )
 
 function pickSlot(time: string) {
-  if (!FULL_TIMES.includes(time)) state.value.time = time
-}
-function pickAlt(day: number, time: string) {
-  state.value.day = day
   state.value.time = time
-  state.value.loading = false
+}
+/**
+ * 挑替代時段：要先把那一天的空檔重抓回來，不然畫面還停在原本那天「沒有空檔」的狀態。
+ * pickDay 會清掉 time，所以時段要等它回來之後再設。
+ */
+async function pickAlt(day: number, time: string) {
   modalOpen.value = false
+  await pickDay(day)
+  state.value.time = time
 }
 
 /* ---- 步驟 4 ----
@@ -166,6 +188,11 @@ const nameError = computed(() =>
 const phoneError = computed(() =>
   state.value.touched && phoneBad(state.value.phone)
     ? '手機號碼看起來不對。填 09 開頭的 10 碼數字就可以送出。'
+    : '',
+)
+const emailError = computed(() =>
+  state.value.touched && emailBad(state.value.email)
+    ? 'Email 看起來不對。預約確認信會寄到這裡。'
     : '',
 )
 
@@ -183,6 +210,7 @@ const confirmRows = computed(() => [
   {
     k: 'DETAILS',
     v: `${state.value.name || '尚未填寫'} ・ ${state.value.phone || '尚未填手機'}`,
+    extra: state.value.email,
     sub:
       (state.value.first === '是' ? `第一次到店 ・ ${state.value.len}髮` : '來過了') +
       (state.value.note ? ` ・ ${state.value.note}` : ''),
@@ -212,7 +240,7 @@ const summaryRows = computed<SummaryRow[]>(() => {
   const invalid = dayFull.value && !state.value.time
   const timeRow: SummaryRow = {
     label: '時間',
-    value: invalid ? `${dateText(NO_ROOM_DAY)} 無空位` : timeText.value,
+    value: invalid ? `${dateText(state.value.day)} 無空位` : timeText.value,
     emphasis: state.value.step === 3 ? 'serif' : null,
     invalid,
   }
@@ -226,7 +254,7 @@ const summaryRows = computed<SummaryRow[]>(() => {
 
 const summaryCaption = computed(() => {
   if (!ready.value) return blockReason.value
-  if (state.value.step === 5) return '送出後會收到簡訊確認，不需要另外聯絡。'
+  if (state.value.step === 5) return '送出後確認信會寄到你填的 Email，不需要另外聯絡。'
   if (state.value.step === 2 && totals.value.rows.length) return '長髮加價會在到店諮詢後確認。'
   return ''
 })
@@ -235,19 +263,50 @@ const modalTitle = computed(() =>
   timeText.value ? `${timeText.value} 剛剛被別人約走了` : '你選的時段剛剛被約走了',
 )
 
-function submit() {
-  if (!state.value.tried && edge.value === 'taken') {
+/**
+ * 「時段被搶走」對話框裡給的三個選擇：先給同一天剩下的空檔，
+ * 那天全滿了才退到後端算出來的替代日期。稿子在這裡固定寫死三個時間，
+ * 但同一天換個時間對顧客來說遠比換一天容易接受，所以優先給同一天的。
+ */
+const modalSlots = computed(() => {
+  const sameDay = (daySlots.value?.times ?? [])
+    .filter(slot => slot.state === 'available' && slot.time !== state.value.time)
+    .slice(0, 3)
+    .map(slot => ({
+      day: state.value.day,
+      time: slot.time,
+      label: `9／${state.value.day} ${slot.time}`,
+      state: 'available' as const,
+    }))
+  return sameDay.length ? sameDay : altSlots.value
+})
+
+async function submit() {
+  // 示範模式才演邊界狀態；真的接上預約系統之後，這兩種狀態由後端的回覆決定。
+  if (!live.value && !state.value.tried && edge.value === 'taken') {
     state.value.tried = true
     modalOpen.value = true
     return
   }
-  if (!state.value.tried && edge.value === 'fail') {
+  if (!live.value && !state.value.tried && edge.value === 'fail') {
     state.value.tried = true
     toastOpen.value = true
     return
   }
-  complete()
-  navigateTo('/booking/done')
+
+  const failure = await sendBooking()
+  if (!failure) {
+    await navigateTo('/booking/done')
+    return
+  }
+  if (failure.taken) {
+    // 時段沒了就重抓一次當天的空檔，對話框裡的替代時段才會是現在的
+    await pickDay(state.value.day)
+    modalOpen.value = true
+    return
+  }
+  failMessage.value = failure.message
+  toastOpen.value = true
 }
 
 function primaryAction() {
@@ -262,7 +321,7 @@ function primaryAction() {
     <MgToast
       v-if="toastOpen"
       label="SUBMIT FAILED"
-      message="送出的時候連線斷了，預約沒有成立。再按一次送出就可以，資料都還在。"
+      :message="failMessage"
       @close="toastOpen = false"
     >
       <template #action>
@@ -372,8 +431,8 @@ function primaryAction() {
 
               <div v-else-if="state.day" class="mg-slots">
                 <MgTimeSlot
-                  v-for="slot in slots"
-                  :key="slot.time"
+                  v-for="(slot, i) in slots"
+                  :key="`${slot.time}-${i}`"
                   :time="slot.time"
                   :state="slot.state"
                   @pick="pickSlot(slot.time)"
@@ -409,6 +468,16 @@ function primaryAction() {
               @blur="state.touched = true"
             />
           </div>
+
+          <MgInput
+            v-model="state.email"
+            type="email"
+            label="Email（必填）"
+            placeholder="you@example.com"
+            :error="emailError"
+            hint="預約確認信會寄到這裡，裡面有編號、時間與交通提醒。"
+            @blur="state.touched = true"
+          />
 
           <fieldset class="flex flex-col gap-2">
             <legend class="mb-2 text-13 text-fg-3">是否第一次到店？</legend>
@@ -473,6 +542,7 @@ function primaryAction() {
               </span>
               <div class="flex flex-1 flex-col gap-2">
                 <span class="font-display text-24 font-medium tracking-display-sm">{{ row.v }}</span>
+                <span v-if="row.extra" class="text-14 leading-body-snug text-fg-2">{{ row.extra }}</span>
                 <span v-if="row.hasSub" class="text-14 leading-body-snug text-fg-3">{{ row.sub }}</span>
               </div>
               <button
@@ -501,7 +571,7 @@ function primaryAction() {
       <MgBookingSummary :rows="summaryRows" :caption="summaryCaption">
         <template #action>
           <MgButton full-width :disabled="!ready" @click="primaryAction">
-            {{ state.step === 5 ? '送出預約' : '下一步' }}
+            {{ state.step === 5 ? (state.sending ? '送出中…' : '送出預約') : '下一步' }}
           </MgButton>
         </template>
       </MgBookingSummary>
@@ -518,7 +588,7 @@ function primaryAction() {
       </p>
       <div class="mg-slots mt-6">
         <MgTimeSlot
-          v-for="alt in altSlots"
+          v-for="alt in modalSlots"
           :key="alt.label"
           :time="alt.label"
           :state="alt.state"

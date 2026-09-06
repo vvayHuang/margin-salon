@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { CAREERS_CULTURE, CAREERS_JOBS, CAREERS_VOICES } from '#shared/pages'
-import { phoneBad } from '#shared/margin'
+import { BRAND, phoneBad } from '#shared/margin'
+import type { CareersResult } from '#shared/booking'
 
 /**
  * 加入我們（文案 §11）。
- * 表單與預約流程一樣沒有後端（F-11 列 P2，信件通知延後），
- * 送出後只切到成功態並留下資料，不會真的寄出——這一點直接寫在畫面上，不假裝。
+ * 送出會打 `/api/careers`，由後端寄一封通知信到店內收件匣（PRD F-11）。
+ * 沒設定寄信服務的環境（例如只跑 `npm run dev` 看版面）後端會回 `mailed: false`，
+ * 畫面就照實說沒有寄出去——不假裝收到了。
  */
 useMgSeo(() => ({
   title: '加入我們｜高雄美髮設計師與助理職缺｜MARGIN',
@@ -24,6 +26,12 @@ const form = reactive({
 })
 const touched = reactive({ name: false, phone: false, link: false })
 const sent = ref(false)
+const sending = ref(false)
+/** 通知信有沒有真的寄到店裡。null 代表還沒送出過。 */
+const mailed = ref<boolean | null>(null)
+const failMessage = ref('')
+/** 蜜罐：藏起來的欄位，只有機器人會填它 */
+const honeypot = ref('')
 
 const nameError = computed(() => (touched.name && !form.name.trim() ? '請填姓名' : ''))
 const phoneError = computed(() =>
@@ -43,12 +51,35 @@ const ready = computed(
     && form.agree,
 )
 
-function submit() {
+async function submit() {
   touched.name = true
   touched.phone = true
   touched.link = true
-  if (!ready.value) return
-  sent.value = true
+  if (!ready.value || sending.value) return
+
+  sending.value = true
+  failMessage.value = ''
+  try {
+    const result = await $fetch<CareersResult>('/api/careers', {
+      method: 'POST',
+      body: { ...form, company: honeypot.value },
+    })
+    mailed.value = result.mailed
+    sent.value = true
+  }
+  catch (err: any) {
+    failMessage.value
+      = err?.data?.statusMessage
+      ?? `送出的時候連線斷了，資料都還在，再按一次就可以。也可以直接來電 ${BRAND.phone}。`
+  }
+  finally {
+    sending.value = false
+  }
+}
+
+function again() {
+  sent.value = false
+  mailed.value = null
 }
 </script>
 
@@ -139,14 +170,24 @@ function submit() {
         </p>
         <div class="mt-6 flex flex-wrap items-center gap-8">
           <MgButton variant="secondary" to="/stylists">看設計師</MgButton>
-          <MgButton variant="link" muted @click="sent = false">再填一次</MgButton>
+          <MgButton variant="link" muted @click="again">再填一次</MgButton>
         </div>
-        <p class="mt-6 text-13 leading-body-snug text-fg-3">
-          （此為作品集模擬案例，表單沒有後端，資料不會真的送出。）
+        <p v-if="!mailed" class="mt-6 text-13 leading-body-snug text-fg-3 text-pretty">
+          （這個環境沒有接上寄信服務，通知信沒有真的寄出去。想確定我們收到，請來電 {{ BRAND.phone }}。）
         </p>
       </div>
 
       <form v-else class="mt-10 flex max-w-[560px] flex-col gap-6" @submit.prevent="submit">
+        <!-- 蜜罐：真人看不到也 tab 不到，填了就當成機器人擋掉 -->
+        <input
+          v-model="honeypot"
+          type="text"
+          name="company"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+          class="absolute -left-[9999px] size-px opacity-0"
+        >
         <MgInput
           v-model="form.name"
           label="姓名（必填）"
@@ -199,8 +240,14 @@ function submit() {
         </label>
 
         <div class="flex flex-col items-start gap-3">
-          <MgButton type="submit" :disabled="!ready" @click="submit">送出應徵</MgButton>
-          <span class="text-13 text-fg-3">
+          <MgButton type="submit" :disabled="!ready || sending" @click="submit">
+            {{ sending ? '送出中…' : '送出應徵' }}
+          </MgButton>
+          <span v-if="failMessage" class="flex items-start gap-2 text-13 leading-body-tight text-accent text-pretty">
+            <span aria-hidden="true" class="font-label text-12 leading-[1.6] font-bold">!</span>
+            {{ failMessage }}
+          </span>
+          <span v-else class="text-13 text-fg-3">
             {{ ready ? '我們會在 5 個工作天內回覆。' : '姓名、手機與同意勾選都填好才能送出。' }}
           </span>
         </div>

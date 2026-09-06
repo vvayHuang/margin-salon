@@ -42,7 +42,18 @@ npx nuxt typecheck
 | `/stylists` | 設計師索引（**高擬真稿沒有這頁**，見下方「與稿子的差異」） |
 | `/stylists/[slug]` | 設計師單頁：132px 大名字、自述、近期空檔 |
 | `/booking` | 五步驟預約，含三種邊界狀態 |
-| `/booking/done` | 預約完成 |
+| `/booking/done` | 預約完成：編號、加入行事曆、交通提醒、取消／改期 |
+
+## 後端 API
+
+| 端點 | 用途 |
+|---|---|
+| `GET /api/works` | 作品集列表（篩選、排序、分頁） |
+| `GET /api/booking/availability` | 月曆的日期狀態 |
+| `GET /api/booking/slots` | 某一天的時段，全滿時附替代時間 |
+| `POST /api/booking` | 送出預約 ＋ 寄確認信與店內通知信 |
+| `POST /api/careers` | 應徵表單 ＋ 寄店內通知信 |
+| `GET /api/booking/catalog` | **僅開發模式**，列出 SimplyBook 後台的 service／provider id |
 
 ## 元件
 
@@ -75,6 +86,10 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
   - 時段被搶走 — `/booking` 預設，送出時跳 SLOT TAKEN 對話框
   - 送出失敗 — `/booking?edge=fail`，nav 下方出現黑底 banner，資料保留可重送
   - 不要邊界狀態：`/booking?edge=none`
+
+  `?edge=` **只在示範模式下有效**。接上 SimplyBook 之後這兩種狀態是真的會發生的
+  （送出前後之間時段被搶走、預約系統回錯、流量限制），走的是同一組 UI，
+  訊息換成後端回的那一句。所以這幾個狀態不是擺著好看的，是真的接線的。
 
 ## 與稿子的差異（都是刻意的）
 
@@ -111,7 +126,10 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
   價目仍寫在 `shared/margin.ts`。版面與語氣沿用高擬真稿，但品牌事實已對回 PRD，
   見下方「品牌事實的權威來源」。
 - **圖示**沿用稿子的 unicode（▼ ▲ ● ✕ ‹ › ＋）。設計系統交接規格提到圖示系統還沒定案。
-- **月曆**固定顯示 2026 年 9 月，切換上下月的箭頭還沒接。
+- **月曆**固定顯示 2026 年 9 月，切換上下月的箭頭還沒接（`BOOKING_MONTH` 這一個常數決定）。
+- **預約通知只有 Email，沒有簡訊。** PRD F-10 寫的是「完成信／簡訊」，簡訊要另接台灣的簡訊商。
+- **一次預約複選多個項目時，只有時間最長的那一項會送進 SimplyBook**，其餘寫在店內通知信裡。
+  要讓時數完全對齊，正解是在 SimplyBook 後台建「剪＋染」這種組合服務，再把 id 填進對照表。
 - **地圖**（`/store`）是 21:9 灰底佔位，還沒接圖資。
 
 ## 內容從哪裡來
@@ -153,6 +171,47 @@ Notion 的檔案網址約 1 小時後失效，所以不能直接引用（§13.5�
 
 封面圖留空的話，會退回用「圖片檔名」欄位指向 `public/img` 既有素材——
 現在站上都是佔位圖，沒必要把它們丟進 Notion。換實拍時在 Notion 上傳、這個欄位留空就好。
+
+## 預約與寄信怎麼接（F-06／F-10／F-11）
+
+```
+/booking 五步驟 UI
+  ├─ GET  /api/booking/availability ─┐
+  ├─ GET  /api/booking/slots        ─┼─ server/utils/booking.ts
+  └─ POST /api/booking              ─┘      ├─ 有金鑰 → SimplyBook.me JSON-RPC
+                                            └─ 沒金鑰 → 站上的示範空檔
+                                    └─ server/utils/mail.ts → Resend
+/careers 應徵表單
+  └─ POST /api/careers ──────────────────── server/utils/mail.ts → Resend
+```
+
+**沒有金鑰也要跑得起來**，這是這一層唯一的硬規則。`.env` 空著時：
+
+- `/booking` 的空檔來自 `server/utils/booking.ts` 的示範資料（9/1–9/4 已過、週一公休、
+  12:00 與 15:00 已滿、9/12 當天排不下），三種邊界狀態照樣演得出來
+- 預約與應徵仍然送得出去，只是不寄信，畫面上會照實說「確認信這次沒有寄出去」——不假裝
+
+判斷「示範還是真的」寫在後端，前端只有一條路徑。所以接上金鑰的那一天，
+`app/pages/booking/index.vue` 一行都不用改。
+
+### 第一次設定
+
+1. 照 `.env.example` 填 `SIMPLYBOOK_LOGIN` 與 `SIMPLYBOOK_API_KEY`
+   （SimplyBook 後台 Custom Features → API）
+2. `npm run dev`，打開 <http://127.0.0.1:3000/api/booking/catalog>，
+   把列出來的 service 與 provider id 填進 `server/utils/simplybook.map.ts`
+3. 填 `RESEND_API_KEY`、`MAIL_FROM`（要是 Resend 上已驗證的網域）、`MAIL_INBOX`
+
+沒對照到的設計師或服務項目會**單獨**退回示範資料，不會整站失效。
+
+### 這一層刻意沒做的事
+
+- **不裝 SDK。** SimplyBook 用 JSON-RPC、Resend 用一個 POST，都是一個 `fetch` 的事，
+  跟 `scripts/lib/notion.ts` 同一個判斷。
+- **金鑰不進 `runtimeConfig.public`。** 全部只有伺服器讀得到。
+- **對照表進版控、不塞環境變數。** id 不是機密，一串 JSON 擠在 `.env` 裡沒人看得懂，
+  也 diff 不出來誰把哪個項目接錯。
+- **信寄不出去不算預約失敗。** 順序是「先進預約系統，再寄信」，第二步失敗只換文案。
 
 ## 系統規則（改動前請先讀）
 

@@ -7,6 +7,22 @@ export default defineNuxtConfig({
   // 於是 http://localhost:3000 會打到 websocket 並回 426 Upgrade Required。
   devServer: { host: '127.0.0.1', port: 3000 },
   css: ['~/assets/css/main.css'],
+  /**
+   * 全部只在伺服器讀得到（沒有 public 區塊）——預約與寄信的金鑰不該進到瀏覽器。
+   * 每一個都可以留空：留空時 `/booking` 退回站上的示範資料、表單照常運作但不寄信，
+   * 這是一個作品集網站，沒有金鑰也要跑得起來。對應的環境變數見 .env.example。
+   */
+  runtimeConfig: {
+    simplybookLogin: '',
+    simplybookApiKey: '',
+    /** 取消／改期連結的樣板，{id} 與 {hash} 會被換成 SimplyBook 回傳的值 */
+    simplybookCancelUrl: '',
+    resendApiKey: '',
+    /** 寄件人，要是 Resend 上已驗證網域的位址，例：MARGIN <hello@margin.tw> */
+    mailFrom: '',
+    /** 店內收件匣：新預約與應徵通知都寄到這裡 */
+    mailInbox: '',
+  },
   vite: {
     plugins: [tailwindcss()],
   },
