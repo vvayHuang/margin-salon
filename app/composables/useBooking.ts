@@ -101,12 +101,18 @@ export function useBooking() {
       : '',
   )
 
-  /** 這一站是不是真的接上 SimplyBook。示範模式下才演那三種邊界狀態。 */
+  /** 這一站是不是真的接上 Google 日曆。示範模式下才演那三種邊界狀態。 */
   const live = computed(() => month.value?.live ?? false)
 
-  /** 選到的那天排不進所選服務 */
+  /**
+   * 選到的那天排不進所選服務。
+   * 判斷是「沒有任何一個可約的時段」，不是「時段清單是空的」——
+   * 接上日曆之後已滿的時段照樣會回傳（PRD §6.9：已滿顯示為停用態，不隱藏）。
+   */
   const dayFull = computed(() =>
-    !!state.value.day && !state.value.loading && (daySlots.value?.times.length ?? 0) === 0,
+    !!state.value.day
+    && !state.value.loading
+    && !(daySlots.value?.times ?? []).some(slot => slot.state === 'available'),
   )
 
   /** 服務越久，最後可開始的時間越早 */

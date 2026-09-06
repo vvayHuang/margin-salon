@@ -45,7 +45,8 @@ export const PRIVACY_SECTIONS: PrivacySection[] = [
     n: '四',
     title: '第三方',
     rows: [
-      { k: '預約系統', v: 'SimplyBook.me（處理時段與預約紀錄）' },
+      { k: '預約系統', v: 'Google 日曆（預約會建成設計師日曆上的一個活動，含你的姓名、電話與備註）' },
+      { k: '信件寄送', v: 'Resend（寄預約確認信，會處理你的 Email 與預約內容）' },
       { k: '網站分析', v: 'Google Analytics 4' },
     ],
   },

@@ -52,7 +52,7 @@ onMounted(() => {
  * 高擬真稿把邊界狀態做成一個 prop（無／時段被搶走／送出失敗），預設是「時段被搶走」。
  * 這裡原樣保留成網址參數，方便把兩種狀態叫出來看：/booking?edge=fail
  *
- * 接上 SimplyBook 之後這兩種狀態是真的會發生的（送出前後之間時段被搶走、
+ * 接上 Google 日曆之後這兩種狀態是真的會發生的（送出前後之間時段被搶走、
  * 預約系統回錯），所以真實錯誤走同一組 UI；`edge` 只在示範模式下用來把它們演出來。
  */
 const edge = computed(() => (route.query.edge as string) ?? 'taken')

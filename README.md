@@ -53,7 +53,7 @@ npx nuxt typecheck
 | `GET /api/booking/slots` | 某一天的時段，全滿時附替代時間 |
 | `POST /api/booking` | 送出預約 ＋ 寄確認信與店內通知信 |
 | `POST /api/careers` | 應徵表單 ＋ 寄店內通知信 |
-| `GET /api/booking/catalog` | **僅開發模式**，列出 SimplyBook 後台的 service／provider id |
+| `GET /api/booking/check` | **僅開發模式**，檢查四本日曆接上了沒、讀不到要去哪裡修 |
 
 ## 元件
 
@@ -87,7 +87,7 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
   - 送出失敗 — `/booking?edge=fail`，nav 下方出現黑底 banner，資料保留可重送
   - 不要邊界狀態：`/booking?edge=none`
 
-  `?edge=` **只在示範模式下有效**。接上 SimplyBook 之後這兩種狀態是真的會發生的
+  `?edge=` **只在示範模式下有效**。接上 Google 日曆之後這兩種狀態是真的會發生的
   （送出前後之間時段被搶走、預約系統回錯、流量限制），走的是同一組 UI，
   訊息換成後端回的那一句。所以這幾個狀態不是擺著好看的，是真的接線的。
 
@@ -128,8 +128,6 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
 - **圖示**沿用稿子的 unicode（▼ ▲ ● ✕ ‹ › ＋）。設計系統交接規格提到圖示系統還沒定案。
 - **月曆**固定顯示 2026 年 9 月，切換上下月的箭頭還沒接（`BOOKING_MONTH` 這一個常數決定）。
 - **預約通知只有 Email，沒有簡訊。** PRD F-10 寫的是「完成信／簡訊」，簡訊要另接台灣的簡訊商。
-- **一次預約複選多個項目時，只有時間最長的那一項會送進 SimplyBook**，其餘寫在店內通知信裡。
-  要讓時數完全對齊，正解是在 SimplyBook 後台建「剪＋染」這種組合服務，再把 id 填進對照表。
 - **地圖**（`/store`）是 21:9 灰底佔位，還沒接圖資。
 
 ## 內容從哪裡來
@@ -188,13 +186,30 @@ Notion 的檔案網址約 1 小時後失效，所以不能直接引用（§13.5�
 ```
 /booking 五步驟 UI
   ├─ GET  /api/booking/availability ─┐
-  ├─ GET  /api/booking/slots        ─┼─ server/utils/booking.ts
-  └─ POST /api/booking              ─┘      ├─ 有金鑰 → SimplyBook.me JSON-RPC
+  ├─ GET  /api/booking/slots        ─┼─ server/utils/booking.ts   ← 排程規則在這裡
+  └─ POST /api/booking              ─┘      ├─ 有金鑰 → Google 日曆（freeBusy／events.insert）
                                             └─ 沒金鑰 → 站上的示範空檔
                                     └─ server/utils/mail.ts → Resend
 /careers 應徵表單
   └─ POST /api/careers ──────────────────── server/utils/mail.ts → Resend
 ```
+
+**設計師本來就在用日曆，所以不另外養一套預約後台**（PRD D-12）：
+空檔就是日曆上沒事的時段，預約就是日曆上多一個活動。店家要看今天有誰要來，
+打開自己的 Google 日曆就好。
+
+**「有沒有空」的規則全部在 `server/utils/booking.ts`，不在 Google 那邊**：
+
+| 規則 | 來源 |
+|---|---|
+| 開始時間 11:00–18:00 | `SLOT_TIMES` |
+| 20:00 打烊，做不完就不開放 | `CLOSE_TIME` |
+| 週一公休 | `CLOSED_DAYS` |
+| 需提前一小時 | `LEAD_MINUTES`（PRD §6.9） |
+| 這次要做多久 | `MENU` 的時長總和 |
+
+Google 只回答一件事：**這位設計師哪幾段時間已經有事了。**
+所以價格、時長、營業時間仍然只有 `shared/margin.ts` 一個來源，不會兩邊各寫一份。
 
 **沒有金鑰也要跑得起來**，這是這一層唯一的硬規則。`.env` 空著時：
 
@@ -207,22 +222,35 @@ Notion 的檔案網址約 1 小時後失效，所以不能直接引用（§13.5�
 
 ### 第一次設定
 
-1. 照 `.env.example` 填 `SIMPLYBOOK_LOGIN` 與 `SIMPLYBOOK_API_KEY`
-   （SimplyBook 後台 Custom Features → API）
-2. `npm run dev`，打開 <http://127.0.0.1:3000/api/booking/catalog>，
-   把列出來的 service 與 provider id 填進 `server/utils/simplybook.map.ts`
-3. 填 `RESEND_API_KEY`、`MAIL_FROM`（要是 Resend 上已驗證的網域）、`MAIL_INBOX`
+照 `.env.example` 走（那裡有逐步說明），大意是：
 
-沒對照到的設計師或服務項目會**單獨**退回示範資料，不會整站失效。
+1. Google Cloud 建專案 → 啟用 Calendar API → 建 service account → 下載 JSON 金鑰
+2. JSON 裡的 `client_email` 與 `private_key` 填進 `NUXT_GOOGLE_SA_EMAIL`／`NUXT_GOOGLE_SA_KEY`
+3. **每位設計師的日曆 → 設定與共用 → 加入那個 `client_email`，權限給「變更活動」**，
+   再把「日曆 ID」填進 `NUXT_GCAL_SHU` 等四個變數
+4. `npm run dev`，打開 <http://127.0.0.1:3000/api/booking/check> 確認誰接上了
+5. 填 `NUXT_RESEND_API_KEY`、`NUXT_MAIL_FROM`、`NUXT_MAIL_INBOX`
+
+第 3 步**漏掉分享那個動作 API 不會報錯**，那位設計師會安靜地退回示範空檔。
+`/api/booking/check` 就是為了讓這件事看得見才做的。沒接上的設計師是**單獨**退回，
+不會整站失效。
 
 ### 這一層刻意沒做的事
 
-- **不裝 SDK。** SimplyBook 用 JSON-RPC、Resend 用一個 POST，都是一個 `fetch` 的事，
-  跟 `scripts/lib/notion.ts` 同一個判斷。
+- **不裝 SDK。** Google 只用到三個端點，service account 的 JWT 用 node 內建的
+  `crypto` 就簽得出來；Resend 是一個 POST。跟 `scripts/lib/notion.ts` 同一個判斷。
 - **金鑰不進 `runtimeConfig.public`。** 全部只有伺服器讀得到。
-- **對照表進版控、不塞環境變數。** id 不是機密，一串 JSON 擠在 `.env` 裡沒人看得懂，
-  也 diff 不出來誰把哪個項目接錯。
-- **信寄不出去不算預約失敗。** 順序是「先進預約系統，再寄信」，第二步失敗只換文案。
+- **日曆 id 走環境變數，不進版控。** 它是一組信箱，屬於部署身分不是專案設定。
+- **不加 attendees。** service account 沒有 domain-wide delegation 時不能寄日曆邀請，
+  加了整個請求會被拒。顧客那封信由 Resend 寄，本來就不靠日曆邀請。
+- **信寄不出去不算預約失敗。** 順序是「先寫日曆，再寄信」，第二步失敗只換文案。
+
+### 已知的取捨（都在 PRD D-12 裡）
+
+- **沒有原子性的訂位。** 活動 id 擋得住起始時間相同的兩筆，擋不住時間重疊的兩筆，
+  所以送出前會再查一次 freeBusy。中間那幾百毫秒就是「時段被搶走」存在的原因。
+- **改期與取消是單向的。** 設計師在日曆上改，網站不會知道，也不會通知顧客。
+  所以完成頁給的是電話，不是線上取消連結。
 
 ## 系統規則（改動前請先讀）
 

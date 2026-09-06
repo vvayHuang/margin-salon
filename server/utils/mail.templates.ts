@@ -169,7 +169,7 @@ ${rows([
     { k: 'FIRST', v: d.first },
     { k: 'NOTE', v: d.note || '（沒有備註）' },
   ])}
-${d.live ? '' : `<div style="height:24px"></div>${para('提醒：目前沒有接上 SimplyBook，這筆預約沒有進到預約系統，只有這封通知信。')}`}
+${d.live ? '' : `<div style="height:24px"></div>${para('提醒：目前沒有接上 Google 日曆，這筆預約沒有進到任何人的行事曆，只有這封通知信。')}`}
 `)
 
   const text = [
@@ -185,7 +185,7 @@ ${d.live ? '' : `<div style="height:24px"></div>${para('提醒：目前沒有接
     `Email：${d.email}`,
     `首次到店：${d.first}`,
     `備註：${d.note || '（沒有備註）'}`,
-    ...(d.live ? [] : ['', '提醒：沒有接上 SimplyBook，這筆預約沒有進到預約系統。']),
+    ...(d.live ? [] : ['', '提醒：沒有接上 Google 日曆，這筆預約沒有進到任何人的行事曆。']),
   ].join('\n')
 
   return { to, subject: `新預約 ${d.time}｜${d.name}｜${d.stylist}`, html, text, replyTo: d.email }

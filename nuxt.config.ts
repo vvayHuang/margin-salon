@@ -10,13 +10,25 @@ export default defineNuxtConfig({
   /**
    * 全部只在伺服器讀得到（沒有 public 區塊）——預約與寄信的金鑰不該進到瀏覽器。
    * 每一個都可以留空：留空時 `/booking` 退回站上的示範資料、表單照常運作但不寄信，
-   * 這是一個作品集網站，沒有金鑰也要跑得起來。對應的環境變數見 .env.example。
+   * 這是一個作品集網站，沒有金鑰也要跑得起來。
+   *
+   * 對應的環境變數一律是 `NUXT_` ＋ 這裡的鍵名轉大寫底線
+   * （`googleSaEmail` → `NUXT_GOOGLE_SA_EMAIL`、`gcal.shu` → `NUXT_GCAL_SHU`）。
+   * 少了前綴 Nuxt 會安靜忽略，症狀是「明明填了卻還是走示範資料」。見 .env.example。
    */
   runtimeConfig: {
-    simplybookLogin: '',
-    simplybookApiKey: '',
-    /** 取消／改期連結的樣板，{id} 與 {hash} 會被換成 SimplyBook 回傳的值 */
-    simplybookCancelUrl: '',
+    /** Google service account：JSON 金鑰檔裡的 client_email 與 private_key */
+    googleSaEmail: '',
+    googleSaKey: '',
+    /** 每位設計師一本日曆。日曆 id 是一組信箱，屬於部署身分，所以不進版控。 */
+    gcal: {
+      shu: '',
+      yuki: '',
+      ray: '',
+      an: '',
+    },
+    /** 取消／改期的說明頁或表單，沒設定時完成頁與信件改成請顧客來電 */
+    bookingCancelUrl: '',
     resendApiKey: '',
     /** 寄件人，要是 Resend 上已驗證網域的位址，例：MARGIN <hello@margin.tw> */
     mailFrom: '',

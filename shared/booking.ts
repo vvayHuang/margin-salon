@@ -34,7 +34,7 @@ export interface AvailabilityResponse {
   month: string
   /** 只回「客觀事實」：可約或不可約。selected 是前端自己疊上去的 */
   days: { day: number; state: Extract<DayState, 'available' | 'past' | 'full'> }[]
-  /** 這批空檔是真的來自 SimplyBook，還是站上的示範資料 */
+  /** 這批空檔是真的來自 Google 日曆，還是站上的示範資料 */
   live: boolean
 }
 
@@ -59,7 +59,7 @@ export interface BookingPayload {
   time: string
   name: string
   phone: string
-  /** 寄預約確認信要用（F-10），SimplyBook 的 book() 也要求這個欄位 */
+  /** 寄預約確認信要用（F-10）。這是唯一能主動聯絡到顧客的欄位，所以必填。 */
   email: string
   note?: string
   first?: '是' | '否'
@@ -78,7 +78,7 @@ export interface BookingResult {
   /** 預估時長，分鐘 */
   minutes: number
   price: number
-  /** 這筆是不是真的進了 SimplyBook（false 代表站上的示範模式） */
+  /** 這筆是不是真的進了設計師的日曆（false 代表站上的示範模式） */
   live: boolean
   /** 確認信有沒有真的寄出去（沒設定寄信服務時是 false） */
   mailed: boolean

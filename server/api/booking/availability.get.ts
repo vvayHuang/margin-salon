@@ -3,7 +3,7 @@ import type { StylistId } from '#shared/margin'
 
 /**
  * 月曆的日期狀態。`/booking` 第三步一進去就打這支。
- * 有接 SimplyBook 就是真的空檔，沒接就是站上的示範資料 —— 前端不分兩套。
+ * 有接 Google 日曆就是真的空檔，沒接就是站上的示範資料 —— 前端不分兩套。
  *
  * GET /api/booking/availability?month=2026-09&stylist=yuki&services=cut1,color1
  */
