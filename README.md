@@ -154,6 +154,9 @@ Notion（三個資料庫）
 2. `npm run sync:notion`
 3. 看一下 git diff，沒問題就 commit
 
+**寫文章的人看這份：[髮型誌發文手冊](https://claude.ai/code/artifact/47fb7a10-dbd5-4640-8b6a-eda5794b2fb4)**
+——欄位怎麼填、內文格式、常見狀況。這裡只寫技術面的取捨，操作步驟不重複寫一份。
+
 **只有「狀態＝上線」的會被抓下來**（PRD §13.5）。草稿留在 Notion，不會進到 bundle 裡——
 所以未發布的標題不會被人從網頁原始碼翻出來。
 
