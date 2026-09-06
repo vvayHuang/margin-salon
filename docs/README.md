@@ -38,6 +38,7 @@
 
 - ~~`/privacy`、`/careers`、404／500~~
 - ~~髮型誌 `/journal` ＋ 文章單頁 ＋ `Article` schema~~
+- ~~Notion CMS 串接（F-07）~~
 
 ## 目前的 backlog
 
@@ -46,10 +47,14 @@
 1. **實拍素材** — 全站影像仍是 Unsplash 佔位圖，頁尾有聲明。
    四張設計師頭像色調不統一（`stylist_yuki` 帶藍紫燈光、`stylist_shu` 是黑白），
    換實拍時一起處理。作品的 Before／After 也要等實拍才能補（D-11）
-2. **Notion CMS**（F-07，P0）— 資料欄位已對齊 §13.1／§13.4，接上時整份陣列換掉即可
+2. **Notion integration token** — CMS 已接好（F-07），但第一次同步前要先到
+   <https://www.notion.so/my-integrations> 建一個 internal integration、把 secret 填進 `.env`，
+   再把三個資料庫用 Connections 加進去。細節見 `.env.example`
 3. **預約後端**（F-06 串 SimplyBook.me、F-10 通知信）與**徵才信件通知**（F-11）
    ——目前兩個表單都只有前端，頁面上有明講
-4. **髮型誌 M2／M3 共 7 篇**（排程見 04-SEO §8）
+4. **髮型誌 M2／M3 共 7 篇**（排程見 04-SEO §8）——七篇的標題、分類、作者、摘要
+   已經建在 Notion 的「髮型誌 Journal」裡，狀態是草稿；內文寫完把狀態改成「上線」
+   再跑一次同步就會上站
 5. `JobPosting` schema（P2，`validThrough` 過期未更新會被移除，維護成本較高）
 6. Logo 與 favicon（`public/img/README.md` 的「尚缺」段）
 

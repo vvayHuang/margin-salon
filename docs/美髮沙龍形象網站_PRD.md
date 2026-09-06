@@ -457,7 +457,7 @@ IG／Google 地圖 → 看作品 → 看設計師 → 看價格 → 預約。
 | F-04 | 設計師個人頁（含指名預約帶參數） | P0 |
 | F-05 | 一鍵撥號 / 一鍵導航（**不做 LINE 加好友**） | P0 |
 | F-06 | **自建五步驟預約流程**（串 SimplyBook.me API） | P0 |
-| F-07 | **Notion 作為 CMS**：作品集 + 髮型誌自動同步 | P0｜**未做**。資料在 `shared/works`／`shared/journal`，欄位已對齊 §13.1／§13.4，接上時整份陣列換掉即可，頁面不用動 |
+| F-07 | **Notion 作為 CMS**：作品集 + 髮型誌自動同步 | P0｜**已完成**。三個資料庫已建於 Notion「留白髮所 MARGIN — 網站 CMS」；`npm run sync:notion` 在建置前抓資料、下載圖片並產生 `shared/journal.data.ts`／`shared/works.data.ts`／`app/utils/img.assets.ts`。只抓「狀態＝上線」，草稿不進 bundle |
 | F-08 | ~~價目表分頁籤~~ | **本期不做，見 D-10** |
 | F-09 | FAQ 折疊 | P1｜**已完成**（`MgFaq`，原生 details／summary） |
 | F-10 | 預約完成信／簡訊通知 | P1 |
@@ -762,6 +762,18 @@ IG／Google 地圖 → 看作品 → 看設計師 → 看價格 → 預約。
 - Notion API 有速率限制，建置時做快取，不在每次請求時呼叫
 - 只抓「狀態＝上線」的資料
 - 欄位名稱一旦定案不要改；改名會讓 API 讀不到
+
+**實作對照（F-07 已完成）**
+
+| 這裡的要求 | 怎麼做到的 |
+|---|---|
+| 圖片必須落地 | `scripts/lib/images.ts` 下載後轉 webp 並產生 `@640`／`@1280`，存進 `public/img` |
+| 建置時抓、不在執行時抓 | `npm run sync:notion` 產生 `.data.ts` 並進版控；`nuxt build` 完全不碰 Notion，也不需要 token |
+| 速率限制 | client 內建每 350ms 一次的節流與 429 重試（`scripts/lib/notion.ts`） |
+| 只抓上線 | query 帶 `狀態 = 上線` 的 filter，草稿不會出現在 bundle 裡 |
+| 欄位名稱不要改 | 腳本直接以中文欄位名讀屬性，改名會在同步時就報錯，不會靜靜產出空資料 |
+
+除了 §13.1／§13.4 定義的欄位，另加了兩個實務欄位：**圖片檔名**（封面圖留空時退回 `public/img` 既有素材，讓佔位圖階段不必把圖丟進 Notion）與髮型誌的 **CTA 文字／CTA 連結**（04-SEO §5 要求每篇至少連一次 `/services` 或 `/booking`）。
 
 ---
 

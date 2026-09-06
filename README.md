@@ -107,11 +107,52 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
 
 - **影像**全是 `#5E5E5E` 佔位塊，右上角標著裁切規格。設計系統 readme 說明目前沒有實拍素材，
   接上時只要打開 `MgImage` 裡的 `<img>`，21:9 / 4:5 / 1:1 三種比例規範不動。
-- **資料**在 `shared/margin.ts`（14 件作品、4 位設計師、9 個服務項目）。版面與語氣沿用高擬真稿，
-  但品牌事實已對回 PRD，見下方「品牌事實的權威來源」。
+- **資料**：作品集與髮型誌來自 Notion（見下方「內容從哪裡來」）；設計師、服務項目、
+  價目仍寫在 `shared/margin.ts`。版面與語氣沿用高擬真稿，但品牌事實已對回 PRD，
+  見下方「品牌事實的權威來源」。
 - **圖示**沿用稿子的 unicode（▼ ▲ ● ✕ ‹ › ＋）。設計系統交接規格提到圖示系統還沒定案。
 - **月曆**固定顯示 2026 年 9 月，切換上下月的箭頭還沒接。
 - **地圖**（`/store`）是 21:9 灰底佔位，還沒接圖資。
+
+## 內容從哪裡來
+
+作品集與髮型誌走 Notion（PRD D-05、F-07）；其餘內容硬寫在 `shared/`。
+
+```
+Notion（三個資料庫）
+  └─ npm run sync:notion
+       ├─ shared/journal.data.ts     髮型誌
+       ├─ shared/works.data.ts       作品集
+       ├─ app/utils/img.assets.ts    public/img 尺寸表
+       └─ public/img/*.webp          從 Notion 下載的圖（含 @640 / @1280）
+```
+
+**這四個產出物要進版控。** `nuxt build` 只讀檔案，完全不碰 Notion，
+所以部署環境不需要 `NOTION_TOKEN`，Notion 掛掉也發得了版；內容改了什麼也會出現在 git diff 裡。
+
+### 改內容的流程
+
+1. 在 Notion 改（資料庫在「留白髮所 MARGIN — 網站 CMS」底下）
+2. `npm run sync:notion`
+3. 看一下 git diff，沒問題就 commit
+
+**只有「狀態＝上線」的會被抓下來**（PRD §13.5）。草稿留在 Notion，不會進到 bundle 裡——
+所以未發布的標題不會被人從網頁原始碼翻出來。
+
+### 第一次要先做的事
+
+`.env` 不在版控裡，所以新環境要自己準備一次，照 `.env.example` 走：
+到 <https://www.notion.so/my-integrations> 建一個 internal integration，
+secret 填進 `.env` 的 `NOTION_TOKEN`，再到三個資料庫各自 ⋯ → Connections 把它加進去。
+**漏掉 Connections 那步 API 會回 404**，因為 integration 看不到那幾頁。
+
+### 圖片
+
+Notion 的檔案網址約 1 小時後失效，所以不能直接引用（§13.5）。
+同步時會把圖抓下來轉成 webp、順便產生 `@640` 與 `@1280`，存進 `public/img`。
+
+封面圖留空的話，會退回用「圖片檔名」欄位指向 `public/img` 既有素材——
+現在站上都是佔位圖，沒必要把它們丟進 Notion。換實拍時在 Notion 上傳、這個欄位留空就好。
 
 ## 系統規則（改動前請先讀）
 
