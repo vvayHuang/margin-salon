@@ -51,7 +51,7 @@ function token() {
   const t = process.env.NOTION_TOKEN
   if (!t) {
     throw new Error(
-      '缺少 NOTION_TOKEN。到 https://www.notion.so/my-integrations 建一個 internal integration，'
+      '缺少 NOTION_TOKEN。到 https://app.notion.com/developers/connections 建一個 internal integration，'
       + '把 secret 放進專案根目錄的 .env，再把三個資料庫用「Connections」加入這個 integration。',
     )
   }

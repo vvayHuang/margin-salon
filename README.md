@@ -159,10 +159,18 @@ Notion（三個資料庫）
 
 ### 第一次要先做的事
 
-`.env` 不在版控裡，所以新環境要自己準備一次，照 `.env.example` 走：
-到 <https://www.notion.so/my-integrations> 建一個 internal integration，
-secret 填進 `.env` 的 `NOTION_TOKEN`，再到三個資料庫各自 ⋯ → Connections 把它加進去。
-**漏掉 Connections 那步 API 會回 404**，因為 integration 看不到那幾頁。
+`.env` 不在版控裡，所以新環境要自己準備一次。完整步驟寫在 `.env.example` 的註解裡，這裡講重點。
+
+**integration 不是 Notion 裡的一頁**，是一把讓程式讀資料庫的鑰匙，建在帳號的開發者設定，
+跟工作區的頁面無關 —— 不用在「留白髮所」底下新增任何東西。
+
+1. 到 <https://app.notion.com/developers/connections> 建一個 internal integration，
+   複製密鑰（`ntn_` 或 `secret_` 開頭）填進 `.env` 的 `NOTION_TOKEN`
+2. 到 Notion 的「留白髮所 MARGIN — 網站 CMS」那一頁，右上角 ⋯ → 連結，
+   把剛剛那個 integration 加進去（子頁面會繼承，三個資料庫一次搞定）
+
+**第 2 步漏掉的話 API 會回 404**，因為 integration 預設看不到你的任何頁面 ——
+這是 Notion 的權限設計，不是設定錯了。
 
 ### 圖片
 

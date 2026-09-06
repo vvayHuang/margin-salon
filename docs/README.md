@@ -48,7 +48,7 @@
    四張設計師頭像色調不統一（`stylist_yuki` 帶藍紫燈光、`stylist_shu` 是黑白），
    換實拍時一起處理。作品的 Before／After 也要等實拍才能補（D-11）
 2. **Notion integration token** — CMS 已接好（F-07），但第一次同步前要先到
-   <https://www.notion.so/my-integrations> 建一個 internal integration、把 secret 填進 `.env`，
+   <https://app.notion.com/developers/connections> 建一個 internal integration、把 secret 填進 `.env`，
    再把三個資料庫用 Connections 加進去。細節見 `.env.example`
 3. **預約後端**（F-06 串 SimplyBook.me、F-10 通知信）與**徵才信件通知**（F-11）
    ——目前兩個表單都只有前端，頁面上有明講
