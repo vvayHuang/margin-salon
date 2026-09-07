@@ -169,6 +169,8 @@ Notion（三個資料庫）
    複製密鑰（`ntn_` 或 `secret_` 開頭）填進 `.env` 的 `NOTION_TOKEN`
 2. 到 Notion 的「留白髮所 MARGIN — 網站 CMS」那一頁，右上角 ⋯ → 連結，
    把剛剛那個 integration 加進去（子頁面會繼承，三個資料庫一次搞定）
+3. 三個資料庫各自用整頁開啟，從網址抓 32 碼的 ID 填進 `.env`
+   （`NOTION_DB_JOURNAL` / `NOTION_DB_WORKS` / `NOTION_DB_STYLISTS`）
 
 **第 2 步漏掉的話 API 會回 404**，因為 integration 預設看不到你的任何頁面 ——
 這是 Notion 的權限設計，不是設定錯了。
