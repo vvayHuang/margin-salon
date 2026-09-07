@@ -29,6 +29,8 @@ const sent = ref(false)
 const sending = ref(false)
 /** 通知信有沒有真的寄到店裡。null 代表還沒送出過。 */
 const mailed = ref<boolean | null>(null)
+/** 沒寄成功時，把「沒接上服務」與「接了但寄失敗」分開講，不然會往錯的方向查 */
+const mailNote = ref('')
 const failMessage = ref('')
 /** 蜜罐：藏起來的欄位，只有機器人會填它 */
 const honeypot = ref('')
@@ -65,6 +67,12 @@ async function submit() {
       body: { ...form, company: honeypot.value },
     })
     mailed.value = result.mailed
+    mailNote.value = result.mailed
+      ? ''
+      : result.reason === 'send-failed'
+        ? `通知信寄送失敗，我們可能沒收到。請直接來電 ${BRAND.phone}。`
+        : '（這個環境沒有接上寄信服務，通知信沒有真的寄出去。'
+          + `想確定我們收到，請來電 ${BRAND.phone}。）`
     sent.value = true
   }
   catch (err: any) {
@@ -80,6 +88,7 @@ async function submit() {
 function again() {
   sent.value = false
   mailed.value = null
+  mailNote.value = ''
 }
 </script>
 
@@ -172,8 +181,8 @@ function again() {
           <MgButton variant="secondary" to="/stylists">看設計師</MgButton>
           <MgButton variant="link" muted @click="again">再填一次</MgButton>
         </div>
-        <p v-if="!mailed" class="mt-6 text-13 leading-body-snug text-fg-3 text-pretty">
-          （這個環境沒有接上寄信服務，通知信沒有真的寄出去。想確定我們收到，請來電 {{ BRAND.phone }}。）
+        <p v-if="mailNote" class="mt-6 text-13 leading-body-snug text-fg-3 text-pretty">
+          {{ mailNote }}
         </p>
       </div>
 

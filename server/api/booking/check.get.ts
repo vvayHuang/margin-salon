@@ -20,11 +20,24 @@ function mailStatus() {
   const from = c.mailFrom as string
   const inbox = c.mailInbox as string
   const on = isMailLive()
+  /**
+   * Resend 沒驗證網域之前是沙盒模式：寄件人只能用 onboarding@resend.dev，
+   * 而且**收件人只能是你註冊 Resend 的那個信箱**。限制在收件人這一側，
+   * 所以 NUXT_MAIL_INBOX 填別的位址、或測試預約時在表單填別人的 Email，
+   * 都會被擋成 403，而且錯誤只會出現在伺服器日誌裡。
+   */
+  const sandbox = on && from.includes('onboarding@resend.dev')
 
   return {
     ok: on,
     from: on ? from : '',
     inbox,
+    sandbox,
+    sandboxNote: sandbox
+      ? 'Resend 還在沙盒模式（from 用 onboarding@resend.dev）。收件人只能是你註冊 Resend 的信箱：'
+        + `NUXT_MAIL_INBOX 要填它，測試 /booking 時第四步的 Email 也要填它，否則會被擋成 403。`
+        + '要寄給其他人請到 resend.com/domains 驗證自己的網域，再把 NUXT_MAIL_FROM 換成該網域的位址。'
+      : '',
     fix: on
       ? (inbox
           ? ''

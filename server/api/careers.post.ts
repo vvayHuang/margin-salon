@@ -19,12 +19,12 @@ export default defineEventHandler(async (event): Promise<CareersResult> => {
 
   // 蜜罐：這個欄位在畫面上被藏起來，真人填不到，填了就是機器人。
   // 回 200 假裝成功，讓對方以為送出了 —— 回錯誤只會讓它換個方法再試。
-  if (body?.company) return { mailed: true }
+  if (body?.company) return { mailed: true, reason: '' as const }
 
   const problem = careersProblem(body)
   if (problem) throw createError({ statusCode: 400, statusMessage: problem })
 
-  if (!hasInbox()) return { mailed: false }
+  if (!hasInbox()) return { mailed: false, reason: 'not-configured' as const }
 
   const mailed = await sendMail(careersNotice({
     name: body.name.trim(),
@@ -35,5 +35,5 @@ export default defineEventHandler(async (event): Promise<CareersResult> => {
     at: new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei', hour12: false }),
   }, inboxAddress()))
 
-  return { mailed }
+  return { mailed, reason: mailed ? '' as const : 'send-failed' as const }
 })

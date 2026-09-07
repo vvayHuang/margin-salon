@@ -4,6 +4,10 @@ node_modules
 .data
 dist
 .env
+# .env 的任何變體（.env.local、.env.bak-… 等）一律排除，只留範本。
+# 沒有這一條的話，一個 `git add -A` 就會把備份檔連同金鑰一起 commit 進去。
+.env.*
+!.env.example
 .DS_Store
 
 # 佔位圖原始檔（150MB，不進版控）

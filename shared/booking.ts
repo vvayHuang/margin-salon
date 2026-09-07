@@ -102,6 +102,13 @@ export interface CareersPayload {
 export interface CareersResult {
   /** 通知信有沒有真的寄到店裡 */
   mailed: boolean
+  /**
+   * 沒寄成功的話是哪一種。兩者要分開講：
+   * `not-configured` 是這個環境根本沒接寄信服務（作品集展示時的正常狀態）；
+   * `send-failed` 是接了但寄失敗（例如 Resend 沒驗證網域，只能寄給自己）。
+   * 混在一起說會讓人往錯的方向查。
+   */
+  reason?: 'not-configured' | 'send-failed' | ''
 }
 
 /* ---------------------------------------------------------------- 驗證 */
