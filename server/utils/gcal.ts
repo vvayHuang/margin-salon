@@ -132,6 +132,21 @@ async function token(force = false) {
   return body.access_token
 }
 
+/**
+ * 只驗金鑰換不換得到 token，完全不碰任何一本日曆。
+ * 設定分成「金鑰」與「日曆共用」兩件事，這支讓第一件事可以單獨確認 ——
+ * 否則日曆 ID 還沒填的時候，程式根本不會打 Google，你也就不知道金鑰對不對。
+ */
+export async function verifyCredentials() {
+  try {
+    await token(true)
+    return { ok: true, error: '' }
+  }
+  catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : String(err) }
+  }
+}
+
 /** 打一個日曆 API。401 就重換一次 token 再試，只重試一次。 */
 async function call(path: string, init: RequestInit, retried = false): Promise<any> {
   const res = await fetch(`${CAL_API}${path}`, {
