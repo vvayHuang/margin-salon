@@ -41,20 +41,18 @@ useJsonLd(() =>
 /** 只有剪髮有職級價差，染燙護四位同價（文案 §3） */
 const cutPrice = computed(() => money(stylistCutPrice(who.value)))
 
-const booking = useBooking()
+/**
+ * 帶著這位設計師進預約流程（PRD F-04）。
+ * 值放在網址上而不是只塞進 useState —— 重新整理、或把連結傳給朋友，
+ * 「指名這一位」這件事都還在。/booking 會自己解析這些參數。
+ */
+function goBooking(extra: Record<string, string | number> = {}) {
+  navigateTo({ path: '/booking', query: { stylist: slug.value, ...extra } })
+}
 
-function bookWithStylist() {
-  booking.reset({ who: slug.value, step: 1 })
-  navigateTo('/booking')
-}
-function seePrices() {
-  booking.reset({ who: slug.value, step: 2 })
-  navigateTo('/booking')
-}
-function pickSlot(day: number, time: string) {
-  booking.reset({ who: slug.value, step: 2, day, time })
-  navigateTo('/booking')
-}
+const bookWithStylist = () => goBooking()
+const seePrices = () => goBooking({ step: 2 })
+const pickSlot = (day: number, time: string) => goBooking({ step: 2, day, time })
 </script>
 
 <template>

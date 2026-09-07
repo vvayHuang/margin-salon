@@ -445,6 +445,14 @@ export const STORE_MAP_QUERY = '高雄市苓雅區文橫二路88號'
 export const STORE_MAP_SRC
   = `https://maps.google.com/maps?q=${encodeURIComponent(STORE_MAP_QUERY)}&z=17&hl=zh-TW&output=embed`
 
+/**
+ * 一鍵導航（PRD F-05）。用 Google 的官方跨平台網址：
+ * 手機上會直接開地圖 app 並帶入目的地，桌機開網頁版路線規劃。
+ * 不要自己拼 `comgooglemaps://`，那個在沒裝 app 的手機上是死連結。
+ */
+export const STORE_DIRECTIONS_HREF
+  = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORE_MAP_QUERY)}`
+
 export const STORE_TIPS = [
   { k: 'MRT', v: '捷運三多商圈站 2 號出口，沿文橫二路步行 5 分鐘。公車在三多文橫路口站下車，走 1 分鐘。' },
   { k: 'PARKING', v: '沒有專屬車位。汽車停文橫二路旁的收費停車場，走過來 3 分鐘；機車請停騎樓外白線區，別停在店門正前方，那是鄰居的出入口。' },

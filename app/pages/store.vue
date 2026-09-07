@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { STORE_MAP_SRC, STORE_ROWS, STORE_TIPS } from '#shared/margin'
+import { BRAND, STORE_DIRECTIONS_HREF, STORE_MAP_SRC, STORE_ROWS, STORE_TIPS } from '#shared/margin'
 import { PAGE_SEO } from '#shared/seo'
 
 /** 店家資訊。地址、時間、交通，最後一句提醒臨時狀況怎麼聯絡。 */
@@ -83,6 +83,12 @@ useMgSeo(() => ({ ...PAGE_SEO['/store']!, path: '/store' }))
           referrerpolicy="no-referrer-when-downgrade"
           class="absolute inset-0 size-full border-0"
         />
+      </div>
+
+      <!-- 一鍵導航／一鍵撥號（PRD F-05）。手機上這兩顆會直接開地圖 app 與撥號畫面。 -->
+      <div class="flex flex-wrap items-center gap-8 pt-6">
+        <MgButton variant="secondary" :href="STORE_DIRECTIONS_HREF">開啟導航</MgButton>
+        <MgButton variant="link" muted :href="BRAND.phoneHref">致電 {{ BRAND.phone }}</MgButton>
       </div>
     </section>
 

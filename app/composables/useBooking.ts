@@ -158,6 +158,22 @@ export function useBooking() {
    * 這兩支都不讓錯誤往外冒 —— 它們是從 template 的事件處理器叫的，
    * 丟出去只會變成沒人接的 rejection。抓不到就維持原本畫得出來的東西。
    */
+  /**
+   * 進第三步要做的事：抓月曆，並把**先前就選好的時段重新驗一次**。
+   * 會有「先前就選好」是因為兩條路徑：從設計師頁的「最近的空檔」帶進來，
+   * 或使用者退回第二步改了服務項目再走回來。兩種情況時長都可能已經對不上。
+   */
+  async function enterTimeStep() {
+    await loadMonth()
+    if (!state.value.day) return
+
+    const wanted = state.value.time
+    await pickDay(state.value.day) // 這一步會把 time 清掉，所以要先存起來
+    const stillOk = (daySlots.value?.times ?? [])
+      .some(slot => slot.time === wanted && slot.state === 'available')
+    state.value.time = stillOk ? wanted : ''
+  }
+
   async function loadMonth() {
     try {
       month.value = await $fetch<AvailabilityResponse>('/api/booking/availability', {
@@ -193,10 +209,10 @@ export function useBooking() {
   function toggleService(id: string) {
     const picked = state.value.picked
     state.value.picked = picked.includes(id) ? picked.filter(x => x !== id) : [...picked, id]
-    // 換了服務項目，原本選的時段可能已經接不下來，重選。
-    state.value.day = 0
-    state.value.time = ''
-    daySlots.value = null
+    // 這裡刻意不清掉已選的日期與時段。換了項目之後時長會變、原本的時段可能排不下，
+    // 但那要問過後端才知道 —— 所以改成進第三步時重驗一次（enterTimeStep）。
+    // 直接清掉的話，從設計師頁「最近的空檔」帶著時段進來的人，
+    // 一選服務就會發現時段不見了。
   }
 
   /* ---------------------------------------------------------------- 步驟 */
@@ -209,7 +225,7 @@ export function useBooking() {
     if (state.value.step < 5) {
       state.value.step += 1
       state.value.touched = false
-      if (state.value.step === 3) await loadMonth()
+      if (state.value.step === 3) await enterTimeStep()
       if (import.meta.client) window.scrollTo(0, 0)
     }
     return true
@@ -300,6 +316,7 @@ export function useBooking() {
     ready,
     blockReason,
     loadMonth,
+    enterTimeStep,
     pickDay,
     toggleService,
     next,

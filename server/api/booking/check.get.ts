@@ -14,6 +14,28 @@ import { bookingDate } from '#shared/booking'
 
 type Status = 'ok' | 'missing-id' | 'unreadable'
 
+/** 寄信設定（PRD F-10 預約完成信、F-11 徵才通知信） */
+function mailStatus() {
+  const c = useRuntimeConfig()
+  const from = c.mailFrom as string
+  const inbox = c.mailInbox as string
+  const on = isMailLive()
+
+  return {
+    ok: on,
+    from: on ? from : '',
+    inbox,
+    fix: on
+      ? (inbox
+          ? ''
+          : '沒填 NUXT_MAIL_INBOX，顧客的確認信會寄，但新預約與應徵的通知信沒有收件人 —— '
+            + '徵才表單會回 mailed:false。')
+      : '沒填 NUXT_RESEND_API_KEY 或 NUXT_MAIL_FROM，所以完全不寄信。'
+        + '預約與應徵仍然送得出去，畫面會照實說明沒有寄出。到 https://resend.com 拿一把 key，'
+        + '還沒有自己的網域就先用 MARGIN <onboarding@resend.dev>（只能寄到你註冊 Resend 的信箱）。',
+  }
+}
+
 export default defineEventHandler(async () => {
   if (!import.meta.dev) throw createError({ statusCode: 404, statusMessage: 'Not Found' })
 
@@ -92,5 +114,7 @@ export default defineEventHandler(async () => {
     credentials,
     serviceAccount: sa,
     stylists,
+    // 寄信是另一條獨立的線（F-10／F-11），沒設定不影響預約，但信不會寄出去。
+    mail: mailStatus(),
   }
 })

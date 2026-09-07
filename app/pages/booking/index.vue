@@ -33,8 +33,9 @@ const {
   lastStart,
   ready,
   blockReason,
-  loadMonth,
+  enterTimeStep,
   pickDay,
+  reset,
   toggleService,
   next,
   goStep,
@@ -43,9 +44,46 @@ const {
   hoursText,
 } = useBooking()
 
-// 重新整理時 step 可能已經停在 3（狀態存在 useState 裡），月曆要自己補抓一次。
-onMounted(() => {
-  if (state.value.step === 3 && !month.value) loadMonth()
+/**
+ * 從設計師頁或別人傳來的連結進來（PRD F-04「指名預約帶參數」）：
+ *   /booking?stylist=ray
+ *   /booking?stylist=ray&step=2
+ *   /booking?stylist=ray&step=2&day=10&time=14:00
+ *
+ * 走網址而不是只把值塞進 useState，理由是**重新整理與把連結傳給別人都還在**。
+ * 只認得出來的值才會被套用，其餘一律忽略 —— 網址是使用者可以亂改的東西。
+ */
+function fromQuery() {
+  const q = route.query
+  if (!q.stylist && !q.service && !q.day) return false
+
+  const who = q.stylist === 'any' || STYLISTS.some(x => x.value === q.stylist)
+    ? (q.stylist as StylistId | 'any')
+    : 'yuki'
+  const picked = String(q.service ?? '').split(',').filter(id => MENU.some(m => m.id === id))
+  const day = Number(q.day) || 0
+  const time = /^\d{2}:\d{2}$/.test(String(q.time ?? '')) ? String(q.time) : ''
+
+  // 沒選服務就進不了第三步（那一步要靠時長算空檔），所以在這裡先夾住。
+  const asked = Number(q.step) || 1
+  const step = Math.min(Math.max(asked, 1), picked.length ? 3 : 2)
+
+  reset({
+    who,
+    picked,
+    day,
+    time,
+    step,
+    cat: (MENU.find(m => m.id === picked[0])?.cat ?? 'cut'),
+  })
+  return true
+}
+
+onMounted(async () => {
+  fromQuery()
+  // 重新整理時 step 可能已經停在 3（狀態存在 useState 裡），月曆要自己補抓一次，
+  // 順便把先前選好的時段重驗一次。
+  if (state.value.step === 3) await enterTimeStep()
 })
 
 /**
