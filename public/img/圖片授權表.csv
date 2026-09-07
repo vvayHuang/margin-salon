@@ -2,12 +2,12 @@
 hero_desktop.webp,首頁 Hero 桌機 21:9,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,選圖基準 A；佔位圖，上線前替換為實拍
 hero_mobile.webp,首頁 Hero 手機 4:5,Giorgio Trovato (@giorgiotrovato),NF_Q9RQ6qRk,https://unsplash.com/photos/NF_Q9RQ6qRk,Unsplash License,2880x1920,2026-09-05,佔位圖，上線前替換為實拍
 hero_desktop_alt.webp,Hero 備選 21:9,Greg Trowman (@gregtrow),jsuWg7IXx1k,https://unsplash.com/photos/jsuWg7IXx1k,Unsplash License,5761x4000,2026-09-05,備選，未採用時可刪
-about_intro.webp,首頁 品牌介紹 3:2,Gemini（AI 生成）,,,AI 生成・無第三方權利,1264x848,2026-09-07,原始檔在 img-src/ai/
-about_hero.webp,/about 頁首 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔在 img-src/ai/
-space_lounge.webp,/about 等候區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔在 img-src/ai/
-space_cutting.webp,/about 剪髮區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔在 img-src/ai/
-space_detail.webp,/about 空間細節 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔在 img-src/ai/
-space_shampoo.webp,/about 洗髮區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔在 img-src/ai/；補上原本「尚缺」的洗髮區
+about_intro.webp,首頁 品牌介紹 3:2,Gemini（AI 生成）,,,AI 生成・無第三方權利,1264x848,2026-09-07,原始檔見 git e47f740
+about_hero.webp,/about 頁首 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740
+space_lounge.webp,/about 等候區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740
+space_cutting.webp,/about 剪髮區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740
+space_detail.webp,/about 空間細節 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740
+space_shampoo.webp,/about 洗髮區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740；補上原本「尚缺」的洗髮區
 space_alt_01.webp,空間備選 16:9,Guilherme Petri (@guipetri),ZkNxY2zErck,https://unsplash.com/photos/ZkNxY2zErck,Unsplash License,4104x2736,2026-09-05,備選
 space_alt_02.webp,空間備選 16:9,Tile Merchant Ireland (@tilemerchant),pb1Ajy_QUeE,https://unsplash.com/photos/pb1Ajy_QUeE,Unsplash License,6144x4098,2026-09-05,備選
 location_stairs.webp,/location 二樓樓梯 16:9,Cuvii (@cuvii),KvZ1Z2Q-7uc,https://unsplash.com/photos/KvZ1Z2Q-7uc,Unsplash License,7728x5152,2026-09-05,佔位圖；日本拍攝，氛圍貼近文案「樓梯在店面右手邊」
