@@ -10,6 +10,7 @@
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
     "typecheck:scripts": "tsc -p scripts",
+    "img:import": "node node_modules/.bin/jiti scripts/img-import.ts",
     "sync:notion": "node --env-file-if-exists=.env node_modules/.bin/jiti scripts/notion-sync.ts"
   },
   "dependencies": {

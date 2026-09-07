@@ -1,13 +1,13 @@
 /* eslint-disable */
 /**
- * public/img 資產清單 —— 由 scripts/notion-sync.ts 從 Notion 產生，請勿手動編輯。
- * 要改內容請改 Notion，然後跑 `npm run sync:notion`。
+ * public/img 資產清單 —— 由 scripts/ 產生，請勿手動編輯。
+ * 要改內容請換 public/img 的圖，然後跑 `npm run img:import` 或 `npm run sync:notion`。
  */
 import type { ImgAsset } from './img'
 
 export const IMG_ASSETS: Record<string, ImgAsset> = {
-  about_hero: { w: 1920, h: 1080, v: [640, 1280] },
-  about_intro: { w: 1600, h: 1067, v: [640, 1280] },
+  about_hero: { w: 1376, h: 768, v: [640, 1280] },
+  about_intro: { w: 1264, h: 848, v: [640] },
   hero_desktop: { w: 2400, h: 1000, v: [640, 1280, 2400] },
   hero_desktop_alt: { w: 2400, h: 1000, v: [640, 1280, 2400] },
   hero_mobile: { w: 1080, h: 1350, v: [640] },
@@ -23,9 +23,10 @@ export const IMG_ASSETS: Record<string, ImgAsset> = {
   service_treatment: { w: 800, h: 800, v: [640] },
   space_alt_01: { w: 1920, h: 1080, v: [640, 1280] },
   space_alt_02: { w: 1920, h: 1080, v: [640, 1280] },
-  space_cutting: { w: 1920, h: 1080, v: [640, 1280] },
-  space_detail: { w: 1920, h: 1080, v: [640, 1280] },
-  space_lounge: { w: 1920, h: 1080, v: [640, 1280] },
+  space_cutting: { w: 1376, h: 768, v: [640, 1280] },
+  space_detail: { w: 1376, h: 768, v: [640, 1280] },
+  space_lounge: { w: 1376, h: 768, v: [640, 1280] },
+  space_shampoo: { w: 1376, h: 768, v: [640, 1280] },
   stylist_an: { w: 600, h: 600, v: [640] },
   stylist_ray: { w: 600, h: 600, v: [640] },
   stylist_shu: { w: 600, h: 600, v: [640] },

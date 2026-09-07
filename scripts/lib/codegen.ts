@@ -3,11 +3,11 @@
  * 是讓 git diff 看得懂——一行一個欄位、鍵不亂加引號、順序穩定。
  */
 
-export function header(what: string) {
+export function header(what: string, how = '改 Notion，然後跑 `npm run sync:notion`') {
   return `/* eslint-disable */\n`
     + `/**\n`
-    + ` * ${what} —— 由 scripts/notion-sync.ts 從 Notion 產生，請勿手動編輯。\n`
-    + ` * 要改內容請改 Notion，然後跑 \`npm run sync:notion\`。\n`
+    + ` * ${what} —— 由 scripts/ 產生，請勿手動編輯。\n`
+    + ` * 要改內容請${how}。\n`
     + ` */\n`
 }
 
@@ -37,7 +37,7 @@ export function renderImgAssets(assets: Record<string, { w: number; h: number; v
     .map(([name, a]) => `  ${key(name)}: { w: ${a.w}, h: ${a.h}, v: [${a.v.join(', ')}] },`)
     .join('\n')
 
-  return header('public/img 資產清單')
+  return header('public/img 資產清單', '換 public/img 的圖，然後跑 `npm run img:import` 或 `npm run sync:notion`')
     + `import type { ImgAsset } from './img'\n\n`
     + `export const IMG_ASSETS: Record<string, ImgAsset> = {\n${rows}\n}\n`
 }

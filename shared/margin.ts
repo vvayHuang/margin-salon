@@ -331,7 +331,7 @@ export const ABOUT_PRINCIPLES = [
 
 export const ABOUT_SPACE = [
   { caption: '入口與等候區，只有兩張椅子', img: 'space_lounge' },
-  { caption: '洗髮區在最裡面，隔一道牆', img: 'space_detail' },
+  { caption: '洗髮區在最裡面，隔一道牆', img: 'space_shampoo' },
   { caption: '工具與藥劑，每天結束後歸零', img: 'space_cutting' },
 ]
 

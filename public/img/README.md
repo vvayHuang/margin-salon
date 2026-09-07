@@ -1,18 +1,51 @@
 # public/img 佔位圖對照表
 
-**產生日期**：2026-09-05　**來源**：Unsplash（免費商用、免標註）
+**產生日期**：2026-09-05（Unsplash）／2026-09-07 起陸續換 AI 圖
 **狀態**：全部為佔位圖，頁面須標註「示意圖」，上線前替換為實拍。
+
+## 一個版位一張圖，不分資料夾
+
+Unsplash 圖與 AI 圖**一律放同一個 `public/img/`，同名覆蓋**，不開第二個資料夾。
+理由是引用端只認版位名稱——`MgImage` 的 `src`、`shared/margin.ts` 的 `img`、
+`app/utils/img.ts` 的 `imgSrc()` 都是 `{name}` → `/img/{name}.webp`，
+多一個資料夾就要在 manifest、元件、產生器三個地方都塞一個「這張在哪」的欄位，
+換來的只是同一個版位擺兩張圖、最後還是得有人決定哪張上站。
+
+換了什麼、要不要換回去，看 git：`git diff` 會顯示檔案異動，
+`git checkout <commit> -- public/img/about_hero.webp` 就回到上一版。
+每張圖的實際出處記在 `圖片授權表.csv` 的「攝影師」欄（AI 圖填「Gemini（AI 生成）」）。
 
 ## 檔案規則
 
 ```
 {name}.webp          主檔（目標尺寸）
 {name}@640.webp      響應式 640w
-{name}@1280.webp     響應式 1280w（16:9 以上才有）
+{name}@1280.webp     響應式 1280w（主檔 >1280 才有）
 {name}@2400.webp     響應式 2400w（Hero 才有）
 works_XXX_thumb.webp 作品縮圖 1:1 800×800
-_original/           Unsplash 原始 JPG（已加入 .gitignore）
+_original/           Unsplash 原始 JPG（已加入 .gitignore，隨時可以重抓）
 ```
+
+原始檔（來源檔）另外放，**不在 `public/` 底下**，才不會跟著 build 出去：
+
+```
+img-src/ai/{name}.jpeg   AI 原始圖（進版控——重生一次就是不一樣的圖，刪掉補不回來）
+```
+
+## 匯入 AI 圖
+
+把 Gemini 產的圖丟進 `img-src/ai/`，**檔名就是版位名稱**（`about_hero.jpeg`），然後：
+
+```bash
+npm run img:import
+```
+
+它會轉成 `public/img/{name}.webp` ＋ `@640`／`@1280`（quality 82，與 Notion 那條線同一支
+`saveImage`），清掉同名的舊響應式檔，最後重建 `app/utils/img.assets.ts`。
+換別的來源資料夾就 `npm run img:import img-src/xxx`。
+
+⚠ 轉檔不裁切。版位比例（16:9、3:2…）請在生圖時就出對，出錯的話 `object-cover` 會幫你裁，
+但裁掉的就是解析度。
 
 Nuxt 用法：
 
@@ -124,3 +157,20 @@ iframe 換回 `MgImage` 即可。全站已無灰底佔位。
   `works_001_back` 153KB、`location_exterior` 193KB 為細節較多的例外。
 - `stylist_*@640.webp` 尺寸大於主檔 600×600，可當 retina @2x 使用。
 - 重新產生：原始檔在 `_original/`，處理腳本邏輯見專案文件《03b-Unsplash佔位圖連結清單》。
+
+## AI 圖替換進度（2026-09-07）
+
+/about 這一頁先換，其餘沿用 Unsplash。已替換：
+
+| 檔名 | 尺寸 | 用途 | 備註 |
+|---|---|---|---|
+| `about_hero.webp` | 1376×768 | /about 頁首 | 版位是 3:4 直式，這張是 16:9，`object-cover` 只會留中間一條 |
+| `about_intro.webp` | 1264×848 | 首頁／about 收尾帶 | 版位 21:9，裁完剩 1264×542 |
+| `space_lounge.webp` | 1376×768 | /about 等候區 | |
+| `space_detail.webp` | 1376×768 | 空間細節 | 不再當洗髮區用 |
+| `space_cutting.webp` | 1376×768 | /about 剪髮區 | |
+| `space_shampoo.webp` | 1376×768 | /about 洗髮區 | **新增**，補掉上面「尚缺」表的第一列；`ABOUT_SPACE` 的洗髮區已從 `space_detail` 改指這張 |
+
+⚠ **解析度偏低**。原本 Unsplash 的主檔是 1920×1080／1600×1067，AI 這批只有 1376×768。
+全幅版位（21:9 收尾帶、3:4 頁首）在 2× 螢幕上會偏軟。往下繼續換之前，
+生圖時請盡量出到 ≥1920 寬，或先過一次放大。
