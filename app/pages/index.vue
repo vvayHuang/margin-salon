@@ -24,21 +24,28 @@ const prices = computed(() =>
 
 <template>
   <div>
-    <!-- 滿版開場：21:9 影像撐滿一個視窗高，標題壓在影像左下邊界外 -->
+    <!-- 滿版開場：桌機 21:9、手機 4:5（PRD §13.4），影像撐滿一個視窗高，標題壓在影像左下邊界外 -->
     <section class="flex h-screen items-center">
       <div
-        class="relative flex max-h-full w-full items-end overflow-hidden bg-placeholder"
-        style="aspect-ratio: 21 / 9"
+        class="mg-hero-media relative flex max-h-full w-full items-end overflow-hidden bg-placeholder"
       >
-        <img
-          :src="imgSrc('hero_desktop')"
-          :srcset="imgSrcset('hero_desktop')"
-          sizes="100vw"
-          alt="留白髮所店內空景"
-          fetchpriority="high"
-          decoding="async"
-          class="absolute inset-0 size-full object-cover"
-        >
+        <picture>
+          <!-- 手機換直式素材：21:9 裁進 4:5 只剩中間一條，構圖整個沒了 -->
+          <source
+            media="(max-width: 900px)"
+            :srcset="imgSrcset('hero_mobile')"
+            sizes="100vw"
+          >
+          <img
+            :src="imgSrc('hero_desktop')"
+            :srcset="imgSrcset('hero_desktop')"
+            sizes="100vw"
+            alt="留白髮所店內空景"
+            fetchpriority="high"
+            decoding="async"
+            class="absolute inset-0 size-full object-cover"
+          >
+        </picture>
         <!-- 標題壓在影像左下，靠這層由下往上的暗化保住對比 -->
         <div class="mg-scrim" />
         <h1

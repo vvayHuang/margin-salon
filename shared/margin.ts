@@ -453,6 +453,17 @@ export const STORE_MAP_SRC
 export const STORE_DIRECTIONS_HREF
   = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(STORE_MAP_QUERY)}`
 
+/**
+ * 「走進來」那段文字的三張環境照，順序照抵達的動線：街角 → 木門 → 樓梯
+ * （街屋整棟在頁首的 `location_street`，二樓窗外那張在頁尾收尾帶）。
+ * 版位是 16:9，與素材同比例（location_* 都是 1376×768），不用裁。
+ */
+export const STORE_ENV = [
+  { caption: '轉過這個路口，就在對面', img: 'location_corner' },
+  { caption: '認門口那幾盆植物，木門就是入口', img: 'location_exterior' },
+  { caption: '上二樓的樓梯，推門就到', img: 'location_stairs' },
+]
+
 export const STORE_TIPS = [
   { k: 'MRT', v: '捷運三多商圈站 2 號出口，沿文橫二路步行 5 分鐘。公車在三多文橫路口站下車，走 1 分鐘。' },
   { k: 'PARKING', v: '沒有專屬車位。汽車停文橫二路旁的收費停車場，走過來 3 分鐘；機車請停騎樓外白線區，別停在店門正前方，那是鄰居的出入口。' },

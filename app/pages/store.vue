@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { BRAND, STORE_DIRECTIONS_HREF, STORE_MAP_SRC, STORE_ROWS, STORE_TIPS } from '#shared/margin'
+import {
+  BRAND,
+  STORE_DIRECTIONS_HREF,
+  STORE_ENV,
+  STORE_MAP_SRC,
+  STORE_ROWS,
+  STORE_TIPS,
+} from '#shared/margin'
 import { PAGE_SEO } from '#shared/seo'
 
 /** 店家資訊。地址、時間、交通，最後一句提醒臨時狀況怎麼聯絡。 */
@@ -14,10 +21,10 @@ useMgSeo(() => ({ ...PAGE_SEO['/store']!, path: '/store' }))
       style="aspect-ratio: 21 / 9"
     >
       <img
-        :src="imgSrc('location_stairs')"
-        :srcset="imgSrcset('location_stairs')"
+        :src="imgSrc('location_street')"
+        :srcset="imgSrcset('location_street')"
         sizes="100vw"
-        alt="店門口與上樓的樓梯"
+        alt="文橫二路上的街屋店面"
         fetchpriority="high"
         decoding="async"
         class="absolute inset-0 size-full object-cover"
@@ -57,6 +64,21 @@ useMgSeo(() => ({ ...PAGE_SEO['/store']!, path: '/store' }))
       </div>
     </div>
 
+    <!-- 環境周圍：照抵達的動線排，街角 → 木門 → 樓梯。版位 16:9 與素材同比例，不裁 -->
+    <section class="mg-gut mg-sect">
+      <div class="mg-grid3">
+        <figure v-for="e in STORE_ENV" :key="e.caption">
+          <MgImage
+            ratio="16/9"
+            :src="e.img"
+            :alt="e.caption"
+            sizes="(max-width: 900px) 50vw, 33vw"
+          />
+          <figcaption class="mt-4 text-14 leading-body-tight text-fg-3">{{ e.caption }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section class="mg-gut mg-sect">
       <div class="mg-grid3">
         <div
@@ -94,9 +116,9 @@ useMgSeo(() => ({ ...PAGE_SEO['/store']!, path: '/store' }))
 
     <section class="mg-sect">
       <MgCtaBand
-        note="IMAGE 21:9 — 巷口街景"
-        src="location_exterior"
-        alt="巷口街景"
+        note="IMAGE 21:9 — 二樓窗外"
+        src="location_env_01"
+        alt="二樓窗外的街"
         line1="找得到路了，"
         line2="就約一個時間"
       />

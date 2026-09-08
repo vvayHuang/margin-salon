@@ -225,6 +225,37 @@
     transparent 70%
   );
 }
+/* 收尾帶的兩行大標比 Hero 的標題高（落在影像 23%–47% 那一段），上面那條漸層在那個高度
+   幾乎已經透明了。量過五張底圖：space_alt_01 1.71、location_exterior 1.98、about_intro 2.47，
+   都低於大字的 AA 門檻 3:1。改成整片拉到頂、50% 處還有 0.62 之後，最低的一張是 3.4。 */
+.mg-scrim-cta {
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 17, 0.86) 0%,
+    rgba(17, 17, 17, 0.62) 50%,
+    transparent 100%
+  );
+}
+/* 首頁開場影像。桌機 21:9，手機換成 4:5（PRD §13.4 的 Hero 規格），
+   兩個比例各有各的素材，見 public/img 的 hero_desktop／hero_mobile。 */
+.mg-hero-media {
+  aspect-ratio: 21 / 9;
+}
+/* 這兩張空景的下緣是淺木地板與白牆，共用的 .mg-scrim 壓下去，標題最上一行只剩 2.9:1，
+   低於大字的 AA 門檻（3:1）。首頁 Hero 單獨把同一條漸層加深一階 → 量到 3.9:1。 */
+.mg-hero-media .mg-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(17, 17, 17, 0.86) 0%,
+    rgba(17, 17, 17, 0.5) 38%,
+    transparent 72%
+  );
+}
+@media (max-width: 900px) {
+  .mg-hero-media {
+    aspect-ratio: 4 / 5;
+  }
+}
 .mg-about-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

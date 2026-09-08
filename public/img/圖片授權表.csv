@@ -1,6 +1,6 @@
 ﻿檔名,用途,攝影師,Unsplash ID,來源網址,授權,原始尺寸,取得日期,備註
-hero_desktop.webp,首頁 Hero 桌機 21:9,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,選圖基準 A；佔位圖，上線前替換為實拍
-hero_mobile.webp,首頁 Hero 手機 4:5,Giorgio Trovato (@giorgiotrovato),NF_Q9RQ6qRk,https://unsplash.com/photos/NF_Q9RQ6qRk,Unsplash License,2880x1920,2026-09-05,佔位圖，上線前替換為實拍
+hero_desktop.webp,首頁 Hero 桌機 21:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1584x672,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；全站最大版位，1584 寬在 2× 螢幕偏軟
+hero_mobile.webp,首頁 Hero 手機 4:5,Gemini（AI 生成）,,,AI 生成・無第三方權利,928x1152,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；2026-09-08 起實際上站（<picture> max-width:900px）
 hero_desktop_alt.webp,Hero 備選 21:9,Greg Trowman (@gregtrow),jsuWg7IXx1k,https://unsplash.com/photos/jsuWg7IXx1k,Unsplash License,5761x4000,2026-09-05,備選，未採用時可刪
 about_intro.webp,首頁 品牌介紹 3:2,Gemini（AI 生成）,,,AI 生成・無第三方權利,1264x848,2026-09-07,原始檔見 git e47f740
 about_hero.webp,/about 頁首 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740
@@ -10,9 +10,11 @@ space_detail.webp,/about 空間細節 16:9,Gemini（AI 生成）,,,AI 生成・�
 space_shampoo.webp,/about 洗髮區 16:9,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-07,原始檔見 git e47f740；補上原本「尚缺」的洗髮區
 space_alt_01.webp,空間備選 16:9,Guilherme Petri (@guipetri),ZkNxY2zErck,https://unsplash.com/photos/ZkNxY2zErck,Unsplash License,4104x2736,2026-09-05,備選
 space_alt_02.webp,空間備選 16:9,Tile Merchant Ireland (@tilemerchant),pb1Ajy_QUeE,https://unsplash.com/photos/pb1Ajy_QUeE,Unsplash License,6144x4098,2026-09-05,備選
-location_stairs.webp,/location 二樓樓梯 16:9,Cuvii (@cuvii),KvZ1Z2Q-7uc,https://unsplash.com/photos/KvZ1Z2Q-7uc,Unsplash License,7728x5152,2026-09-05,佔位圖；日本拍攝，氛圍貼近文案「樓梯在店面右手邊」
-location_exterior.webp,/location 外觀 16:9,Hector Falcon (@hectorfalcon),4FhMrcTl4Kc,https://unsplash.com/photos/4FhMrcTl4Kc,Unsplash License,5184x3456,2026-09-05,佔位圖；壓縮後 193KB 為細節較多的例外
-location_env_01.webp,/location 環境 16:9,Nico Knaack (@xoxnk),C6SUsdkBGjE,https://unsplash.com/photos/C6SUsdkBGjE,Unsplash License,3475x2328,2026-09-05,佔位圖
+location_street.webp,/store 頁首 21:9（街屋店面）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；2026-09-08 新開的版位
+location_stairs.webp,/store 環境三連拍 16:9（室內木樓梯）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；原本是頁首，讓給 location_street
+location_corner.webp,/store 環境三連拍 16:9（街角路口）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；照 location_street 的色調重生
+location_exterior.webp,/store 環境三連拍 16:9（街屋木門入口）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；第二版，取代原本那張現代水泥透天入口
+location_env_01.webp,/store 頁尾收尾帶 21:9（二樓窗外街景）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；招牌偏飽和，與基準色調不合，待重生
 service_cut.webp,服務卡片 剪髮 1:1,Victor Sirbu (@victorsirbu04),Cr3CxWtuc5U,https://unsplash.com/photos/Cr3CxWtuc5U,Unsplash License,3688x3688,2026-09-05,佔位圖
 service_cut_alt.webp,剪髮備選 剪刀平拍 1:1,Giorgio Trovato (@giorgiotrovato),U-DinasrjvU,https://unsplash.com/photos/U-DinasrjvU,Unsplash License,10000x10000,2026-09-05,備選
 service_color.webp,服務卡片 染髮 1:1,Yovanka Loria Salon (@yovankaloriasalon),RpFQdgJ9gQw,https://unsplash.com/photos/RpFQdgJ9gQw,Unsplash License,2400x2400,2026-09-05,佔位圖；對應主力品項「透明感染髮」
@@ -44,7 +46,7 @@ works_015_front.webp,作品 剪髮 施作中 4:5,Nate Johnston (@natejohnston),t
 works_015_back.webp,作品 男士短髮 背面 4:5,Matthew Jackson (@levijackson),fmbnp_Oy1-I,https://unsplash.com/photos/fmbnp_Oy1-I,Unsplash License,4000x6000,2026-09-05,佔位圖
 works_016_front.webp,作品 男士短髮 4:5,Ahmad Ebadi (@ebadi__ahmad),zAsMbiVW5-M,https://unsplash.com/photos/zAsMbiVW5-M,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
 works_017_front.webp,作品 男士 沙龍情境 4:5,Mr Shave (@mrshave),4k60yfGy7fU,https://unsplash.com/photos/4k60yfGy7fU,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
-og_default.jpg,OG 預設分享圖 1200x630,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,由 hero_desktop 同一原始檔裁切；JPG 格式（社群相容性）
+og_default.jpg,OG 預設分享圖 1200x630,Giorgio Trovato (@giorgiotrovato),T9u-Xr30FY8,https://unsplash.com/photos/T9u-Xr30FY8,Unsplash License,5760x3840,2026-09-05,原本與 hero_desktop 同一張原始檔；hero_desktop 已於 2026-09-08 換成 AI 圖，這張仍是舊的 Unsplash，兩者不再是同一個畫面。JPG 格式（社群相容性）
 （未採用）,設計師頭像備選,Janko Ferlič (@itfeelslikefilm),XbxQbS1NMKE,https://unsplash.com/photos/XbxQbS1NMKE,Unsplash License,3946x4344,2026-09-05,已下載未採用，原始檔留在 _original/
 （未採用）,設計師頭像備選,jim hatch (@jimo6633),s2qtRSATaP8,https://unsplash.com/photos/s2qtRSATaP8,Unsplash License,4378x4831,2026-09-05,已下載未採用，原始檔留在 _original/
 （未採用）,設計師頭像備選,Craig Tidball (@devonshiremedia),Ufd5WoJf_7k,https://unsplash.com/photos/Ufd5WoJf_7k,Unsplash License,3360x3360,2026-09-05,已下載未採用，原始檔留在 _original/
