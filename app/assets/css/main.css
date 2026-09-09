@@ -225,10 +225,12 @@
     transparent 70%
   );
 }
-/* 收尾帶的兩行大標比 Hero 的標題高（落在影像 23%–47% 那一段），上面那條漸層在那個高度
-   幾乎已經透明了。量過五張底圖：space_alt_01 1.71、location_exterior 1.98、about_intro 2.47，
-   都低於大字的 AA 門檻 3:1。改成整片拉到頂、50% 處還有 0.62 之後，最低的一張是 3.4。 */
-.mg-scrim-cta {
+/* 整片拉到頂的版本，給「大標高過影像下半部」的版位用：
+   收尾帶的兩行大標落在影像 23%–47%，上面那條漸層到那個高度幾乎已經透明——量過五張底圖：
+   space_alt_01 1.71、location_exterior 1.98、about_intro 2.47，都低於大字的 AA 門檻 3:1。
+   設計師 Hero 是另一種同樣的擠壓：框固定 21:9，132px 的兩行名字要到 1440px 寬才有地方站，
+   901px 時名字佔掉框高的 64%（量到 1.6–2.3:1）。50% 處還有 0.62 之後，兩處最低 3.4。 */
+.mg-scrim-full {
   background: linear-gradient(
     to top,
     rgba(17, 17, 17, 0.86) 0%,
@@ -236,14 +238,9 @@
     transparent 100%
   );
 }
-/* 首頁開場影像。桌機 21:9，手機換成 4:5（PRD §13.4 的 Hero 規格），
-   兩個比例各有各的素材，見 public/img 的 hero_desktop／hero_mobile。 */
-.mg-hero-media {
-  aspect-ratio: 21 / 9;
-}
-/* 這兩張空景的下緣是淺木地板與白牆，共用的 .mg-scrim 壓下去，標題最上一行只剩 2.9:1，
-   低於大字的 AA 門檻（3:1）。首頁 Hero 單獨把同一條漸層加深一階 → 量到 3.9:1。 */
-.mg-hero-media .mg-scrim {
+/* 首頁 Hero 的兩張空景下緣是淺木地板與白牆，共用的 .mg-scrim 壓下去，標題最上一行
+   只剩 2.9:1，低於大字的 AA 門檻 3:1。同一條漸層加深一階 → 量到 3.9:1。 */
+.mg-scrim-deep {
   background: linear-gradient(
     to top,
     rgba(17, 17, 17, 0.86) 0%,
@@ -251,9 +248,23 @@
     transparent 72%
   );
 }
+/* 首頁開場影像。桌機 21:9，手機換成 4:5（PRD §13.4 的 Hero 規格），
+   兩個比例各有各的素材，見 public/img 的 hero_desktop／hero_mobile。 */
+.mg-hero-media {
+  aspect-ratio: 21 / 9;
+}
+/* 設計師個人頁的開場影像。桌機 21:9，窄螢幕換成素材原本的 16:9——
+   21:9 在 375px 只有 161px 高，64px 的兩行名字就佔掉四分之三，
+   壓到讀得到的程度整張照片也黑了。16:9 高 211px，而且完全不用裁。 */
+.mg-stylist-hero {
+  aspect-ratio: 21 / 9;
+}
 @media (max-width: 900px) {
   .mg-hero-media {
     aspect-ratio: 4 / 5;
+  }
+  .mg-stylist-hero {
+    aspect-ratio: 16 / 9;
   }
 }
 .mg-about-hero {

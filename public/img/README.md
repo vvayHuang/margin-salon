@@ -79,10 +79,14 @@ Nuxt 用法：
 | `service_treatment.webp` | 1:1 800×800 | 服務卡片 護髮 | 44KB | Katsiaryna Endruszkiewicz | `katsiaryna-endruszkiewicz-yZviQtYoP08.jpg` |
 | `service_scalp.webp` | 1:1 800×800 | 服務卡片 頭皮養護 | 157KB | Ela De Pure | `ela-de-pure-Gp3s0bquEkE.jpg` |
 | `service_scalp_alt.webp` | 1:1 800×800 | 頭皮養護備選 | 13KB | Ela De Pure | `ela-de-pure-06Z_DoagMz4.jpg` |
-| `stylist_shu.webp` | 1:1 600×600 | 設計師 Shu 周敘（總監） | 15KB | Tron Le | `tron-le-MEsOFGCccHg-unsplash.jpg` |
-| `stylist_yuki.webp` | 1:1 600×600 | 設計師 Yuki 林宜家（資深設計師） | 20KB | Aiony Haust | `aiony-haust-3TLl_97HNJo-unsplash.jpg` |
-| `stylist_ray.webp` | 1:1 600×600 | 設計師 Ray 陳柏睿（設計師） | 23KB | Imansyah Muhamad Putera | `imansyah-muhamad-putera-n4KewLKFOZw-unsplash.jpg` |
-| `stylist_an.webp` | 1:1 600×600 | 設計師 An 黃安（設計師） | 33KB | Good Faces | `good-faces-yliYi-2s9qg-unsplash.jpg` |
+| `stylist_shu.webp` | 1:1 560×560 | 設計師 周敘 Shu（總監）頭像 | 22KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_shu_hero.webp` | 16:9 1376×768 | 周敘 Shu（總監）個人頁 Hero | 42KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_yuki.webp` | 1:1 560×560 | 設計師 林宜家 Yuki（資深設計師）頭像 | 20KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_yuki_hero.webp` | 16:9 1376×768 | 林宜家 Yuki（資深設計師）個人頁 Hero | 41KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_ray.webp` | 1:1 560×560 | 設計師 陳柏睿 Ray（設計師）頭像 | 19KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_ray_hero.webp` | 16:9 1376×768 | 陳柏睿 Ray（設計師）個人頁 Hero | 39KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_an.webp` | 1:1 560×560 | 設計師 黃安 An（設計師）頭像 | 31KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `stylist_an_hero.webp` | 16:9 1376×768 | 黃安 An（設計師）個人頁 Hero | 31KB | Gemini（AI 生成） | 來源檔不進 repo |
 | `works_001_front.webp` | 4:5 1200×1500 | 染髮 長髮 | 86KB | Guido Fuà | `guido-fua-dpHAcZsu4bg.jpg` |
 | `works_001_back.webp` | 4:5 1200×1500 | 染髮 背面 | 153KB | Vii Nguyenn | `vii-nguyenn-Bjr4JDdl6ts.jpg` |
 | `works_002_front.webp` | 4:5 1200×1500 | 染髮 中長髮 | 142KB | Minh Ngọc | `minh-ng-c-8mrH9UjbgR8.jpg` |
@@ -117,7 +121,7 @@ Nuxt 用法：
 ## 實際上站狀況（2026-09-05 接上）
 
 影像對應寫在程式裡，不在這份表：作品看 `shared/margin.ts` 的 `WORKS[].img`、
-設計師頭像與個人頁 Hero 都看 `STYLISTS[].photo`（同一張）、服務卡片看 `CATEGORY_IMG`，
+設計師的卡片頭像看 `STYLISTS[].photo`、個人頁 Hero 看 `STYLISTS[].hero`、服務卡片看 `CATEGORY_IMG`，
 其餘固定位置直接寫在各頁 `.vue`。檔名 → srcset 的對照表在 `app/utils/img.ts`（由本目錄產生）。
 
 與上表原始規劃不同的幾處替代：
@@ -128,7 +132,7 @@ Nuxt 用法：
 | /services 收尾帶（原「藥劑檯」） | `space_alt_01` | 沒有藥劑檯素材，這張的檯面與瓶罐最接近 |
 | ~~/store Hero（原「店門口」）~~ | ~~`location_stairs`~~ | 2026-09-08 解除：`location_street` 就是街屋店面，頁首改用它，樓梯移到環境三連拍 |
 | /about 空間三連拍「洗髮區」 | `space_detail` | 沒有洗髮區素材 |
-| 設計師個人頁 Hero | 各人的 `stylist_*`（與列表卡片同一張） | 改用本人照片；1:1 裁進 21:9 只剩臉的一條，`object-position: center 45%` 讓五官落在中線。素材只有 600×600／@640，滿版 Hero 會偏軟，換實拍時請出到 ≥1920 寬並補 @640／@1280 變體 |
+| ~~設計師個人頁 Hero~~ | ~~各人的 `stylist_*`（與列表卡片同一張）~~ | 2026-09-09 解除：改用各人的 `stylist_*_hero`，Hero 與卡片是分開的兩張（`STYLISTS[].hero`／`.photo`） |
 
 /store 的環境照已於 2026-09-08 補上（`STORE_ENV` 三連拍）；地圖本身沒有靜態素材，仍是嵌 Google Maps（`STORE_MAP_SRC`，`output=embed` 不用 API key）。
 查詢字串是 PRD 的地址 `高雄市苓雅區文橫二路88號`；換成自製靜態圖時，把 store.vue 的
@@ -137,26 +141,59 @@ iframe 換回 `MgImage` 即可。全站已無灰底佔位。
 未使用：`service_cut_alt`、`service_scalp_alt`、
 `works_012`／`works_016`（作品只有 14 件，素材有 17 組）、各 `works_*_back`／`works_*_thumb`（版面沒有這兩個用途）。
 
-設計師頭像已於 2026-09-05 換成四張各自獨立的亞洲面孔（裁切以臉為中心、頭部約佔畫面 45%，
-主檔 600、`@640` 供 retina，全部 ≤40KB）。`stylist_yuki` 帶藍紫色燈光、`stylist_shu` 是黑白，
-四張的色調不統一，換實拍時一起處理。
-
-⚠ `圖片授權表.csv` 原本把這四張記成「候補・尚未處理」，同時在 `stylist_*` 列掛了另外四位
-攝影師（Janko Ferlič／jim hatch／Craig Tidball ×2）——那是換圖前的舊記錄，四張都掛錯人。
-已於 2026-09-05 依本表更正，未採用的四張原始檔仍留在 `_original/`。
-**本表是頭像來源的權威記錄，授權表以本表為準。**
+設計師頭像 2026-09-05 先換成四張 Unsplash 的亞洲面孔，2026-09-09 整批換成 AI 圖
+（見最下面那段）。**本表是頭像來源的權威記錄，授權表以本表為準**——授權表曾經把這四張
+記成「候補・尚未處理」，還掛了另外四位攝影師，那是更早的舊記錄。
 
 檔名沿用高擬真稿時期的四位設計師代號，已對回 PRD 的姓名：
 `stylist_shu`＝周敘 Shu、`stylist_yuki`＝林宜家 Yuki、`stylist_ray`＝陳柏睿 Ray、
-`stylist_an`＝黃安 An。檔名與 `STYLISTS[].photo` 一致，不需要改檔名。
+`stylist_an`＝黃安 An。檔名與 `STYLISTS[].photo`／`.hero` 一致，不需要改檔名。
 
 ## 備註
 
 - 人像類裁切採「重心偏上 18%」，避免頭頂被切；空間類置中裁切。
 - 每張自動壓縮至符合上限（Hero ≤300KB／作品 ≤150KB／縮圖 ≤60KB／頭像 ≤40KB）；
   `works_001_back` 153KB、`location_exterior` 193KB 為細節較多的例外。
-- `stylist_*@640.webp` 尺寸大於主檔 600×600，可當 retina @2x 使用。
+- `stylist_*.webp` 主檔 560×560，沒有響應式變體——卡片只有 96px，560 已經是 5× 有餘。
 - 重新產生：原始檔在 `_original/`，處理腳本邏輯見專案文件《03b-Unsplash佔位圖連結清單》。
+
+## AI 圖替換進度（2026-09-09：/stylists 四人的頭像與 Hero）
+
+八張一次進來：四張 1:1 頭像、四張 16:9 個人頁 Hero，四位設計師各兩張。
+
+| 檔名 | 尺寸 | 用途 | 備註 |
+|---|---|---|---|
+| `stylist_shu.webp` | 560×560 | 周敘 Shu 卡片頭像 | 1024×1024 出圖，裁 560 對到臉 |
+| `stylist_yuki.webp` | 560×560 | 林宜家 Yuki 卡片頭像 | 同上 |
+| `stylist_ray.webp` | 560×560 | 陳柏睿 Ray 卡片頭像 | 同上 |
+| `stylist_an.webp` | 560×560 | 黃安 An 卡片頭像 | 同上 |
+| `stylist_shu_hero.webp` | 1376×768 | Shu 個人頁 Hero | **新版位**。以下四張都是人在右、左邊整片留白 |
+| `stylist_yuki_hero.webp` | 1376×768 | Yuki 個人頁 Hero | |
+| `stylist_ray_hero.webp` | 1376×768 | Ray 個人頁 Hero | |
+| `stylist_an_hero.webp` | 1376×768 | An 個人頁 Hero | 背對鏡頭，臉靠卡片頭像那張補 |
+
+**Hero 與卡片頭像從此是兩張圖。** `Stylist` 型別多一個 `hero` 欄位：卡片要的是臉，
+Hero 要的是左邊那片留白——大名字壓在那裡。以前兩邊共用同一張 1:1，裁進 21:9 只剩臉的一條。
+
+頭像是從 1024×1024 的原圖裁 560×560：出圖是「人在店裡工作」的中景，臉只佔畫面約 19%，
+直接當 96px 的卡片頭像會看不出是誰。裁成頭部約佔 45%（沿用上面備註的人像裁切規則），
+四張都 ≤31KB，560 對 96px 的版位還有 5× 餘裕，所以連 `@640` 都不用出。
+
+⚠ **這四張 Hero 的左下全是白牆，白色大名字壓不住。** 量法同 2026-09-08 那段。
+只壓下緣的 `.mg-scrim` 在 1440px 量到 2.0–3.1:1，低於大字的 AA 門檻 3:1；
+而且問題不只在手機——版位固定 21:9，132px 的兩行名字要到 1440px 寬才有地方站，
+901px 時名字佔掉框高的 64%，量到 1.6–2.3:1。改用收尾帶那條整片拉到頂的漸層，
+390–2560px 掃過來最低 3.6:1。順手做的兩件事：
+
+- `.mg-scrim-cta` 更名為 `.mg-scrim-full`（現在收尾帶與設計師 Hero 兩個地方在用，
+  名字不該綁在 CTA 上）；首頁 Hero 那條原本寫成 `.mg-hero-media .mg-scrim` 的加深版
+  抽成具名的 `.mg-scrim-deep`。兩條漸層的數值都沒有動。
+- 設計師 Hero 在 ≤900px 換成素材原本的 16:9。21:9 在 375px 只有 161px 高，
+  64px 的兩行名字就佔掉四分之三，壓到讀得到的程度整張照片也黑了；16:9 高 211px，
+  而且完全不用裁。桌機維持 21:9（上下各切一點，左右構圖不動）。
+
+解析度仍然是 1MP 那條老問題（見最下面）：1376 寬的 Hero 撐 1440 版面不到 1×。
+換實拍或換得動 2K 的模型時，這八張一起重出。
 
 ## AI 圖替換進度（2026-09-08：首頁 Hero ＋ /store 全頁）
 

@@ -22,10 +22,14 @@ service_perm.webp,服務卡片 燙髮 1:1,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67
 service_treatment.webp,服務卡片 護髮 1:1,Katsiaryna Endruszkiewicz (@endka_1),yZviQtYoP08,https://unsplash.com/photos/yZviQtYoP08,Unsplash License,4000x4000,2026-09-05,佔位圖
 service_scalp.webp,服務卡片 頭皮養護 1:1,Ela De Pure (@eladepure),Gp3s0bquEkE,https://unsplash.com/photos/Gp3s0bquEkE,Unsplash License,2400x2400,2026-09-05,佔位圖；產品照，非施作照
 service_scalp_alt.webp,頭皮養護備選 1:1,Ela De Pure (@eladepure),06Z_DoagMz4,https://unsplash.com/photos/06Z_DoagMz4,Unsplash License,2400x2400,2026-09-05,備選
-stylist_shu.webp,設計師 周敘 Shu（總監）1:1,Tron Le (@tronle_sg),MEsOFGCccHg,https://unsplash.com/photos/MEsOFGCccHg,Unsplash License,3781x5672,2026-09-05,佔位圖；黑白照，與其餘三張色調不一致，換實拍時一起處理
-stylist_yuki.webp,設計師 林宜家 Yuki（資深設計師）1:1,Aiony Haust (@aiony),3TLl_97HNJo,https://unsplash.com/photos/3TLl_97HNJo,Unsplash License,3276x4096,2026-09-05,佔位圖；帶藍紫色燈光，與全站無彩色調衝突，換實拍時一起處理
-stylist_ray.webp,設計師 陳柏睿 Ray（設計師）1:1,Imansyah Muhamad Putera (@imansyahmp),n4KewLKFOZw,https://unsplash.com/photos/n4KewLKFOZw,Unsplash License,3456x3456,2026-09-05,佔位圖
-stylist_an.webp,設計師 黃安 An（設計師）1:1,Good Faces (@goodfacesagency),yliYi-2s9qg,https://unsplash.com/photos/yliYi-2s9qg,Unsplash License,1856x2784,2026-09-05,佔位圖
+stylist_shu.webp,設計師 周敘 Shu（總監）頭像 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,560x560,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；1024×1024 出圖，裁 560×560 對到臉（頭部約佔 45%）
+stylist_shu_hero.webp,設計師 周敘 Shu（總監）個人頁 Hero,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；人在右、左邊留白給大名字，桌機裁進 21:9、≤900px 用原本的 16:9
+stylist_yuki.webp,設計師 林宜家 Yuki（資深設計師）頭像 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,560x560,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；1024×1024 出圖，裁 560×560 對到臉（頭部約佔 45%）
+stylist_yuki_hero.webp,設計師 林宜家 Yuki（資深設計師）個人頁 Hero,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；人在右、左邊留白給大名字，桌機裁進 21:9、≤900px 用原本的 16:9
+stylist_ray.webp,設計師 陳柏睿 Ray（設計師）頭像 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,560x560,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；1024×1024 出圖，裁 560×560 對到臉（頭部約佔 45%）
+stylist_ray_hero.webp,設計師 陳柏睿 Ray（設計師）個人頁 Hero,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；人在右、左邊留白給大名字，桌機裁進 21:9、≤900px 用原本的 16:9
+stylist_an.webp,設計師 黃安 An（設計師）頭像 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,560x560,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；1024×1024 出圖，裁 560×560 對到臉（頭部約佔 45%）
+stylist_an_hero.webp,設計師 黃安 An（設計師）個人頁 Hero,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；人在右、左邊留白給大名字，桌機裁進 21:9、≤900px 用原本的 16:9
 works_001_front.webp,作品 染髮 長髮 4:5,Guido Fuà (@eikona),dpHAcZsu4bg,https://unsplash.com/photos/dpHAcZsu4bg,Unsplash License,4096x6144,2026-09-05,佔位圖；有人物，上線前須換為有拍攝同意的實拍
 works_001_back.webp,作品 染髮 背面 4:5,Vii Nguyenn (@viinguyenn),Bjr4JDdl6ts,https://unsplash.com/photos/Bjr4JDdl6ts,Unsplash License,2220x2775,2026-09-05,⚠ 藍髮插紅辣椒，與品牌極簡調性不符，建議降為備選
 works_002_front.webp,作品 染髮 中長髮 4:5,Minh Ngọc (@ngocntmn),8mrH9UjbgR8,https://unsplash.com/photos/8mrH9UjbgR8,Unsplash License,3456x5184,2026-09-05,佔位圖；有人物

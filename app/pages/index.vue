@@ -46,8 +46,9 @@ const prices = computed(() =>
             class="absolute inset-0 size-full object-cover"
           >
         </picture>
-        <!-- 標題壓在影像左下，靠這層由下往上的暗化保住對比 -->
-        <div class="mg-scrim" />
+        <!-- 標題壓在影像左下，靠這層由下往上的暗化保住對比。這兩張的下緣是白牆與
+             淺木地板，用加深版（.mg-scrim-deep），共用那條壓不住白字。 -->
+        <div class="mg-scrim mg-scrim-deep" />
         <h1
           class="mg-h1 relative -mb-3.5 ml-[42px] font-display leading-[1.02] font-medium tracking-display-xl text-surface-0"
         >

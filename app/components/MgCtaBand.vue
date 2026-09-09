@@ -32,7 +32,7 @@ defineProps<{
       class="absolute inset-0 size-full object-cover"
     >
     <!-- 大標壓在影像上，靠這層由下往上的暗化保住對比 -->
-    <div v-if="src" class="mg-scrim mg-scrim-cta" />
+    <div v-if="src" class="mg-scrim mg-scrim-full" />
     <span
       v-if="!src"
       class="absolute top-6 right-8 font-mono text-11 tracking-label text-placeholder-label"

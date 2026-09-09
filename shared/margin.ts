@@ -64,8 +64,13 @@ export interface Stylist {
   bio1: string
   bio2: string
   hours: string
-  /** public/img 檔名（不含副檔名）。列表卡片與個人頁 Hero 共用同一張個人照。 */
+  /** public/img 檔名（不含副檔名）。列表卡片與 personSchema 用的 1:1 個人照。 */
   photo: string
+  /**
+   * 個人頁 Hero 的 16:9 工作照。與 photo 是分開的兩張：
+   * 卡片要臉，Hero 要的是左邊那片留白——大名字壓在那裡。
+   */
+  hero: string
   /**
    * 指名這位設計師的顧客評價，逐字取自全站文案 §8，一人 3 則。
    * D-04 把首頁的評價區塊移到設計師頁，理由是「評價綁人比綁店有說服力」。
@@ -99,6 +104,7 @@ export const STYLISTS: Stylist[] = [
     ],
     seoDesc: '年資 15 年，擅長韓系層次燙、剪髮結構與髮質重建。剪之前一定會問你早上有多少時間、會不會吹頭髮。高雄苓雅，可線上指名預約。',
     photo: 'stylist_shu',
+    hero: 'stylist_shu_hero',
     avail: [
       [10, 'THU', ['11:00', '14:00', '18:00']],
       [11, 'FRI', ['13:00', '16:00']],
@@ -127,6 +133,7 @@ export const STYLISTS: Stylist[] = [
     ],
     seoDesc: '年資 9 年，專做低彩度顏色。配色時把褪色後的樣子一起算進去，所以作品偏灰。高雄苓雅三多商圈，可線上指名預約。',
     photo: 'stylist_yuki',
+    hero: 'stylist_yuki_hero',
     avail: [
       [10, 'THU', ['12:00', '15:30']],
       [11, 'FRI', []],
@@ -155,6 +162,7 @@ export const STYLISTS: Stylist[] = [
     ],
     seoDesc: '年資 6 年，擅長短髮修剪、男士造型與瀏海設計。會先看髮旋、後腦勺與耳朵位置，戴安全帽的人請務必告知。',
     photo: 'stylist_ray',
+    hero: 'stylist_ray_hero',
     avail: [
       [10, 'THU', ['11:00', '13:00', '16:00']],
       [11, 'FRI', ['11:30']],
@@ -183,6 +191,7 @@ export const STYLISTS: Stylist[] = [
     ],
     seoDesc: '年資 5 年，主做頭皮與護髮。用放大鏡看毛孔並把螢幕轉給你一起看，不會因為你坐下就開始加項目。',
     photo: 'stylist_an',
+    hero: 'stylist_an_hero',
     avail: [
       [10, 'THU', ['11:00', '12:00', '19:00']],
       [11, 'FRI', ['16:00', '19:00']],

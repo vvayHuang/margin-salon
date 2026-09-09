@@ -58,24 +58,23 @@ const pickSlot = (day: number, time: string) => goBooking({ step: 2, day, time }
 <template>
   <div>
     <!-- Hero：大名字貼齊影像左下邊界 -->
-    <section
-      class="relative flex w-full items-end overflow-hidden bg-placeholder"
-      style="aspect-ratio: 21 / 9"
-    >
-      <!-- 個人照是 1:1，裁進 21:9 只會留下臉的那一條；object-position 往上帶一點，
-           讓五官落在畫面中線，下緣的名字才不會壓在眼睛上。 -->
+    <section class="mg-stylist-hero relative flex w-full items-end overflow-hidden bg-placeholder">
+      <!-- Hero 用的是另一張 16:9 工作照（不是卡片那張 1:1 頭像）：人在右、左邊留白，
+           大名字就落在留白上。裁進 21:9 是上下各切一點，構圖左右不動。 -->
       <img
-        :src="imgSrc(who.photo)"
-        :srcset="imgSrcset(who.photo)"
+        :src="imgSrc(who.hero)"
+        :srcset="imgSrcset(who.hero)"
         sizes="100vw"
-        :alt="`${who.label}的個人照`"
+        :alt="`${who.label}在店裡工作的樣子`"
         fetchpriority="high"
         decoding="async"
         class="absolute inset-0 size-full object-cover"
-        style="object-position: center 45%"
+        style="object-position: center 40%"
       >
-      <!-- 大名字壓在影像左下，靠這層由下往上的暗化保住對比 -->
-      <div class="mg-scrim" />
+      <!-- 大名字壓在影像左下，靠這層暗化保住對比。四張的左下都是白牆，且 132px 的兩行名字
+           在 1440px 以下會佔掉 21:9 框高的一半以上——只壓下緣的版本量到 1.6–3.1:1，
+           所以跟收尾帶用同一條整片拉到頂的（390–2560px 量下來最低 3.6:1）。 -->
+      <div class="mg-scrim mg-scrim-full" />
       <h1
         class="mg-hero-name relative -mb-3.5 -ml-1.5 font-display leading-display-tight font-medium tracking-[.01em] text-surface-0"
       >
