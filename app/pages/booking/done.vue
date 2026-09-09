@@ -63,7 +63,10 @@ const icsHref = computed(() => {
 
 <template>
   <div class="mg-gut py-30">
-    <div class="font-label text-12 font-semibold tracking-label-wide text-fg-3">BOOKING RECEIVED</div>
+    <!-- 完成頁不掛導覽，標誌用單體收尾（Logo variant="mark"、32px、tone muted） -->
+    <MgLogo variant="mark" :size="32" tone="muted" />
+
+    <div class="mt-6 font-label text-12 font-semibold tracking-label-wide text-fg-3">BOOKING RECEIVED</div>
 
     <h1 class="mg-h2 mt-6 font-display leading-heading font-medium tracking-display-md">
       已經收到<br>

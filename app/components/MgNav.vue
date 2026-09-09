@@ -9,6 +9,10 @@ import { NAV_ITEMS } from '#shared/margin'
  *          預約流程是一個關起來的房間，只能關掉離開。
  *  compact 375 用的 56px 列：16px 邊距、1px 下邊框、字標靠左，右邊是用三條 1px div
  *          畫出來的漢堡（不是字符）。
+ *
+ * 標誌位是 Logo variant="compact"——頁首落在 96–140px 這一段，標誌使用規範在這裡
+ * 就把中文拿掉，所以列上只有裁切標記加 MARGIN。72px 的列用 40，56px 的列用 30。
+ * 這裡不再自己排一次名字。
  */
 withDefaults(
   defineProps<{ variant?: 'site' | 'booking'; current?: string; closeTo?: string }>(),
@@ -26,9 +30,7 @@ watch(() => route.fullPath, () => (menuOpen.value = false))
     v-if="variant === 'booking'"
     class="flex h-[72px] items-center justify-between border-b border-line-2 bg-surface-0 px-4 md:px-12"
   >
-    <span class="font-display text-16 font-semibold tracking-wordmark whitespace-nowrap text-fg-1">
-      留白髮所 MARGIN
-    </span>
+    <MgLogo variant="compact" :size="40" />
     <NuxtLink :to="closeTo" class="font-label text-12 font-semibold tracking-label-wide text-fg-3">
       ✕ CLOSE
     </NuxtLink>
@@ -39,9 +41,7 @@ watch(() => route.fullPath, () => (menuOpen.value = false))
     <div
       class="flex h-14 items-center justify-between border-b border-line-2 bg-surface-0 px-4 md:hidden"
     >
-      <NuxtLink to="/" class="font-display text-16 font-semibold tracking-wordmark whitespace-nowrap text-fg-1">
-        留白髮所 MARGIN
-      </NuxtLink>
+      <MgLogo variant="compact" :size="30" to="/" />
       <button
         type="button"
         class="flex w-6 flex-col gap-1"
@@ -92,9 +92,7 @@ watch(() => route.fullPath, () => (menuOpen.value = false))
         </NuxtLink>
       </nav>
 
-      <NuxtLink to="/" class="font-display text-16 font-semibold tracking-wordmark whitespace-nowrap text-fg-1">
-        留白髮所 MARGIN
-      </NuxtLink>
+      <MgLogo variant="compact" :size="40" to="/" />
     </div>
   </header>
 </template>

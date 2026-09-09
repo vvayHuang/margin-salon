@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { FOOTER_LINKS, FOOTER_NAV } from '#shared/margin'
 
-/** navigation/Footer — 96px、0 48px、上方 1px #E4E4E4，全部 12px #6E6E6E。 */
+/**
+ * navigation/Footer — 96px、0 48px、上方 1px #E4E4E4，全部 12px #6E6E6E。
+ * 版權前面是 20px 的裁切標記（Logo variant="mark"、tone="muted"），與版權間距 16px。
+ */
 </script>
 
 <template>
   <footer
     class="flex min-h-24 flex-wrap items-center justify-between gap-6 border-t border-line-2 bg-surface-0 px-4 py-6 text-12 text-fg-3 md:flex-nowrap md:px-12 md:py-0"
   >
-    <span class="font-body">© 2026 留白髮所 MARGIN Hair Studio</span>
+    <span class="flex items-center gap-4 font-body">
+      <MgLogo variant="mark" :size="20" tone="muted" />
+      © 2026 留白髮所 MARGIN Hair Studio
+    </span>
     <!-- 素材還是 Unsplash 佔位，換成實拍前站上要標示 -->
     <span class="font-body">站內影像為示意圖，非實際施作紀錄</span>
     <!-- /careers 與 /privacy 只有這一個入口，見 D-09 補註 -->
