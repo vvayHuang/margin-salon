@@ -56,7 +56,8 @@
    已經建在 Notion 的「髮型誌 Journal」裡，狀態是草稿；內文寫完把狀態改成「上線」
    再跑一次同步就會上站
 5. `JobPosting` schema（P2，`validThrough` 過期未更新會被移除，維護成本較高）
-6. Logo 與 favicon（`public/img/README.md` 的「尚缺」段）
+6. ~~Logo 與 favicon~~ — 2026-09-11 接上：favicon、apple-touch-icon、JSON-LD 的 `logo`，
+   來源與做法見 `public/img/README.md` 的「標誌與網站圖示」
 
 ## 與 v1.3.1／v2.0 的差異
 

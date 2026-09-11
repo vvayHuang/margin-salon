@@ -93,7 +93,8 @@ export const PAGE_SEO: Record<string, PageSeo> = {
  * HairSalon 結構化資料（04-SEO §4.1）。只放在首頁。
  *
  * 與文件的兩處差異：
- * 1. `logo` 拿掉 — 站上還沒有 logo 檔，指向 404 比不放更糟。
+ * 1. `logo` 指向 /logo.png，不是文件寫的 /logo_light.svg。來源是標誌包的方形組合
+ *    （換成站上的 #111111），轉成 PNG 是因為結構化資料的圖要能被 Google 圖片收錄，點陣最保險。
  * 2. 週一公休不用 `specialOpeningHoursSpecification`（文件寫 opens/closes 都 00:00）。
  *    Google 判讀公休的方式是「不出現在 openingHoursSpecification 裡」，多寫反而有歧義。
  */
@@ -106,6 +107,7 @@ export function hairSalonSchema() {
     'alternateName': BRAND.nameEn,
     'url': `${SITE_URL}/`,
     'image': OG_IMAGE,
+    'logo': `${SITE_URL}/logo.png`,
     'description':
       '高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開，不推銷、不辦卡。',
     'slogan': BRAND.slogan.join('，'),

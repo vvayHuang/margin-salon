@@ -49,6 +49,11 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
+        // 分頁圖示顯示在 16 CSS px，照標誌規範用單角的 symbol-min（20px 以下不可縮小四角版），
+        // ICO 裡放 16 與 32（2×）兩層。白底是刻意的：透明底的深色標記在深色模式的分頁列上會消失。
+        // 檔案由 Downloads/pack 的標誌包換色（#1A1A18 → #111111）產出，見 public/img/README.md。
+        { rel: 'icon', href: '/favicon.ico' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
