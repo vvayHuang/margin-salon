@@ -15,12 +15,12 @@ location_stairs.webp,/store 環境三連拍 16:9（室內木樓梯）,Gemini（A
 location_corner.webp,/store 環境三連拍 16:9（街角路口）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；照 location_street 的色調重生
 location_exterior.webp,/store 環境三連拍 16:9（街屋木門入口）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；第二版，取代原本那張現代水泥透天入口
 location_env_01.webp,/store 頁尾收尾帶 21:9（二樓窗外街景）,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-08,來源檔不進 repo（README §匯入 AI 圖）；招牌偏飽和，與基準色調不合，待重生
-service_cut.webp,服務卡片 剪髮 1:1,Victor Sirbu (@victorsirbu04),Cr3CxWtuc5U,https://unsplash.com/photos/Cr3CxWtuc5U,Unsplash License,3688x3688,2026-09-05,佔位圖
+service_cut.webp,服務卡片 剪髮 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,1024x1024,2026-09-11,來源檔不進 repo（README §匯入 AI 圖）；梳子上讀得出「Y.S.PARK」（真實品牌），剪刀刃上也有字，上線前重生或修掉
 service_cut_alt.webp,剪髮備選 剪刀平拍 1:1,Giorgio Trovato (@giorgiotrovato),U-DinasrjvU,https://unsplash.com/photos/U-DinasrjvU,Unsplash License,10000x10000,2026-09-05,備選
-service_color.webp,服務卡片 染髮 1:1,Yovanka Loria Salon (@yovankaloriasalon),RpFQdgJ9gQw,https://unsplash.com/photos/RpFQdgJ9gQw,Unsplash License,2400x2400,2026-09-05,佔位圖；對應主力品項「透明感染髮」
-service_perm.webp,服務卡片 燙髮 1:1,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67CzXs,https://unsplash.com/photos/nDSCY67CzXs,Unsplash License,3345x3571,2026-09-05,佔位圖；與 works_007_front 同一原始檔
-service_treatment.webp,服務卡片 護髮 1:1,Katsiaryna Endruszkiewicz (@endka_1),yZviQtYoP08,https://unsplash.com/photos/yZviQtYoP08,Unsplash License,4000x4000,2026-09-05,佔位圖
-service_scalp.webp,服務卡片 頭皮養護 1:1,Ela De Pure (@eladepure),Gp3s0bquEkE,https://unsplash.com/photos/Gp3s0bquEkE,Unsplash License,2400x2400,2026-09-05,佔位圖；產品照，非施作照
+service_color.webp,服務卡片 染髮 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,1024x1024,2026-09-11,來源檔不進 repo（README §匯入 AI 圖）；對應主力品項「透明感染髮」
+service_perm.webp,服務卡片 燙髮 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,1024x1024,2026-09-11,來源檔不進 repo（README §匯入 AI 圖）；不再與 works_007_front 共用原始檔
+service_treatment.webp,服務卡片 護髮 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,1024x1024,2026-09-11,來源檔不進 repo（README §匯入 AI 圖）
+service_scalp.webp,服務卡片 頭皮養護 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,1024x1024,2026-09-11,來源檔不進 repo（README §匯入 AI 圖）；施作照，取代原本的產品照
 service_scalp_alt.webp,頭皮養護備選 1:1,Ela De Pure (@eladepure),06Z_DoagMz4,https://unsplash.com/photos/06Z_DoagMz4,Unsplash License,2400x2400,2026-09-05,備選
 stylist_shu.webp,設計師 周敘 Shu（總監）頭像 1:1,Gemini（AI 生成）,,,AI 生成・無第三方權利,560x560,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；1024×1024 出圖，裁 560×560 對到臉（頭部約佔 45%）
 stylist_shu_hero.webp,設計師 周敘 Shu（總監）個人頁 Hero,Gemini（AI 生成）,,,AI 生成・無第三方權利,1376x768,2026-09-09,來源檔不進 repo（README §匯入 AI 圖）；人在右、左邊留白給大名字，桌機裁進 21:9、≤900px 用原本的 16:9
@@ -38,7 +38,7 @@ works_003_front.webp,作品 染髮 黑長髮 4:5,Jarin Dominguez (@jarind),sxUdO
 works_004_front.webp,作品 染髮 中長髮 4:5,Chalaphan Mathong (@jmj_jimmy),2Ceido7Uldo,https://unsplash.com/photos/2Ceido7Uldo,Unsplash License,4000x6000,2026-09-05,佔位圖；有人物
 works_005_front.webp,作品 染髮 自然光 4:5,Rameez Remy (@rameez_remy),mncdBRKF56k,https://unsplash.com/photos/mncdBRKF56k,Unsplash License,2160x2700,2026-09-05,佔位圖；有人物
 works_006_front.webp,作品 染髮 特殊色 4:5,Scott Goodwill (@scottagoodwill),r7KPlaryeqs,https://unsplash.com/photos/r7KPlaryeqs,Unsplash License,4096x4096,2026-09-05,藍綠漸層，與「低彩度」定位不符，建議降為備選
-works_007_front.webp,作品 燙髮 4:5,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67CzXs,https://unsplash.com/photos/nDSCY67CzXs,Unsplash License,3345x3571,2026-09-05,與 service_perm 同一原始檔，同頁勿並列
+works_007_front.webp,作品 燙髮 4:5,Ahmad Mahjoubzad (@mahjoubzad),nDSCY67CzXs,https://unsplash.com/photos/nDSCY67CzXs,Unsplash License,3345x3571,2026-09-05,與 service_perm 舊版同一原始檔；service_perm 已於 2026-09-11 換成 AI 圖，不再撞圖
 works_008_front.webp,作品 燙髮 黑白 4:5,Alexander Krivitskiy (@krivitskiy),e7-0U1EAqz4,https://unsplash.com/photos/e7-0U1EAqz4,Unsplash License,6629x6074,2026-09-05,佔位圖；有人物
 works_009_front.webp,作品 燙髮 4:5,Janko Ferlič (@itfeelslikefilm),LGlBwZGjiwM,https://unsplash.com/photos/LGlBwZGjiwM,Unsplash License,4819x5304,2026-09-05,佔位圖；有人物
 works_010_front.webp,作品 燙髮 逆光 4:5,Alef Morais (@alef_visuals),HWdTfhFX-OY,https://unsplash.com/photos/HWdTfhFX-OY,Unsplash License,3790x4737,2026-09-05,佔位圖；有人物

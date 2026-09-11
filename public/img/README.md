@@ -72,12 +72,12 @@ Nuxt 用法：
 | `location_stairs.webp` | 16:9 1920×1080 | /location 二樓樓梯 | 119KB | Cuvii | `cuvii-KvZ1Z2Q-7uc.jpg` |
 | `location_exterior.webp` | 16:9 1920×1080 | /location 外觀 | 193KB | Hector Falcon | `hector-falcon-4FhMrcTl4Kc.jpg` |
 | `location_env_01.webp` | 16:9 1920×1080 | /location 環境 | 149KB | Nico Knaack | `nico-knaack-C6SUsdkBGjE.jpg` |
-| `service_cut.webp` | 1:1 800×800 | 服務卡片 剪髮 | 77KB | Victor Sirbu | `victor-sirbu-Cr3CxWtuc5U.jpg` |
+| `service_cut.webp` | 1:1 1024×1024 | 服務卡片 剪髮 | 59KB | Gemini（AI 生成） | 來源檔不進 repo |
 | `service_cut_alt.webp` | 1:1 800×800 | 剪髮備選（剪刀平拍） | 31KB | Giorgio Trovato | `giorgio-trovato-U-DinasrjvU.jpg` |
-| `service_color.webp` | 1:1 800×800 | 服務卡片 染髮 | 95KB | Yovanka Loria Salon | `yovanka-loria-salon-RpFQdgJ9gQw.jpg` |
-| `service_perm.webp` | 1:1 800×800 | 服務卡片 燙髮 | 44KB | Ahmad Mahjoubzad | `ahmad-mahjoubzad-nDSCY67CzXs.jpg` |
-| `service_treatment.webp` | 1:1 800×800 | 服務卡片 護髮 | 44KB | Katsiaryna Endruszkiewicz | `katsiaryna-endruszkiewicz-yZviQtYoP08.jpg` |
-| `service_scalp.webp` | 1:1 800×800 | 服務卡片 頭皮養護 | 157KB | Ela De Pure | `ela-de-pure-Gp3s0bquEkE.jpg` |
+| `service_color.webp` | 1:1 1024×1024 | 服務卡片 染髮 | 56KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `service_perm.webp` | 1:1 1024×1024 | 服務卡片 燙髮 | 43KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `service_treatment.webp` | 1:1 1024×1024 | 服務卡片 護髮 | 64KB | Gemini（AI 生成） | 來源檔不進 repo |
+| `service_scalp.webp` | 1:1 1024×1024 | 服務卡片 頭皮養護 | 49KB | Gemini（AI 生成） | 來源檔不進 repo |
 | `service_scalp_alt.webp` | 1:1 800×800 | 頭皮養護備選 | 13KB | Ela De Pure | `ela-de-pure-06Z_DoagMz4.jpg` |
 | `stylist_shu.webp` | 1:1 560×560 | 設計師 周敘 Shu（總監）頭像 | 22KB | Gemini（AI 生成） | 來源檔不進 repo |
 | `stylist_shu_hero.webp` | 16:9 1376×768 | 周敘 Shu（總監）個人頁 Hero | 42KB | Gemini（AI 生成） | 來源檔不進 repo |
@@ -114,7 +114,7 @@ Nuxt 用法：
 | 項目 | 檔名 | 替代方案 |
 |---|---|---|
 | 洗髮區 | `space_shampoo.webp` | photoAC 搜「シャンプー台 美容室」 |
-| 頭皮養護施作照 | `service_scalp` 實拍 | photoAC 搜「ヘッドスパ 頭皮」 |
+| ~~頭皮養護施作照~~ | ~~`service_scalp` 實拍~~ | 2026-09-11 換成 AI 施作照（原本是產品照），實拍仍待補 |
 | ~~Logo ×3、Favicon ×2~~ | ~~`logo_*.svg` `favicon.ico`~~ | 2026-09-11 解除，見下方「標誌與網站圖示」 |
 | 作品 018–020 | `works_018~020_front.webp` | 目前 17 件，補足 20 件 |
 
@@ -180,6 +180,27 @@ iframe 換回 `MgImage` 即可。全站已無灰底佔位。
   `works_001_back` 153KB、`location_exterior` 193KB 為細節較多的例外。
 - `stylist_*.webp` 主檔 560×560，沒有響應式變體——卡片只有 96px，560 已經是 5× 有餘。
 - 重新產生：原始檔在 `_original/`，處理腳本邏輯見專案文件《03b-Unsplash佔位圖連結清單》。
+
+## AI 圖替換進度（2026-09-11：首頁服務卡）
+
+五張 1:1 一次進來，同名覆蓋，`CATEGORY_IMG` 與各頁引用都不用動。
+
+| 檔名 | 尺寸 | 內容 | 備註 |
+|---|---|---|---|
+| `service_cut.webp` | 1024×1024 | 剪刀＋梳子剪一束直髮 | 唯一沒戴手套的一張。梳子上讀得出「Y.S.PARK」（真實品牌），剪刀刃上也有字，上線前重生或修掉 |
+| `service_color.webp` | 1024×1024 | 染刷上藥 | |
+| `service_perm.webp` | 1024×1024 | 捲髮棒上捲 | 以前與 `works_007_front` 同一張原始檔，現在不撞了 |
+| `service_treatment.webp` | 1024×1024 | 護髮乳抹上濕髮 | |
+| `service_scalp.webp` | 1024×1024 | 雙手按頭皮、分線置中 | 施作照，取代原本的產品照；「尚缺」表那一列一起劃掉 |
+
+五張是同一組：同一雙手、同一枚銀戒、白牆背景、手部特寫、不露臉。
+
+首頁版位是 4:5，1:1 的圖左右各裁 10%，剩 820×1024。桌機 25vw 在 1440 寬是 360 CSS px，
+2× 螢幕要 720——這是目前少數 1MP 就夠用的版位。主檔從 800 變成 1024，檔案反而變小（43–64KB，舊的 44–157KB）。
+
+同一組檔名也是 /journal 四篇的封面（`shared/journal.data.ts` 的 `cover`），版位 16:9，
+1:1 裁完剩 1024×576。置頂那張 60vw、文章頁 100vw，在 2× 螢幕上偏軟——這個裁切舊圖就有
+（800 裁剩 800×450），這次只是像素多了一點，沒有解決。
 
 ## AI 圖替換進度（2026-09-09：/stylists 四人的頭像與 Hero）
 
