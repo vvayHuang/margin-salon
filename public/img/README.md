@@ -107,7 +107,7 @@ Nuxt 用法：
 | `works_015_back.webp` | 4:5 1200×1500 | 男士短髮 背面 | 46KB | Matthew Jackson | `matthew-jackson-fmbnp_Oy1-I.jpg` |
 | `works_016_front.webp` | 4:5 1200×1500 | 男士短髮 | 125KB | Ahmad Ebadi | `ahmad-ebadi-zAsMbiVW5-M.jpg` |
 | `works_017_front.webp` | 4:5 1200×1500 | 男士 沙龍情境 | 124KB | Mr Shave | `mr-shave-4k60yfGy7fU.jpg` |
-| `og_default.jpg` | 1200×630 | OG 預設圖 | 82KB | Giorgio Trovato | `giorgio-trovato-T9u-Xr30FY8.jpg` |
+| `og_default.jpg` | 1200×630 | OG 預設圖 | 29KB | Gemini（AI 生成） | 2026-09-15 由 `hero_desktop.webp` 裁切（左起 40px 取 1280×672 再縮），取代舊 Unsplash 圖 |
 
 ## 尚缺（Unsplash 補不到）
 

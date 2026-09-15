@@ -1,9 +1,46 @@
-# 留白髮所 MARGIN — Nuxt 4 + Tailwind CSS 4
+# 留白髮所 MARGIN
 
-`Works Page Hi-Fi.dc.html` 的實作。那份高擬真稿其實不只作品集列表，
-而是整個站：首頁、關於、服務價目、店家資訊，加上
-「作品集 → 作品單頁 → 設計師單頁 → 五步驟預約 → 預約完成」這條動線，
-這個專案把它整個做出來。
+> **概念作品，非真實店家。** 品牌、店址、電話、設計師與影像皆為虛構示意，網站設定為不讓搜尋引擎收錄。
+
+一間虛構的高雄預約制美髮沙龍：從品牌定位、規格文件、設計系統，到一個能實際預約的網站。
+「留白」是店名，也是整個網站的設計規格——一屏一件事、減法優先、每個區塊只有一個主按鈕。
+
+**個案研究：[docs/個案研究.md](docs/個案研究.md)**（要解決的問題、關鍵決策與代價、還沒做完的部分）
+
+![首頁](docs/screenshots/home.jpg)
+
+| 作品集 | 設計師個人頁 |
+|---|---|
+| ![作品集](docs/screenshots/works.jpg) | ![設計師個人頁](docs/screenshots/stylist.jpg) |
+| **五步驟預約** | **手機版** |
+| ![預約流程](docs/screenshots/booking.jpg) | <img src="docs/screenshots/mobile-home.jpg" alt="手機版首頁" width="48%"> <img src="docs/screenshots/mobile-booking.jpg" alt="手機版預約" width="48%"> |
+
+## 看點
+
+- **品牌原則寫成可檢查的規格。** 只有黑白＋單一強調色 `#C8351C`（只當狀態色，不當按鈕色）、
+  無圓角無陰影、每個區塊最多一個主按鈕。23 支 `Mg*` 元件對應設計系統的元件規格，設計 token 從設計系統同步。
+- **自建五步驟預約。** 除了順利路徑，還有「當天排不下」「時段被搶走」「送出失敗」三種邊界狀態。
+  後端接 Google 日曆；沒有金鑰時走示範空檔，畫面是同一套。
+- **決策有紀錄。** PRD 裡 12 條決策記錄（D-01–D-12），每條寫明放棄了什麼、代價怎麼補；
+  實作時推翻規格的地方都回填進去。
+- **細節有量測。** 影像上白字的對比逐張量過，最低從 1.6:1 修到全站 3.4:1 以上（大字 AA 門檻 3:1）。
+- **SEO 與內容管理。** 各頁 meta、6 種結構化資料、sitemap；作品集與髮型誌以 Notion 當 CMS，建置時同步。
+
+## 分工與 AI 的使用
+
+| 部分 | 做法 |
+|---|---|
+| 規格文件（PRD、全站文案、SEO） | 我撰寫，AI 輔助整理與潤飾 |
+| 高擬真稿、MARGIN 設計系統 | 我設計，以 Claude Design 輔助 |
+| 網站程式（Nuxt 實作） | Claude Code 撰寫；我負責需求、審查、驗收與取捨決策 |
+| 影像 | Gemini 生成空間、設計師與服務照；作品照暫用 Unsplash（來源見 [public/img/README.md](public/img/README.md)） |
+
+## 技術
+
+Nuxt 4、Vue 3、Tailwind CSS 4、TypeScript。外部服務：Notion API（CMS）、Google Calendar API（預約）、
+Resend（寄信），都直接打 API，沒有另外裝 SDK。
+
+## 在本機跑起來
 
 ```bash
 npm install     # 需要 .npmrc 裡的 legacy-peer-deps，原因見該檔註解
@@ -12,9 +49,22 @@ npm run build
 npx nuxt typecheck
 ```
 
+不填任何金鑰也跑得起來：預約走示範空檔，表單照常送出但不寄信。要接真的服務，照 `.env.example` 的步驟設定。
+
+---
+
+# 開發筆記
+
+以下是給開發與維護看的技術細節。
+
+`Works Page Hi-Fi.dc.html` 的實作。那份高擬真稿其實不只作品集列表，
+而是整個站：首頁、關於、服務價目、店家資訊，加上
+「作品集 → 作品單頁 → 設計師單頁 → 五步驟預約 → 預約完成」這條動線，
+這個專案把它整個做出來。
+
 ## 來源
 
-從 claude.ai/design 專案 `570447c2-d539-4025-a046-4f8a85b206b1` 匯入：
+從 claude.ai/design 的專案匯入：
 
 | 專案檔 | 用途 |
 |---|---|
@@ -120,15 +170,15 @@ Vue 這邊看不到父層有沒有綁 `@toggle`（宣告過的 emit 不會留在
 
 ## 還是暫代的部分
 
-- **影像**全是 `#5E5E5E` 佔位塊，右上角標著裁切規格。設計系統 readme 說明目前沒有實拍素材，
-  接上時只要打開 `MgImage` 裡的 `<img>`，21:9 / 4:5 / 1:1 三種比例規範不動。
+- **影像**是示意圖：空間、設計師與服務照由 Gemini 生成，作品照暫用 Unsplash，
+  出處與授權見 `public/img/README.md`。上線前要換成實拍（有人物的要取得拍攝同意）。
 - **資料**：作品集與髮型誌來自 Notion（見下方「內容從哪裡來」）；設計師、服務項目、
   價目仍寫在 `shared/margin.ts`。版面與語氣沿用高擬真稿，但品牌事實已對回 PRD，
   見下方「品牌事實的權威來源」。
 - **圖示**沿用稿子的 unicode（▼ ▲ ● ✕ ‹ › ＋）。設計系統交接規格提到圖示系統還沒定案。
 - **月曆**固定顯示 2026 年 9 月，切換上下月的箭頭還沒接（`BOOKING_MONTH` 這一個常數決定）。
 - **預約通知只有 Email，沒有簡訊。** PRD F-10 寫的是「完成信／簡訊」，簡訊要另接台灣的簡訊商。
-- **地圖**（`/store`）是 21:9 灰底佔位，還沒接圖資。
+- **地圖**（`/store`）嵌 Google Maps（`STORE_MAP_SRC`，`output=embed` 不需要 API key），還沒有自製的靜態地圖。
 
 ## 內容從哪裡來
 
@@ -232,6 +282,9 @@ Google 只回答一件事：**這位設計師哪幾段時間已經有事了。**
    再把「日曆 ID」填進 `NUXT_GCAL_SHU` 等四個變數
 4. `npm run dev`，打開 <http://127.0.0.1:3000/api/booking/check> 確認誰接上了
 5. 填 `NUXT_RESEND_API_KEY`、`NUXT_MAIL_FROM`、`NUXT_MAIL_INBOX`
+6. 部署在平台或反向代理後面時，填 `NUXT_CLIENT_IP_HEADER`（例：Vercel 的 `x-real-ip`）。
+   不填的話流量限制認的是代理自己的 IP，所有訪客共用同一份額度。**不要填 `x-forwarded-for`**，
+   那是客戶端改得了的值，見 `.env.example`
 
 第 3 步**漏掉分享那個動作 API 不會報錯**，那位設計師會安靜地退回示範空檔。
 `/api/booking/check` 就是為了讓這件事看得見才做的。沒接上的設計師是**單獨**退回，

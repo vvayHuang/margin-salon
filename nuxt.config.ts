@@ -34,6 +34,11 @@ export default defineNuxtConfig({
     mailFrom: '',
     /** 店內收件匣：新預約與應徵通知都寄到這裡 */
     mailInbox: '',
+    /**
+     * 流量限制認哪個標頭當客戶端 IP。留空用連線本身的位址；
+     * 放在平台或反向代理後面時才填（例：Vercel 的 x-real-ip），見 .env.example。
+     */
+    clientIpHeader: '',
   },
   vite: {
     plugins: [tailwindcss()],
