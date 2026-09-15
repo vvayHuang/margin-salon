@@ -28,7 +28,9 @@ export function imgSrcset(name: string) {
   if (!a) return undefined
   const widths = [...new Set([...a.v, a.w])].sort((x, y) => x - y)
   return widths
-    .map(w => (w === a.w ? `${imgSrc(name)} ${w}w` : `/img/${name}@${w}.webp ${w}w`))
+    // 檔名裡的 @ 在網址裡寫成 %40：Cloudflare Workers 的靜態檔會把 /img/x@640.webp
+    // 307 轉到 /img/x%40640.webp，每張響應式圖都多一次往返。直接給編碼後的網址就是 200。
+    .map(w => (w === a.w ? `${imgSrc(name)} ${w}w` : `/img/${name}%40${w}.webp ${w}w`))
     .join(', ')
 }
 
