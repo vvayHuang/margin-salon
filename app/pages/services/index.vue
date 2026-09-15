@@ -92,9 +92,9 @@ useJsonLd(() => faqPageSchema(SERVICE_FAQ))
 
     <div class="mg-sect">
       <MgCtaBand
-        note="IMAGE 21:9 — 藥劑檯"
-        src="space_alt_01"
-        alt="店內藥劑檯"
+        note="IMAGE 21:9 — 鏡前工作檯"
+        src="about_intro"
+        alt="鏡前工作檯"
         line1="想好了，"
         line2="就約一個時間"
       />

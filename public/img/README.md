@@ -152,8 +152,8 @@ Nuxt 用法：
 
 | 位置 | 用了 | 原因 |
 |---|---|---|
-| 首頁收尾帶（原「洗髮區」） | `space_alt_02` | 沒有洗髮區素材；`space_lounge` 的孔雀綠沙發與全站無彩色調衝突 |
-| /services 收尾帶（原「藥劑檯」） | `space_alt_01` | 沒有藥劑檯素材，這張的檯面與瓶罐最接近 |
+| ~~首頁收尾帶（原「洗髮區」）~~ | ~~`space_alt_02`~~ | 2026-09-11 解除：收尾帶除了 /store 全站統一用 `about_intro`，見下方 |
+| ~~/services 收尾帶（原「藥劑檯」）~~ | ~~`space_alt_01`~~ | 同上 |
 | ~~/store Hero（原「店門口」）~~ | ~~`location_stairs`~~ | 2026-09-08 解除：`location_street` 就是街屋店面，頁首改用它，樓梯移到環境三連拍 |
 | /about 空間三連拍「洗髮區」 | `space_detail` | 沒有洗髮區素材 |
 | ~~設計師個人頁 Hero~~ | ~~各人的 `stylist_*`（與列表卡片同一張）~~ | 2026-09-09 解除：改用各人的 `stylist_*_hero`，Hero 與卡片是分開的兩張（`STYLISTS[].hero`／`.photo`） |
@@ -163,7 +163,14 @@ Nuxt 用法：
 iframe 換回 `MgImage` 即可。全站已無灰底佔位。
 
 未使用：`service_cut_alt`、`service_scalp_alt`、
-`works_012`／`works_016`（作品只有 14 件，素材有 17 組）、各 `works_*_back`／`works_*_thumb`（版面沒有這兩個用途）。
+`works_012`／`works_016`（作品只有 14 件，素材有 17 組）、各 `works_*_back`／`works_*_thumb`（版面沒有這兩個用途）、
+`space_alt_01`／`space_alt_02`／`hero_desktop_alt`／`space_detail`（2026-09-11 收尾帶統一之後就沒有版位在用）。
+
+**收尾帶（`MgCtaBand`）2026-09-11 起全站統一用 `about_intro`**，只有 /store 維持 `location_env_01`（二樓窗外，接「找得到路了」那句）。
+首頁、/services、服務細項五頁、/works、/journal 列表與文章頁原本各用各的，其中 `space_alt_*`、`hero_desktop_alt`
+還是沒換過的 Unsplash，和已經換成 AI 圖的頁面擺在一起色調不一。`shared/services.ts` 的 `ctaImg`／`ctaAlt`
+隨之拿掉，影像直接寫在 `services/[slug].vue`；兩行大標仍然各頁不同。
+對比沿用 2026-09-08 那次的量測（`about_intro` 疊 `.mg-scrim-full` 最低 3.4:1），版位同為 21:9 滿版，不用重量。
 
 設計師頭像 2026-09-05 先換成四張 Unsplash 的亞洲面孔，2026-09-09 整批換成 AI 圖
 （見最下面那段）。**本表是頭像來源的權威記錄，授權表以本表為準**——授權表曾經把這四張

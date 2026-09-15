@@ -113,9 +113,18 @@ export interface CareersResult {
 
 /* ---------------------------------------------------------------- 驗證 */
 
-/** 只擋明顯不是 email 的字串，不做 RFC 等級的較真 —— 真正的驗證是那封信寄不寄得到 */
+/**
+ * 只擋明顯不是 email 的字串，不做 RFC 等級的較真 —— 真正的驗證是那封信寄不寄得到。
+ *
+ * 兩道防 ReDoS（資安報告 F1）：
+ * 1. 先擋長度。254 是 email 位址的上限，超過就不用跑正則。
+ * 2. 網域段的字元類別排除「.」，每一段的邊界由點決定，量詞之間不重疊。
+ *    舊寫法 `[^\s@]+\.[^\s@]{2,}` 讓點同時屬於兩個量詞，一長串點就是二次方回溯。
+ */
 export function emailBad(email: string) {
-  return !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.trim())
+  const value = email.trim()
+  if (value.length > 254) return true
+  return !/^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)*\.[^\s@.]{2,}$/.test(value)
 }
 
 const STYLIST_IDS = STYLISTS.map(s => s.value) as string[]

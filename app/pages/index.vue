@@ -122,9 +122,9 @@ const prices = computed(() =>
 
     <div class="mg-sect">
       <MgCtaBand
-        note="IMAGE 21:9 — 洗髮區"
-        src="space_alt_02"
-        alt="店內鏡前工作區"
+        note="IMAGE 21:9 — 鏡前工作檯"
+        src="about_intro"
+        alt="鏡前工作檯"
         line1="想剪了，"
         line2="就選個時間"
       />

@@ -7,10 +7,19 @@
  */
 import { BRAND, MENU, money, type CategoryId } from './margin'
 
-export const SITE_URL = 'https://marginhair.com.tw'
+/**
+ * 這是概念作品，品牌、店址、電話都是虛構的，所以整站不讓搜尋引擎收錄——
+ * 否則 HairSalon 結構化資料會讓它被當成一間真的店。
+ * 真的要當正式站上線時，把這裡改成 true 就好（robots meta 與 robots.txt 都看這一個值）。
+ */
+export const INDEXABLE = false
 
-/** 04-SEO 寫的是 /og/og_default.jpg，實際檔案在 /img/ 底下 */
-export const OG_IMAGE = `${SITE_URL}/img/og_default.jpg`
+/**
+ * 網址一律用「這次請求實際打到的 origin」，不寫死網域。
+ * 04-SEO 規劃的 marginhair.com.tw 並不存在，寫死的話 canonical、OG 圖、sitemap
+ * 在任何部署網址上都會指向一個連不到的地方。所以下面每個需要絕對網址的函式都吃 `site`。
+ */
+export const OG_IMAGE_PATH = '/img/og_default.jpg'
 export const OG_IMAGE_ALT = '留白髮所 MARGIN 的店內空間'
 
 export interface PageSeo {
@@ -98,16 +107,16 @@ export const PAGE_SEO: Record<string, PageSeo> = {
  * 2. 週一公休不用 `specialOpeningHoursSpecification`（文件寫 opens/closes 都 00:00）。
  *    Google 判讀公休的方式是「不出現在 openingHoursSpecification 裡」，多寫反而有歧義。
  */
-export function hairSalonSchema() {
+export function hairSalonSchema(site: string) {
   return {
     '@context': 'https://schema.org',
     '@type': 'HairSalon',
-    '@id': `${SITE_URL}/#salon`,
+    '@id': `${site}/#salon`,
     'name': `${BRAND.nameZh} ${BRAND.nameEn}`,
     'alternateName': BRAND.nameEn,
-    'url': `${SITE_URL}/`,
-    'image': OG_IMAGE,
-    'logo': `${SITE_URL}/logo.png`,
+    'url': `${site}/`,
+    'image': `${site}${OG_IMAGE_PATH}`,
+    'logo': `${site}/logo.png`,
     'description':
       '高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開，不推銷、不辦卡。',
     'slogan': BRAND.slogan.join('，'),
@@ -138,7 +147,7 @@ export function hairSalonSchema() {
       '@type': 'ReserveAction',
       'target': {
         '@type': 'EntryPoint',
-        'urlTemplate': `${SITE_URL}/booking`,
+        'urlTemplate': `${site}/booking`,
         'actionPlatform': [
           'http://schema.org/DesktopWebPlatform',
           'http://schema.org/MobileWebPlatform',
@@ -174,10 +183,10 @@ export function hairSalonSchema() {
 /* ---- 其餘結構化資料（04-SEO §4.2–§4.5） ---- */
 
 /** 所有 schema 都用 @id 指回首頁的 HairSalon，不重複描述同一間店 */
-const SALON_REF = { '@id': `${SITE_URL}/#salon` }
+const salonRef = (site: string) => ({ '@id': `${site}/#salon` })
 
 /** §4.3 Service — 服務單頁 ×5 */
-export function serviceSchema(input: {
+export function serviceSchema(site: string, input: {
   name: string
   serviceType: string
   lowPrice: number
@@ -188,7 +197,7 @@ export function serviceSchema(input: {
     '@type': 'Service',
     'name': input.name,
     'serviceType': input.serviceType,
-    'provider': SALON_REF,
+    'provider': salonRef(site),
     'areaServed': { '@type': 'City', 'name': '高雄市' },
     'offers': {
       '@type': 'AggregateOffer',
@@ -204,7 +213,7 @@ export function serviceSchema(input: {
  * caption 直接用 §13.1 的衍生欄位 alt，與頁面上的 img alt 是同一份資料。
  * `acquireLicensePage` 指向 /privacy。
  */
-export function imageObjectSchema(input: {
+export function imageObjectSchema(site: string, input: {
   img: string
   title: string
   description: string
@@ -214,22 +223,22 @@ export function imageObjectSchema(input: {
   return {
     '@context': 'https://schema.org',
     '@type': 'ImageObject',
-    'contentUrl': `${SITE_URL}/img/${input.img}_front.webp`,
-    'thumbnailUrl': `${SITE_URL}/img/${input.img}_thumb.webp`,
+    'contentUrl': `${site}/img/${input.img}_front.webp`,
+    'thumbnailUrl': `${site}/img/${input.img}_thumb.webp`,
     'name': input.title,
     'description': input.description,
     'caption': input.caption,
     'width': 1200,
     'height': 1500,
     'creator': { '@type': 'Person', 'name': input.creator },
-    'copyrightHolder': SALON_REF,
-    'acquireLicensePage': `${SITE_URL}/privacy`,
+    'copyrightHolder': salonRef(site),
+    'acquireLicensePage': `${site}/privacy`,
     'representativeOfPage': true,
   }
 }
 
 /** §4.4 Person — 設計師個人頁 ×4 */
-export function personSchema(input: {
+export function personSchema(site: string, input: {
   name: string
   jobTitle: string
   knowsAbout: string[]
@@ -240,9 +249,9 @@ export function personSchema(input: {
     '@type': 'Person',
     'name': input.name,
     'jobTitle': input.jobTitle,
-    'worksFor': SALON_REF,
+    'worksFor': salonRef(site),
     'knowsAbout': input.knowsAbout,
-    'image': `${SITE_URL}/img/${input.photo}.webp`,
+    'image': `${site}/img/${input.photo}.webp`,
     'sameAs': [BRAND.igHref],
   }
 }
@@ -264,7 +273,7 @@ export function faqPageSchema(items: { q: string; a: string }[]) {
 }
 
 /** §4.7 Article — 髮型誌文章頁 */
-export function articleSchema(input: {
+export function articleSchema(site: string, input: {
   headline: string
   description: string
   datePublished: string
@@ -280,8 +289,8 @@ export function articleSchema(input: {
     'datePublished': input.datePublished,
     'dateModified': input.datePublished,
     'author': { '@type': 'Person', 'name': input.author },
-    'publisher': SALON_REF,
-    'image': `${SITE_URL}/img/${input.image}.webp`,
+    'publisher': salonRef(site),
+    'image': `${site}/img/${input.image}.webp`,
     'articleSection': input.section,
   }
 }

@@ -152,9 +152,9 @@ function loadMore() {
     </template>
 
     <MgCtaBand
-      note="IMAGE 21:9 — 鏡前完成照"
-      src="hero_desktop_alt"
-      alt="鏡前完成照"
+      note="IMAGE 21:9 — 鏡前工作檯"
+      src="about_intro"
+      alt="鏡前工作檯"
       line1="找到喜歡的"
       line2="那一張"
     />

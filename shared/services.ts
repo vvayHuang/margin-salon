@@ -49,9 +49,7 @@ export interface ServicePage {
   stylistNote: string
   /** 該項目 FAQ */
   faq: ServiceFaq[]
-  /** 收尾帶影像與兩行大標 */
-  ctaImg: string
-  ctaAlt: string
+  /** 收尾帶兩行大標（影像全站共用 about_intro，寫在 services/[slug].vue） */
   ctaLine1: string
   ctaLine2: string
 }
@@ -104,8 +102,6 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: '有可能，所以我們會先問你多久能來一次。三個月才來一次的話，我們不會建議剪需要一個月修一次的長度。',
       },
     ],
-    ctaImg: 'space_cutting',
-    ctaAlt: '店內剪髮區',
     ctaLine1: '想好長度了，',
     ctaLine2: '就約一個時間',
   },
@@ -157,8 +153,6 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: '可以，建議帶三張。我們比較在意你不想要什麼，那個判斷通常更準。',
       },
     ],
-    ctaImg: 'space_detail',
-    ctaAlt: '店內藥劑與工具檯',
     ctaLine1: '想好顏色了，',
     ctaLine2: '就約一個時間',
   },
@@ -209,8 +203,6 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: '可以，而且效果通常很明顯。捲度只做在需要的那一段，上面留直的，看起來才不會蓬得不自然。',
       },
     ],
-    ctaImg: 'space_lounge',
-    ctaAlt: '店內候客區',
     ctaLine1: '想燙了，',
     ctaLine2: '就約一個時間',
   },
@@ -261,8 +253,6 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: '不用。如果你的頭髮只是乾，基礎護髮就夠了。會建議做重建的，通常是漂過三次以上的髮質。',
       },
     ],
-    ctaImg: 'location_env_01',
-    ctaAlt: '店內環境',
     ctaLine1: '摸過再決定，',
     ctaLine2: '先約一個時間',
   },
@@ -306,8 +296,6 @@ export const SERVICE_PAGES: ServicePage[] = [
       { q: '可以跟染髮同一天做嗎？', a: '不建議。頭皮清潔後毛孔開，染劑刺激會變強。' },
       { q: '一次就有效嗎？', a: '出油與異味通常一次有感；掉髮需要三次以上並搭配作息。' },
     ],
-    ctaImg: 'about_hero',
-    ctaAlt: '店內空間',
     ctaLine1: '想處理頭皮了，',
     ctaLine2: '就約一個時間',
   },

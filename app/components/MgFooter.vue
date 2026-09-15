@@ -15,8 +15,8 @@ import { FOOTER_LINKS, FOOTER_NAV } from '#shared/margin'
       <MgLogo variant="mark" :size="20" tone="muted" />
       © 2026 留白髮所 MARGIN Hair Studio
     </span>
-    <!-- 素材還是 Unsplash 佔位，換成實拍前站上要標示 -->
-    <span class="font-body">站內影像為示意圖，非實際施作紀錄</span>
+    <!-- 概念作品：品牌是虛構的，影像是 Unsplash／AI 示意。不標示的話會被當成真的店 -->
+    <span class="font-body">概念作品，非真實店家。品牌、店址、電話與影像皆為虛構示意</span>
     <!-- /careers 與 /privacy 只有這一個入口，見 D-09 補註 -->
     <nav aria-label="次要導覽" class="flex items-center gap-6 font-body">
       <NuxtLink

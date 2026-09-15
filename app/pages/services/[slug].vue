@@ -50,8 +50,8 @@ useMgSeo(() => ({
   description: page.value.seoDesc,
   path: `/services/${slug.value}`,
 }))
-useJsonLd(() =>
-  serviceSchema({
+useJsonLd(site =>
+  serviceSchema(site, {
     name: page.value.title,
     serviceType: page.value.serviceType,
     lowPrice: priceLo.value,
@@ -204,9 +204,9 @@ useJsonLd(() =>
     <!-- 9. 預約 CTA -->
     <div class="mg-sect">
       <MgCtaBand
-        :note="`IMAGE 21:9 — ${page.ctaAlt}`"
-        :src="page.ctaImg"
-        :alt="page.ctaAlt"
+        note="IMAGE 21:9 — 鏡前工作檯"
+        src="about_intro"
+        alt="鏡前工作檯"
         :line1="page.ctaLine1"
         :line2="page.ctaLine2"
       />

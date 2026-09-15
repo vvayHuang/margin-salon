@@ -36,8 +36,8 @@ useMgSeo(() => ({
   path: `/works/${current.value.code}`,
   ogType: 'article',
 }))
-useJsonLd(() =>
-  imageObjectSchema({
+useJsonLd(site =>
+  imageObjectSchema(site, {
     img: current.value.img,
     title: current.value.title,
     description: `${serviceLabel(current.value.service)}，${current.value.bleach ? '需要漂髮' : '不需漂髮'}${current.value.colorCode ? `，色號 ${current.value.colorCode}` : ''}。${current.value.length}。`,

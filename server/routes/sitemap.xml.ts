@@ -1,7 +1,6 @@
 import { STYLISTS, WORKS } from '#shared/margin'
 import { SERVICE_PAGES } from '#shared/services'
 import { PUBLISHED } from '#shared/journal'
-import { SITE_URL } from '#shared/seo'
 
 /**
  * sitemap.xml（04-SEO §5）。
@@ -29,8 +28,9 @@ export default defineEventHandler((event) => {
     '/privacy',
   ]
 
+  const site = getRequestURL(event).origin
   const urls = paths
-    .map(p => `  <url><loc>${SITE_URL}${p}</loc></url>`)
+    .map(p => `  <url><loc>${site}${p}</loc></url>`)
     .join('\n')
 
   setHeader(event, 'content-type', 'application/xml; charset=utf-8')

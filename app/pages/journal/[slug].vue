@@ -33,8 +33,8 @@ useMgSeo(() => ({
   path: `/journal/${slug.value}`,
   ogType: 'article',
 }))
-useJsonLd(() =>
-  articleSchema({
+useJsonLd(site =>
+  articleSchema(site, {
     headline: post.value.title,
     description: post.value.excerpt,
     datePublished: post.value.date,
@@ -141,9 +141,9 @@ useJsonLd(() =>
 
     <div class="mg-sect">
       <MgCtaBand
-        note="IMAGE 21:9 — 店內空景"
-        src="space_alt_02"
-        alt="店內空景"
+        note="IMAGE 21:9 — 鏡前工作檯"
+        src="about_intro"
+        alt="鏡前工作檯"
         line1="看完了，"
         line2="不如來試試看"
       />

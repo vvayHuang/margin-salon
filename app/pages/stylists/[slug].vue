@@ -29,8 +29,8 @@ useMgSeo(() => ({
   description: who.value.seoDesc,
   path: `/stylists/${slug.value}`,
 }))
-useJsonLd(() =>
-  personSchema({
+useJsonLd(site =>
+  personSchema(site, {
     name: who.value.label,
     jobTitle: who.value.roleZh,
     knowsAbout: who.value.tags,
