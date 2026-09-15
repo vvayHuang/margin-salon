@@ -8,7 +8,7 @@
 import { CLOSED_DAYS, MENU, STYLISTS, phoneBad, type StylistId } from './margin'
 
 /**
- * 月曆固定顯示 2026 年 9 月（README「還是暫代的部分」）。
+ * 月曆固定顯示 2026 年 9 月（docs/開發筆記.md「還是暫代的部分」）。
  * 流程裡到處在傳「幾號」這個整數，真正打 API 要的是 Y-m-d，
  * 換算只走這一個常數，之後接上換月的箭頭時改這裡。
  */
