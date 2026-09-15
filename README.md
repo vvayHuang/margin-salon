@@ -45,11 +45,28 @@ Resend（寄信），都直接打 API，沒有另外裝 SDK。
 ```bash
 npm install     # 需要 .npmrc 裡的 legacy-peer-deps，原因見該檔註解
 npm run dev     # http://127.0.0.1:3000
-npm run build
+npm run build   # 產出是 Cloudflare Workers 格式（nuxt.config.ts 的 nitro.preset）
 npx nuxt typecheck
 ```
 
 不填任何金鑰也跑得起來：預約走示範空檔，表單照常送出但不寄信。要接真的服務，照 `.env.example` 的步驟設定。
+
+`npm run build` 之後要用 Workers 的執行環境預覽，不能直接用 node 跑：
+
+```bash
+CLOUDFLARE_LOAD_DEV_VARS_FROM_DOT_ENV=false npx wrangler dev
+```
+
+前面那個變數讓 wrangler 不讀 `.env`——本機的 `.env` 若接了真的日曆與 Resend，預覽時也會變成真的。
+
+## 部署
+
+部署在 Cloudflare Workers，GitHub 的 `main` 有新 commit 就自動建置部署（Workers Builds）。
+
+- Worker 的設定在 `wrangler.jsonc`：`nodejs_compat`、靜態檔輸出、流量限制認的 `cf-connecting-ip`。
+- 公開站跑**示範模式**：後台不設 Google 日曆與 Resend 的任何變數，訪客試約不會進真的日曆、也不寄信。
+- 限流記在記憶體裡，Workers 會同時開很多個 isolate 各算各的，所以只是盡力而為；要真的擋，
+  用 Cloudflare 的 Rate limiting rules（免費方案 1 條、以 IP 計）。
 
 ---
 

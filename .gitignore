@@ -12,3 +12,6 @@ dist
 
 # 佔位圖原始檔（150MB，不進版控）
 public/img/_original
+
+# wrangler dev 的本機暫存（miniflare 狀態與快取）
+.wrangler

@@ -1,0 +1,30 @@
+/**
+ * Cloudflare Workers 的部署設定（2026-09-15 決定部署到 Workers，Nitro 與 Cloudflare 都建議 Workers 而不是 Pages）。
+ *
+ * - `name` 要跟 Cloudflare 後台的 Worker 名稱一致，GitHub 自動部署（Workers Builds）才對得起來。
+ * - `main`／`assets` 指向 `npm run build` 的產出（nuxt.config.ts 指定 cloudflare_module）。
+ * - `nodejs_compat`：server/utils/gcal.ts 用 node:crypto 簽 Google 的 JWT。沒開的話
+ *   Nitro 會把 createSign 換成「未實作」的替身，接上日曆的那天一換 token 就失敗。
+ *
+ * 金鑰一律不寫在這裡。作品集站跑示範模式，不設 Google 日曆與 Resend 的任何變數；
+ * 之後要接，在後台 Worker → Settings → Variables and Secrets 用 Secret 加。
+ */
+{
+  "name": "margin-salon",
+  "main": ".output/server/index.mjs",
+  "compatibility_date": "2025-07-15",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "binding": "ASSETS",
+    "directory": ".output/public"
+  },
+  "vars": {
+    // 流量限制認的客戶端 IP（server/utils/throttle.ts）。Workers 的連線位址是 Cloudflare 自己，
+    // cf-connecting-ip 由 Cloudflare 覆寫、客戶端改不了。
+    // 注意：限流記在記憶體裡，Workers 會同時開很多個 isolate 各算各的，所以這層只是盡力而為。
+    "NUXT_CLIENT_IP_HEADER": "cf-connecting-ip"
+  },
+  "observability": {
+    "enabled": true
+  }
+}

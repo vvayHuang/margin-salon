@@ -8,6 +8,13 @@ export default defineNuxtConfig({
   devServer: { host: '127.0.0.1', port: 3000 },
   css: ['~/assets/css/main.css'],
   /**
+   * 部署在 Cloudflare Workers，Worker 本身的設定在 wrangler.jsonc。
+   * 所以本機 `npm run build` 的產出也是 Workers 格式：要預覽用 `npx wrangler dev`，不能直接用 node 跑。
+   */
+  nitro: {
+    preset: 'cloudflare_module',
+  },
+  /**
    * 全部只在伺服器讀得到（沒有 public 區塊）——預約與寄信的金鑰不該進到瀏覽器。
    * 每一個都可以留空：留空時 `/booking` 退回站上的示範資料、表單照常運作但不寄信，
    * 這是一個作品集網站，沒有金鑰也要跑得起來。
