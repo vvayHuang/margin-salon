@@ -43,8 +43,11 @@ export const PRICE_MAX = Math.max(...ALL_PRICES)
  * Title ≤ 30 全形字、Description 80–110 全形字，規範見 04-SEO §2。
  */
 export const PAGE_SEO: Record<string, PageSeo> = {
+  // 首頁的分頁標題只放店名（2026-09-15 決定）：單店、沒有分店計畫，店名擺最前面最好認。
+  // 04-SEO 原本是「苓雅美髮沙龍｜…」把地區關鍵字放前面；內頁維持「頁名｜…｜MARGIN」，
+  // 開很多分頁時才分得出哪個是哪一頁。
   '/': {
-    title: '苓雅美髮沙龍｜留白髮所 MARGIN・三多商圈預約制',
+    title: '留白髮所 MARGIN',
     description:
       '高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開、不推銷、不辦卡。捷運三多商圈站步行 5 分鐘，線上預約 30 秒完成。',
   },

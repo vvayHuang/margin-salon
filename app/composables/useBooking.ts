@@ -14,6 +14,7 @@ import {
   BOOKING_MONTH,
   bookingDate,
   emailBad,
+  nameBad,
   type AvailabilityResponse,
   type BookingResult,
   type SlotsResponse,
@@ -125,7 +126,7 @@ export function useBooking() {
     2: totals.value.rows.length > 0,
     3: !!state.value.day && !!state.value.time,
     4:
-      !!state.value.name.trim()
+      !nameBad(state.value.name)
       && !phoneBad(state.value.phone)
       && !emailBad(state.value.email),
     5: !state.value.sending,

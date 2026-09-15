@@ -83,11 +83,14 @@ function overlaps(start: number, end: number, busy: Busy[]) {
 function slotStates(date: string, busy: Busy[], minutes: number) {
   const closeMs = ms(date, CLOSE_TIME)
   const earliest = Date.now() + LEAD_MINUTES * 60_000
+  // 公休日整天不開放。以前只有 availability() 的月曆那層擋，
+  // slots() 與送出前的 freeStylist() 都會把週一算成有空（資安報告 F5）。
+  const closed = CLOSED_DAYS.includes(Number(date.slice(8, 10)))
 
   return SLOT_TIMES.map((time) => {
     const start = ms(date, time)
     const end = start + minutes * 60_000
-    const ok = end <= closeMs && start >= earliest && !overlaps(start, end, busy)
+    const ok = !closed && end <= closeMs && start >= earliest && !overlaps(start, end, busy)
     return { time, state: ok ? 'available' as const : 'full' as const }
   })
 }

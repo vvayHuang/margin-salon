@@ -5,7 +5,7 @@
  * 只有其中一邊有的東西（no `process.env`、no `useState`）。驗證規則寫一次，
  * 前端拿來畫錯誤態、後端拿來擋髒資料，兩邊不會各長一套。
  */
-import { MENU, STYLISTS, phoneBad, type StylistId } from './margin'
+import { CLOSED_DAYS, MENU, STYLISTS, phoneBad, type StylistId } from './margin'
 
 /**
  * 月曆固定顯示 2026 年 9 月（README「還是暫代的部分」）。
@@ -19,9 +19,16 @@ export function bookingDate(day: number) {
   return `${BOOKING_MONTH}-${String(day).padStart(2, '0')}`
 }
 
-/** '2026-09-12' → 12；不是本月的日期回 0 */
+/**
+ * '2026-09-12' → 12；格式不對、不是本月、或本月沒有這一天都回 0。
+ * 以前只比對前綴，'2026-09-12 後面接任何字' 與 '2026-09-99' 都過得去，
+ * 後面那段字會一路帶進預約編號與確認信主旨（資安報告 F4）。
+ */
 export function bookingDay(date: string) {
-  return date.startsWith(BOOKING_MONTH + '-') ? Number(date.slice(8, 10)) || 0 : 0
+  const match = new RegExp(`^${BOOKING_MONTH}-(\\d{2})$`).exec(String(date))
+  const day = match ? Number(match[1]) : 0
+  // 9 月只有 30 天
+  return day >= 1 && day <= 30 ? day : 0
 }
 
 /* ---------------------------------------------------------------- 日曆／時段 */
@@ -127,22 +134,52 @@ export function emailBad(email: string) {
   return !/^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)*\.[^\s@.]{2,}$/.test(value)
 }
 
+/**
+ * 姓名與備註的上限（資安報告 F4）。
+ * 確認信會寄到「填表的人自己填的」信箱，沒有人確認那真的是他的——
+ * 所以會進到確認信的自由文字要短，而且不能帶網址，免得被拿來寄釣魚信。
+ * 備註已經不進確認信（只進店內通知與日曆），上限是為了日曆與通知信的版面。
+ */
+export const NAME_MAX = 30
+export const NOTE_MAX = 300
+
+/** 網址的樣子：協定、www、或常見網域結尾。姓名欄沒有理由出現這些 */
+const LINK_LIKE = /(https?:\/\/|www\.|\.(com|net|org|io|co|tw|me|app|link|xyz)\b)/i
+
+/** 沒填、太長、或夾著網址 */
+export function nameBad(name: string) {
+  const value = name.trim()
+  return !value || value.length > NAME_MAX || LINK_LIKE.test(value)
+}
+
 const STYLIST_IDS = STYLISTS.map(s => s.value) as string[]
 const MENU_IDS = MENU.map(m => m.id)
 
+const isText = (value: unknown): value is string => typeof value === 'string'
+
 /**
  * 回第一個問題的中文說明，沒問題回空字串。
- * 前端已經用同樣的規則把送出鍵停用了，這裡是第二道 —— 直接打 API 的請求也要擋得住。
+ * 前端已經用同樣的規則把送出鍵停用了，這裡是第二道 —— 直接打 API 的請求也要擋得住，
+ * 所以每個欄位都先確認型別：JSON 裡的數字或陣列不能讓 `.trim()` 直接炸成 500。
  */
 export function bookingProblem(p: Partial<BookingPayload>): string {
-  if (!p.stylist || (p.stylist !== 'any' && !STYLIST_IDS.includes(p.stylist))) return '設計師選項不正確'
+  if (!p || typeof p !== 'object') return '資料格式不正確'
+  if (!isText(p.stylist) || (p.stylist !== 'any' && !STYLIST_IDS.includes(p.stylist))) return '設計師選項不正確'
   if (!Array.isArray(p.services) || !p.services.length) return '還沒選服務項目'
   if (p.services.some(id => !MENU_IDS.includes(id))) return '服務項目不正確'
-  if (!p.date || bookingDay(p.date) === 0) return '日期不正確'
-  if (!p.time || !/^\d{2}:\d{2}$/.test(p.time)) return '時段不正確'
-  if (!p.name?.trim()) return '還沒填姓名'
-  if (!p.phone || phoneBad(p.phone)) return '手機號碼看起來不對'
-  if (!p.email || emailBad(p.email)) return 'Email 看起來不對'
+  if (!isText(p.date) || bookingDay(p.date) === 0) return '日期不正確'
+  // 週一公休原本只在月曆那層擋，直接打 API 就約得到（資安報告 F5）
+  if (CLOSED_DAYS.includes(bookingDay(p.date))) return '週一公休，請換一天'
+  // 只驗格式，不限定 SLOT_TIMES：示範模式的替代時段有 11:30。
+  // 接上日曆時，送出前的 freeStylist 只認 SLOT_TIMES 裡的時間，範圍外的會回「被約走」。
+  if (!isText(p.time) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(p.time)) return '時段不正確'
+  if (!isText(p.name) || !p.name.trim()) return '還沒填姓名'
+  if (nameBad(p.name)) return `姓名請在 ${NAME_MAX} 字以內，也不要放網址`
+  if (!isText(p.phone) || phoneBad(p.phone)) return '手機號碼看起來不對'
+  if (!isText(p.email) || emailBad(p.email)) return 'Email 看起來不對'
+  if (p.note !== undefined && (!isText(p.note) || p.note.length > NOTE_MAX)) return `備註請在 ${NOTE_MAX} 字以內`
+  if (p.first !== undefined && p.first !== '是' && p.first !== '否') return '是否第一次到店的選項不正確'
+  if (p.len !== undefined && p.len !== '短' && p.len !== '中長' && p.len !== '長') return '髮長選項不正確'
   return ''
 }
 

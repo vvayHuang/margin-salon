@@ -11,7 +11,7 @@ import {
   type CategoryId,
   type StylistId,
 } from '#shared/margin'
-import { bookingDay, emailBad } from '#shared/booking'
+import { NAME_MAX, NOTE_MAX, bookingDay, emailBad, nameBad } from '#shared/booking'
 import { PAGE_SEO } from '#shared/seo'
 import type { DayCell } from '~/components/MgDatePicker.vue'
 import type { SummaryRow } from '~/components/MgBookingSummary.vue'
@@ -218,11 +218,12 @@ async function pickAlt(day: number, time: string) {
    高擬真稿把 touched 設在 next() 裡，但那一步的「下一步」在填完之前就是停用的，
    所以欄位級錯誤在原型裡其實走不到。這裡改成離開欄位就檢查，
    設計好的錯誤態（2px #C8351C ＋ Archivo「!」）才真的會出現。 */
-const nameError = computed(() =>
-  state.value.touched && !state.value.name.trim()
-    ? '還沒填名字。設計師當天要叫得出你的名字。'
-    : '',
-)
+const nameError = computed(() => {
+  if (!state.value.touched) return ''
+  if (!state.value.name.trim()) return '還沒填名字。設計師當天要叫得出你的名字。'
+  // 名字會出現在寄給你的確認信裡，所以不收網址（shared/booking.ts 的 nameBad）
+  return nameBad(state.value.name) ? `名字填你的稱呼就好，${NAME_MAX} 個字以內，不要放網址。` : ''
+})
 const phoneError = computed(() =>
   state.value.touched && phoneBad(state.value.phone)
     ? '手機號碼看起來不對。填 09 開頭的 10 碼數字就可以送出。'
@@ -494,6 +495,7 @@ function primaryAction() {
               class="min-w-60 flex-1"
               label="姓名（必填）"
               placeholder="王小明"
+              :maxlength="NAME_MAX"
               :error="nameError"
               @blur="state.touched = true"
             />
@@ -547,6 +549,7 @@ function primaryAction() {
             v-model="state.note"
             label="想跟設計師說的話（選填）"
             placeholder="例如：上次染壞了、想剪短但不要太短"
+            :maxlength="NOTE_MAX"
             multiline
           />
 

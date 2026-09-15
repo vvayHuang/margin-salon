@@ -48,6 +48,15 @@ export default defineEventHandler(async (event): Promise<BookingResult> => {
   const problem = bookingProblem(body)
   if (problem) throw createError({ statusCode: 400, statusMessage: problem })
 
+  // 同一個收件地址一天最多 3 封確認信（資安報告 F4）。沒有人確認這個信箱真的是填表的人的，
+  // 拿別人的信箱亂填時，對方最多收到 3 封。放在寫日曆與寄信之前，擋下來就什麼都不發生。
+  if (tooMany(`booking-mail:${body.email.trim().toLowerCase()}`, 3, 24 * 60 * 60_000)) {
+    throw createError({
+      statusCode: 429,
+      statusMessage: `這個 Email 今天已經收過幾封確認信了。要再約的話請來電 ${BRAND.phone}。`,
+    })
+  }
+
   const asked = body.stylist as StylistId | 'any'
   const rows = MENU.filter(m => body.services.includes(m.id))
   const price = rows.reduce((a, b) => a + b.price, 0)

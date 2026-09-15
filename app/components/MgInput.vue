@@ -15,6 +15,8 @@ withDefaults(
     type?: string
     multiline?: boolean
     disabled?: boolean
+    /** 字數上限，對應後端的驗證（例：shared/booking.ts 的 NAME_MAX／NOTE_MAX） */
+    maxlength?: number
   }>(),
   { type: 'text', multiline: false, disabled: false },
 )
@@ -39,6 +41,7 @@ const fieldId = useId()
       :value="modelValue"
       :placeholder="placeholder"
       :disabled="disabled"
+      :maxlength="maxlength"
       class="h-28 w-full resize-none border p-4 font-body text-16 leading-body-snug outline-none transition-colors duration-200"
       :class="error ? 'border-2 border-accent' : disabled ? 'border-line-3 bg-surface-2 text-fg-4' : 'border-line-2 bg-surface-0 text-fg-1'"
       @input="$emit('update:modelValue', ($event.target as HTMLTextAreaElement).value)"
@@ -51,6 +54,7 @@ const fieldId = useId()
       :value="modelValue"
       :placeholder="placeholder"
       :disabled="disabled"
+      :maxlength="maxlength"
       :aria-invalid="error ? true : undefined"
       class="h-14 w-full border px-4 font-body text-16 outline-none transition-colors duration-200"
       :class="error ? 'border-2 border-accent' : disabled ? 'border-line-3 bg-surface-2 text-fg-4' : 'border-line-1 bg-surface-0 text-fg-1'"

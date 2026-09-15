@@ -109,7 +109,6 @@ ${rows([
     { k: 'SERVICE', v: d.service },
     { k: 'TIME', v: d.time },
     { k: 'TOTAL', v: d.total },
-    ...(d.note ? [{ k: 'NOTE', v: d.note }] : []),
   ])}
 <div style="height:36px"></div>
 ${label('BEFORE YOU COME')}
@@ -133,7 +132,8 @@ ${label('GETTING HERE')}
     `服務：${d.service}`,
     `時間：${d.time}`,
     `金額：${d.total}`,
-    ...(d.note ? [`備註：${d.note}`] : []),
+    // 備註不進確認信（資安報告 F4）：這封信寄到「填表的人自己填的」信箱，
+    // 備註是最大的一塊自由文字，會被拿來寄釣魚內容。店內通知信與日曆活動照樣有備註。
     '',
     '到店前',
     '遲到 15 分鐘以上可能需要改期，因為同時段只服務你一位。',
