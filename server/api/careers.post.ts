@@ -12,7 +12,7 @@ import { careersProblem, type CareersPayload, type CareersResult } from '#shared
  */
 export default defineEventHandler(async (event): Promise<CareersResult> => {
   if (tooMany(clientKey(event, 'careers'), 5, 60 * 60_000)) {
-    throw createError({ statusCode: 429, statusMessage: '送出太多次了，請直接來電 07-338-0088。' })
+    throw createError({ statusCode: 429, statusMessage: '送出太多次了，請直接來電 07-000-0000。' })
   }
 
   const body = await readBody<CareersPayload>(event)

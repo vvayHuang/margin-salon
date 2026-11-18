@@ -30,9 +30,10 @@ export const BRAND = {
   address: '高雄市苓雅區文橫二路 88 號 2 樓',
   district: '苓雅區',
   area: '三多商圈',
-  phone: '07-338-0088',
+  /** 虛構號碼：這是概念站，不放可能屬於真實用戶的號碼（seo.ts 的 telephone 要一起改） */
+  phone: '07-000-0000',
   /** 07 的區碼在國際格式要去掉開頭的 0 */
-  phoneHref: 'tel:+88673380088',
+  phoneHref: 'tel:+88670000000',
   ig: '＠margin.hair',
   igHref: 'https://www.instagram.com/margin.hair/',
 } as const

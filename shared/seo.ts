@@ -123,7 +123,7 @@ export function hairSalonSchema(site: string) {
     'description':
       '高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開，不推銷、不辦卡。',
     'slogan': BRAND.slogan.join('，'),
-    'telephone': '+886-7-338-0088',
+    'telephone': '+886-7-000-0000',
     'priceRange': `NT$${PRICE_MIN.toLocaleString('en-US')}-${PRICE_MAX.toLocaleString('en-US')}`,
     'currenciesAccepted': 'TWD',
     // 與 /services 的付款規則和 FAQ 一致：沒有信用卡

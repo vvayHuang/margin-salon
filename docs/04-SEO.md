@@ -270,7 +270,7 @@ useSeoMeta({
   "logo": "https://marginhair.com.tw/logo_light.svg",
   "description": "高雄三多商圈的預約制美髮沙龍，一位設計師同時段只服務一位客人。價格全公開，不推銷、不辦卡。",
   "slogan": "剪去多餘，留下你",
-  "telephone": "+886-7-338-0088",
+  "telephone": "+886-7-000-0000",
   "priceRange": "NT$1,200-4,500",
   "currenciesAccepted": "TWD",
   "paymentAccepted": "Cash, Credit Card, Mobile Payment",
@@ -469,7 +469,7 @@ useSeoMeta({
 □ 手機可用性：字級 ≥ 16px、點擊區 ≥ 44×44px（含 Sticky 預約列，尚未實作）
 □ `/location` 若曾對外露出，需 301 導向 `/store`（PRD D-10）
 □ Core Web Vitals：LCP ≤ 2.5s（PRD §9）、INP < 200ms、CLS < 0.1
-□ 電話用 <a href="tel:+886733800088">，地址用 <address>
+□ 電話用 <a href="tel:+88670000000">，地址用 <address>
 □ 內部連結：每篇文章至少連 1 次 /services 或 /booking
 □ 作品單頁必連設計師頁，設計師頁必連 /booking?stylist={slug}
 □ ⚠️ D-09 取消了 Footer 的「最新 3 篇文章」精簡列（原為 D-04 保留的 SEO 內鏈）。
