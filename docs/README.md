@@ -57,7 +57,7 @@
    再跑一次同步就會上站
 5. `JobPosting` schema（P2，`validThrough` 過期未更新會被移除，維護成本較高）
 6. ~~Logo 與 favicon~~ — 2026-09-11 接上：favicon、apple-touch-icon、JSON-LD 的 `logo`，
-   來源與做法見 `public/img/README.md` 的「標誌與網站圖示」
+   來源與做法見 `docs/圖片對照表.md` 的「標誌與網站圖示」
 
 ## 與 v1.3.1／v2.0 的差異
 

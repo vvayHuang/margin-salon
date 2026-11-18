@@ -34,7 +34,7 @@
 | 規格文件（PRD、全站文案、SEO） | 我撰寫，AI 輔助整理與潤飾 |
 | 高擬真稿、MARGIN 設計系統 | 我設計，以 Claude Design 輔助 |
 | 網站程式（Nuxt 實作） | Claude Code 撰寫；我負責需求、審查、驗收與取捨決策 |
-| 影像 | Gemini 生成空間、設計師與服務照；作品照暫用 Unsplash（來源見 [public/img/README.md](public/img/README.md)） |
+| 影像 | Gemini 生成空間、設計師與服務照；作品照暫用 Unsplash（來源見 [docs/圖片對照表.md](docs/圖片對照表.md)） |
 
 ## 技術
 
